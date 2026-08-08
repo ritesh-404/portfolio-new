@@ -6,16 +6,15 @@ import {
   LayersIcon,
 } from "./components/icons";
 
+import Button from "./components/ui/Button";
+import { BookIcon } from "./components/icons";
+
+import Navbar from "./components/ui/Navbar";
+
 function App() {
   return (
     <>
-      <h1 className="text-4xl">
-        <HomeIcon />
-        <LayoutIcon />
-        <LayersIcon />
-        <DashboardIcon />
-        what the hell
-      </h1>
+      <Navbar />
     </>
   );
 }

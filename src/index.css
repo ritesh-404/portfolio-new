@@ -1,30 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 @theme inline {
-  /* text */
-  --color-primary: var(--color-neutral-50);
-  --color-secondary: var(--color-neutral-950);
-  --color-muted-dark: var(--color-neutral-700);
-  --color-muted-light: var(--color-neutral-500);
-
-  /* btn */
-  --color-btn-primary: var(--color-green-500);
-  --color-btn-hover: var(--color-green-600);
-  --color-btn-secondary: transparent;
-  --color-btn-secondary-hover: var(--color-green-900);
-
-  /* border */
-  --color-border-default: var(--color-neutral-700);
-  --color-border-dark: var(--color-neutral-800);
-  --color-border-bg: var(--color-neutral-900);
-
-  /* background */
-  --color-body: var(--color-neutral-950);
-  --color-surface: var(--color-neutral-900);
-  --color-img-container: var(--color-neutral-800);
-
-  /* Typography */
+  /* Typography Tokens */
   --font-title: "DM Sans", sans-serif;
   --font-body: "DM Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -35,8 +12,42 @@
 
   --letter-spacing-tight: -2px;
   --letter-spacing-normal: 0px;
+
+  /* Custom Color Aliases (referencing default Tailwind palette) */
+  /* text  */
+  --color-primary: var(--color-neutral-50);
+  --color-secondary: var(--color-neutral-950);
+  --color-muted-dark: var(--color-neutral-700);
+  --color-muted-light: var(--color-neutral-500);
+
+  /* button  */
+  --color-btn-primary: var(--color-green-500);
+  --color-btn-hover: var(--color-green-600);
+  --color-btn-secondary: transparent;
+  --color-btn-secondary-hover: var(--color-green-900);
+
+  /* border  */
+  --color-border-default: var(--color-neutral-700);
+  --color-border-dark: var(--color-neutral-800);
+  --color-border-bg: var(--color-neutral-900);
+
+  /* background */
+  --color-body: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-img-container: var(--color-neutral-800);
 }
 
+/* Base Document Styling */
+:root {
+  color: var(--color-primary);
+  background-color: var(--color-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utilities: Display Headings */
 @utility display-xl {
   font-family: var(--font-title);
   font-size: 36px;
@@ -49,20 +60,6 @@
     line-height: 72px;
   }
 }
-
-@utility display-xl--regular {
-  font-weight: var(--font-weight-regular);
-}
-
-@utility display-xl--medium {
-  font-weight: var(--font-weight-medium);
-}
-
-@utility display-xl--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-
-/* ... repeat pattern for other display sizes ... */
 
 @utility display-lg {
   font-family: var(--font-title);
@@ -116,7 +113,7 @@
   }
 }
 
-/* Text utilities with responsive variants */
+/* Custom Utilities: Text Scale Overrides */
 @utility text-xl {
   font-family: var(--font-body);
   font-size: 18px;
@@ -182,67 +179,7 @@
   }
 }
 
-/* Weight modifiers (keep these as they override the default) */
-@utility text-xl--regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility text-xl--medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility text-xl--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-@utility text-lg--regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility text-lg--medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility text-lg--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-@utility text-md--regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility text-md--medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility text-md--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-@utility text-sm--regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility text-sm--medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility text-sm--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-@utility text-xs--regular {
-  font-weight: var(--font-weight-regular);
-}
-@utility text-xs--medium {
-  font-weight: var(--font-weight-medium);
-}
-@utility text-xs--semibold {
-  font-weight: var(--font-weight-semibold);
-}
-
-@utility font-mono {
-  font-family: var(--font-mono);
-}
-
-:root {
-  color: var(--color-primary);
-  background: var(--color-body);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Cross-browser scrollbar styling */
+/* Custom Scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-neutral-700) transparent;
