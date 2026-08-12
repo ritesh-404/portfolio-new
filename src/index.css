@@ -1,16 +1,36 @@
 @import "tailwindcss";
 
+* {
+  cursor:
+    url("./assets/images/cursor-normal.png") 0 0,
+    auto;
+}
+
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+label{
+  cursor:
+    url("./assets/images/cursor-pointer.png") 0 0,
+    pointer;
+}
+
+button > * {
+  pointer-events: none;
+}
+
 @theme inline {
   /* Typography Tokens */
   --font-title: "DM Sans", sans-serif;
   --font-body: "DM Sans", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
 
-  --letter-spacing-tight: -2px;
+  --letter-spacing-tight: -1px;
   --letter-spacing-normal: 0px;
 
   /* Custom Color Aliases (referencing default Tailwind palette) */
@@ -37,159 +57,228 @@
   --color-img-container: var(--color-neutral-800);
 }
 
-/* Base Document Styling */
 :root {
+  user-select: none;
   color: var(--color-primary);
-  background-color: var(--color-body);
+  background-color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Utilities: Display Headings */
+/* Custom Scrollbar */
+* {
+  scrollbar-width: none;
+}
+
+/* text styles  */
 @utility display-xl {
   font-family: var(--font-title);
-  font-size: 36px;
-  line-height: 44px;
-  letter-spacing: var(--letter-spacing-tight);
-  font-weight: var(--font-weight-regular);
+  font-size: 60px;
+  line-height: 72px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 60px;
-    line-height: 72px;
-  }
+@utility display-xl-medium {
+  font-family: var(--font-title);
+  font-size: 60px;
+  line-height: 72px;
+  font-weight: 500;
+}
+
+@utility display-xl-semibold {
+  font-family: var(--font-title);
+  font-size: 60px;
+  line-height: 72px;
+  font-weight: 600;
 }
 
 @utility display-lg {
   font-family: var(--font-title);
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: var(--letter-spacing-tight);
-  font-weight: var(--font-weight-regular);
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 48px;
-    line-height: 60px;
-  }
+@utility display-lg-medium {
+  font-family: var(--font-title);
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 500;
+}
+
+@utility display-lg-semibold {
+  font-family: var(--font-title);
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 600;
 }
 
 @utility display-md {
   font-family: var(--font-title);
-  font-size: 28px;
-  line-height: 36px;
-  letter-spacing: var(--letter-spacing-tight);
-  font-weight: var(--font-weight-regular);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 36px;
-    line-height: 44px;
-  }
+@utility display-md-medium {
+  font-family: var(--font-title);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 500;
+}
+
+@utility display-md-semibold {
+  font-family: var(--font-title);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
 }
 
 @utility display-sm {
   font-family: var(--font-title);
-  font-size: 24px;
-  line-height: 32px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 30px;
-    line-height: 38px;
-  }
+@utility display-sm-medium {
+  font-family: var(--font-title);
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 500;
+}
+
+@utility display-sm-semibold {
+  font-family: var(--font-title);
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 600;
 }
 
 @utility display-xs {
   font-family: var(--font-title);
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
-
-  @variant md {
-    font-size: 24px;
-    line-height: 32px;
-  }
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
 }
 
-/* Custom Utilities: Text Scale Overrides */
+@utility display-xs-medium {
+  font-family: var(--font-title);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+@utility display-xs-semibold {
+  font-family: var(--font-title);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
 @utility text-xl {
   font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 20px;
-    line-height: 30px;
-  }
+@utility text-xl-medium {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+@utility text-xl-semibold {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
 }
 
 @utility text-lg {
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 18px;
-    line-height: 28px;
-  }
+@utility text-lg-medium {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+@utility text-lg-semibold {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
 }
 
 @utility text-md {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 22px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 16px;
-    line-height: 24px;
-  }
+@utility text-md-medium {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+@utility text-md-semibold {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
 }
 
 @utility text-sm {
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
+}
 
-  @variant md {
-    font-size: 14px;
-    line-height: 20px;
-  }
+@utility text-sm-medium {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+@utility text-sm-semibold {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
 }
 
 @utility text-xs {
   font-family: var(--font-body);
   font-size: 12px;
   line-height: 18px;
-  letter-spacing: var(--letter-spacing-normal);
-  font-weight: var(--font-weight-regular);
-
-  @variant md {
-    font-size: 12px;
-    line-height: 18px;
-  }
+  font-weight: 400;
 }
 
-/* Custom Scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-neutral-700) transparent;
+@utility text-xs-medium {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-neutral-700);
-  border-radius: 9999px;
+@utility text-xs-semibold {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
 }

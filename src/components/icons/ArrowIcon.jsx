@@ -1,29 +1,30 @@
 export default function ArrowIcon({ className = "w-5 h-5" }) {
   return (
     <svg
-      className={className}
-      viewBox="0 0 20 20"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M4.16663 10L15.8333 10"
+        d="M5 12H19"
         stroke="currentColor"
-        strokeWidth="1.5"
+        stroke-width="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M10.8334 15L15.8334 10"
+        d="M13 18L19 12"
         stroke="currentColor"
-        strokeWidth="1.5"
+        stroke-width="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M10.8334 5L15.8334 10"
+        d="M13 6L19 12"
         stroke="currentColor"
-        strokeWidth="1.5"
+        stroke-width="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

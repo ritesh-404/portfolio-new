@@ -10,3 +10,4 @@ export { default as MessageIcon } from "./MessageIcon";
 export { default as LayersIcon } from "./LayersIcon";
 export { default as DashboardIcon } from "./DashboardIcon";
 export { default as LayoutIcon } from "./LayoutIcon";
+export { default as CameraIcon } from "./CameraIcon";
