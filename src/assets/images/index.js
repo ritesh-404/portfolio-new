@@ -1,0 +1,10 @@
+export { default as Flowers } from "./flowers.png";
+export { default as GithubCard } from "./github-card.png";
+export { default as Illustration } from "./illustration.png";
+export { default as LandingPage } from "./landing page.png";
+export { default as PricingColorful } from "./pricing-colorful.png";
+export { default as QuoraLogin } from "./quora-login.png";
+export { default as CursorNormal } from "./cursor-normal.png";
+export { default as CursorPointer } from "./cursor-pointer.png";
+export { default as Normal } from "./normal.png";
+export { default as Pointer } from "./pointer.png";

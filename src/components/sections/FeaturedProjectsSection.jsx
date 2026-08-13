@@ -1,5 +1,5 @@
 import Card from "../ui/Card";
-import FlowersWallpaper from "../../assets/images/flowers.png";
+import { Flowers } from "../../assets/images";
 
 export default function FeaturedProjectsSection() {
   return (
@@ -18,19 +18,19 @@ export default function FeaturedProjectsSection() {
 
       <div className="overflow-hidden flex flex-col gap-12">
         <Card
-          image={FlowersWallpaper}
+          image={Flowers}
           category="Branding & website"
           title="DataView : We redesigned their website"
           href="/work/dataview"
         />
         <Card
-          image={FlowersWallpaper}
+          image={Flowers}
           category="Branding & website"
           title="DataView : We redesigned their website"
           href="/work/dataview"
         />
         <Card
-          image={FlowersWallpaper}
+          image={Flowers}
           category="Branding & website"
           title="DataView : We redesigned their website"
           href="/work/dataview"

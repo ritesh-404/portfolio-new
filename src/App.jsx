@@ -1,24 +1,8 @@
 import "./App.css";
-// import {
-//   LayoutIcon,
-//   DashboardIcon,
-//   LayersIcon,
-//   CameraIcon,
-//   HeyIcon,
-//   ArrowIcon,
-//   BookIcon,
-//   PeaceHandIcon,
-//   MessageIcon,
-// } from "./components/icons";
 
-// import Button from "./components/ui/Button";
-// import Pill from "./components/ui/Pill";
 import Footer from "./components/ui/Footer";
 import HeroSection from "./components/sections/HeroSection";
 import FeaturedProjectsSection from "./components/sections/FeaturedProjectsSection";
-import ContactSection from "./components/sections/ContactSection";
-import AboutSection from "./components/sections/AboutSection";
-import CaseStudySection from "./components/sections/CaseStudySection";
 
 function App() {
   return (
@@ -33,15 +17,7 @@ function App() {
       <div className="absolute top-0 bottom-0 right-0 w-8 border-l border-border-dark pointer-events-none" />
 
       <HeroSection />
-
       <FeaturedProjectsSection />
-
-      <ContactSection />
-
-      <AboutSection />
-
-      <CaseStudySection />
-
       <Footer />
     </div>
   );

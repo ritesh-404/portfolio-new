@@ -1,19 +1,18 @@
-import quoradesign from "../../assets/images/quora-login.png";
-import pricingdesign from "../../assets/images/pricing-colorful.png";
+import { QuoraLogin, PricingColorful } from "../../assets/images";
 
 const caseStudyImages = [
   // Row 1
-  { src: quoradesign, alt: "Quora login screen" },
-  { src: pricingdesign, alt: "Illustration" },
+  { src: QuoraLogin, alt: "Quora login screen" },
+  { src: PricingColorful, alt: "Illustration" },
   // Row 2
-  { src: quoradesign, alt: "Quora login screen" },
-  { src: pricingdesign, alt: "Illustration" },
+  { src: QuoraLogin, alt: "Quora login screen" },
+  { src: PricingColorful, alt: "Illustration" },
   // Row 3
-  { src: quoradesign, alt: "Quora login screen" },
-  { src: pricingdesign, alt: "Illustration" },
+  { src: QuoraLogin, alt: "Quora login screen" },
+  { src: PricingColorful, alt: "Illustration" },
   // Row 4
-  { src: quoradesign, alt: "Quora login screen" },
-  { src: pricingdesign, alt: "Illustration" },
+  { src: QuoraLogin, alt: "Quora login screen" },
+  { src: PricingColorful, alt: "Illustration" },
 ];
 
 export default function CaseStudySection() {
@@ -27,8 +26,8 @@ export default function CaseStudySection() {
 
         {/* Description */}
         <div className="flex flex-col gap-6">
-          <p className="text-sm text-(--color-muted-light) leading-relaxed">
-            <span className="text-(--color-primary) font-medium">Dataview</span>{" "}
+          <p className="text-xl text-(--color-muted-light) leading-relaxed">
+            <span className="text-(--color-primary)">Dataview</span>{" "}
             is building the infrastructure for data-driven decision-making:
             real-time dashboards, predictive analytics, pipeline monitoring,
             collaborative reporting, and AI- generated insight layers. As their
@@ -37,8 +36,8 @@ export default function CaseStudySection() {
             cohesive, precise, and deeply technical.
           </p>
 
-          <p className="text-sm text-(--color-muted-light) leading-relaxed">
-            <span className="text-(--color-primary) font-medium">
+          <p className="text-xl text-(--color-muted-light) leading-relaxed">
+            <span className="text-(--color-primary)">
               Problem :
             </span>{" "}
             Dataview had a great product but somehow it was not convincing the
@@ -46,8 +45,8 @@ export default function CaseStudySection() {
             generic and sloppy visuals.
           </p>
 
-          <p className="text-sm text-(--color-muted-light) leading-relaxed">
-            <span className="text-(--color-primary) font-medium">
+          <p className="text-xl text-(--color-muted-light) leading-relaxed">
+            <span className="text-(--color-primary)">
               What i did :
             </span>{" "}
             Bringing clean modern user interface to their website and adding
@@ -55,7 +54,7 @@ export default function CaseStudySection() {
           </p>
 
           {/* Tags */}
-          <ul className="flex flex-col gap-1 text-sm text-(--color-primary)">
+          <ul className="flex flex-col gap-1 text-xl text-(--color-primary)">
             <li className="flex items-center gap-2">
               <span className="text-(--color-muted-light)">•</span>
               web design
@@ -74,7 +73,7 @@ export default function CaseStudySection() {
         {/* Image Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {caseStudyImages.map((image, index) => (
-            <div key={index} className="w-full overflow-hidden">
+            <div key={index} className="w-full bg-neutral-900 overflow-hidden">
               <img
                 src={image.src}
                 alt={image.alt}
