@@ -19,6 +19,7 @@ import FeaturedProjectsSection from "./components/sections/FeaturedProjectsSecti
 
 import Button from "./components/ui/Button";
 import { ArrowIcon } from "./components/icons";
+import CaseStudySection from "./components/sections/CaseStudySection";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <HeroSection />
 
       <FeaturedProjectsSection />
+      <CaseStudySection />
       <Footer />
     </div>
   );

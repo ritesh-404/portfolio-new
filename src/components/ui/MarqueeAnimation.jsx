@@ -1,18 +1,14 @@
 import { motion } from "motion/react";
 
 import ImgContainer from "../ui/ImgContainer";
-import githubCardImg from "../../assets/images/github-card.png";
-import illustrationImg from "../../assets/images/illustration.png";
-import landingPageImg from "../../assets/images/landing page.png";
-import pricingImg from "../../assets/images/pricing-colorful.png";
-import quoraLoginImg from "../../assets/images/quora-login.png";
+import { Illustration, GithubCard, LandingPage, PricingColorful, QuoraLogin } from "../../assets/images";
 
 const images = [
-  illustrationImg,
-  githubCardImg,
-  landingPageImg,
-  pricingImg,
-  quoraLoginImg,
+  Illustration,
+  GithubCard,
+  LandingPage,
+  PricingColorful,
+  QuoraLogin,
 ];
 
 const MarqueeAnimation = ({ speed = 35, direction = "left" }) => {
