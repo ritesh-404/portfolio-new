@@ -16,9 +16,9 @@ import "./App.css";
 import Footer from "./components/ui/Footer";
 import HeroSection from "./components/sections/HeroSection";
 import FeaturedProjectsSection from "./components/sections/FeaturedProjectsSection";
-
-import Button from "./components/ui/Button";
-import { ArrowIcon } from "./components/icons";
+import ContactSection from "./components/sections/ContactSection";
+import AboutSection from "./components/sections/AboutSection";
+import CaseStudySection from "./components/sections/CaseStudySection";
 
 function App() {
   return (
@@ -35,6 +35,13 @@ function App() {
       <HeroSection />
 
       <FeaturedProjectsSection />
+
+      <ContactSection />
+
+      <AboutSection />
+
+      <CaseStudySection />
+
       <Footer />
     </div>
   );

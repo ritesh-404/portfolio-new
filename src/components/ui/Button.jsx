@@ -1,4 +1,4 @@
-import React from "react";
+import { motion } from "motion/react";
 
 export default function Button({
   children,
@@ -26,11 +26,13 @@ export default function Button({
   //     : "transition-transform duration-300 ease-in-out group-hover:-translate-x-1";
 
   return (
-    <button
+    <motion.button
       type={type}
       onClick={onClick}
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
       {...props}
+      whileHover={{ scale: 1.005 }}
+      whileTap={{ scale: 0.995 }}
     >
       {/* Render icon on the left if specified */}
       {Icon && iconPosition === "left" && (
@@ -48,6 +50,6 @@ export default function Button({
           <Icon />
         </span>
       )}
-    </button>
+    </motion.button>
   );
 }

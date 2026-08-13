@@ -10,8 +10,7 @@ a,
 button,
 [role="button"],
 input[type="submit"],
-input[type="button"],
-label{
+input[type="button"]{
   cursor:
     url("./assets/images/cursor-pointer.png") 0 0,
     pointer;
@@ -58,13 +57,17 @@ button > * {
 }
 
 :root {
-  user-select: none;
   color: var(--color-primary);
   background-color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #22c55e;   /* green-500 */
+  color: #000000;        /* black text */
 }
 
 /* Custom Scrollbar */

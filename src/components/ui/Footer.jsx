@@ -48,8 +48,8 @@ const Footer = () => {
           </div>
 
           {/* Right: Pills + Watermark */}
-          <div className="flex flex-col items-end gap-2">
-            <span className="display-xs text-muted-dark">Ritesh n.</span>
+          <div className="flex flex-col items-end gap-4">
+            <span className="text-muted-light text-lg">Or email us at <a href="gmail.com" target="_blank" className="text-neutral-100 underline underline-offset-1">hey@budbaks.com</a> for any enqueries.</span>
             <div className="flex gap-2">
               <Pill label="Github" href="https://github.com" />
               <Pill label="X (twitter)" href="https://twitter.com" />
