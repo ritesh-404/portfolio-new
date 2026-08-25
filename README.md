@@ -1,16 +1,78 @@
-# React + Vite
+# Ritesh — Designer & Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal portfolio website showcasing concept and self-initiated projects in tech and product — designed in Figma, built in React, and shipped end to end by one person.
 
-Currently, two official plugins are available:
+**Live site:** <!-- Add your deployed URL here, e.g. https://your-domain.com -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## About
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+I design and build landing pages and websites for startups and tech companies. This portfolio is both my showcase and proof of work — every screen, component, and line of code you see here was created by me, from the first Figma frame to production deployment.
 
-## Expanding the Oxlint configuration
+The site includes detailed **case studies** that walk through my actual process: the brief, the challenge, the approach, and dozens of real design iterations behind each project.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Highlights
+
+- **End-to-end ownership** — UI/UX design, branding, and front-end development handled solo
+- **Detailed case studies** — each project documents the problem, process, and final outcome with full-page visuals
+- **Working contact form** — bot-protected with Cloudflare Turnstile and email delivery via Resend
+- **Responsive by default** — layouts adapt cleanly from mobile to widescreen
+- **Performance-conscious assets** — optimized images and fast builds with Vite
+
+## Tech Stack
+
+| Layer     | Tools                                                        |
+| --------- | ------------------------------------------------------------ |
+| Front-end | React 19, Vite 8, Tailwind CSS 4, Wouter (routing), Motion   |
+| Tooling   | Oxlint, Git                                                  |
+| Forms     | Cloudflare Turnstile (spam protection), Resend (email)       |
+| Design    | Figma, Instrument Sans / Instrument Serif / Hedvig Letters   |
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/ritesh-404/portfolio-new.git
+cd portfolio-new
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Lint the codebase
+npm run lint
+```
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values. Client-side variables use the `VITE_` prefix; server-side secrets (Resend API key, Turnstile secret) must only be set in your deployment dashboard — never committed.
+
+## Project Structure
+
+```
+src/
+├── assets/            # Optimized images, videos, and asset barrel exports
+├── components/
+│   ├── sections/      # Page-level sections (Hero, Contact, About, Case Studies…)
+│   └── ui/            # Reusable UI primitives (Button, Navbar, Cards, Pills)
+├── data/              # Case study content and card data
+├── pages/             # Route-level page components
+├── App.jsx            # Layout shell and router
+└── main.jsx           # Entry point
+```
+
+## Work With Me
+
+I'm available for freelance projects and full-time roles. If you're looking for someone who can take a product from idea to polished, shipped website — design and code — let's talk.
+
+- **GitHub:** [ritesh-404](https://github.com/ritesh-404)
+- **Email:** <!-- Add your email here -->
+- **Book a call:** [Cal.com — 15 min intro](https://cal.com/ritesh-n/15min)
+
+Typical engagement: landing pages and websites starting at $999, delivered in 2–3 weeks.
