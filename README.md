@@ -29,44 +29,6 @@ The site includes detailed **case studies** that walk through my actual process:
 | Forms     | Cloudflare Turnstile (spam protection), Resend (email)       |
 | Design    | Figma, Instrument Sans / Instrument Serif / Hedvig Letters   |
 
-## Getting Started
-
-```bash
-# Clone the repository
-git clone https://github.com/ritesh-404/portfolio-new.git
-cd portfolio-new
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Lint the codebase
-npm run lint
-```
-
-### Environment Variables
-
-Copy `.env.example` to `.env` and fill in the values. Client-side variables use the `VITE_` prefix; server-side secrets (Resend API key, Turnstile secret) must only be set in your deployment dashboard — never committed.
-
-## Project Structure
-
-```
-src/
-├── assets/            # Optimized images, videos, and asset barrel exports
-├── components/
-│   ├── sections/      # Page-level sections (Hero, Contact, About, Case Studies…)
-│   └── ui/            # Reusable UI primitives (Button, Navbar, Cards, Pills)
-├── data/              # Case study content and card data
-├── pages/             # Route-level page components
-├── App.jsx            # Layout shell and router
-└── main.jsx           # Entry point
-```
-
 ## Work With Me
 
 I'm available for freelance projects and full-time roles. If you're looking for someone who can take a product from idea to polished, shipped website — design and code — let's talk.
