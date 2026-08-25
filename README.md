@@ -72,7 +72,7 @@ src/
 I'm available for freelance projects and full-time roles. If you're looking for someone who can take a product from idea to polished, shipped website — design and code — let's talk.
 
 - **GitHub:** [ritesh-404](https://github.com/ritesh-404)
-- **Email:** <!-- Add your email here -->
+- **X (twitter):** *https://x.com/Riteshxdev* 
 - **Book a call:** [Cal.com — 15 min intro](https://cal.com/ritesh-n/15min)
 
-Typical engagement: landing pages and websites starting at $999, delivered in 2–3 weeks.
+Typical engagement: landing pages and websites starting at $1999, delivered in 2–3 weeks not 3-6months.
