@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables (secrets — keep out of version control)
+.env
+.env.*
+!.env.example
