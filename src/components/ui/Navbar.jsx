@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "wouter";
 import Button from "./Button";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
+  // Close menu on click outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -16,83 +18,87 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Work", href: "#work" },
-    { label: "Process", href: "#process" },
-    { label: "Services", href: "#services" },
-    { label: "About me", href: "#about" },
-    { label: "Writings", href: "#writings" },
+    { label: "Home", targetId: "heroSection" },
+    { label: "Work", targetId: "caseStudySection" },
+    { label: "Process", targetId: "processSection" },
+    { label: "Services", targetId: "serviceSection" },
+    { label: "Contact me", targetId: "contactSection" },
+    { label: "About me", targetId: "aboutSection" },
   ];
 
+  const handleScroll = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    setIsOpen(false)
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <>
-      <nav className="fixed top-10 right-10 z-50 flex items-center gap-2 px-2 py-2 pl-6 rounded-sm bg-[#f0f0f0]/60  saturate-[180%] backdrop-blur-[20px] border border-border transition-all duration-300 md:w-auto w-[calc(100%-2rem)] max-w-[420px] md:max-w-none md:justify-start justify-between">
-        {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-1 list-none">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className="block px-4 py-2 text-[15px] font-medium text-[#626277] rounded-full transition-colors duration-200 hover:text-black no-underline"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+    <nav
+      ref={menuRef}
+      className="fixed lg:right-10 lg:top-10 z-50 flex flex-col px-5 py-3 rounded-md bg-[#f0f0f0]/80 saturate-[180%] backdrop-blur-[20px] border border-border transition-all duration-300 justify-between w-full lg:w-[300px]"
+    >
+      {/* Navbar Header Bar */}
+      <div className="flex items-center justify-between w-full">
 
-        {/* CTA Button (Desktop) */}
-        <Button className="hidden md:inline-flex">Get in touch</Button>
+        <Button className="hidden md:inline-flex" onClick={(e) => handleScroll(e, "contactSection")}>Get in touch</Button>
 
-        {/* Mobile Menu Button */}
+        {/* Interactive Morphing Hamburger / Cross Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-transparent border-none cursor-pointer"
-          aria-label="Toggle menu"
+          aria-label="Toggle navigation menu"
+          className="p-1 cursor-pointer focus:outline-none ml-auto"
         >
           <svg
-            viewBox="0 0 24 24"
-            className="w-[22px] h-[22px] stroke-[#1a1a2e] stroke-2 stroke-linecap-round stroke-linejoin-round fill-none"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {isOpen ? (
-              <>
-                <line x1="6" y1="6" x2="18" y2="18" />
-                <line x1="18" y1="6" x2="6" y2="18" />
-              </>
-            ) : (
-              <>
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </>
-            )}
+            {/* Top Line -> Morphs into first arm of "X" */}
+            <path
+              d="M 5.333 10.666 H 26.666"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className={`transition-all duration-300 origin-center ${
+                isOpen ? "translate-y-[5.33px] rotate-45" : ""
+              }`}
+            />
+            {/* Bottom Line -> Morphs into second arm of "X" */}
+            <path
+              d="M 5.333 21.333 H 26.666"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className={`transition-all duration-300 origin-center ${
+                isOpen ? "-translate-y-[5.33px] -rotate-45" : ""
+              }`}
+            />
           </svg>
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile Dropdown */}
-      <div
-        ref={menuRef}
-        className={`md:hidden fixed top-20 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[360px] p-3 rounded-[20px] bg-white/55 backdrop-blur-2xl saturate-[180%] border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] z-[999] transition-all duration-300 origin-top ${
-          isOpen
-            ? "opacity-100 scale-100 pointer-events-auto"
-            : "opacity-0 scale-95 pointer-events-none"
-        }`}
-      >
-        <ul className="flex flex-col gap-1 list-none m-0 p-0">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 text-base font-medium text-[#1a1a2e] rounded-xl transition-colors duration-200 hover:bg-black/5 no-underline"
+      {/* Dropdown Navigation Menu */}
+      {isOpen && (
+        <ul className="flex flex-col pt-4 mt-3 border-t border-black/10 w-full animate-in fade-in slide-in-from-top-2 duration-200">
+          {navLinks.map((navLink) => (
+            <li key={navLink.targetId}>
+              <Link
+                href={`${navLink.targetId}`}
+                onClick={(e) => handleScroll(e, navLink.targetId)}
+                className="lg:text-3xl text-2xl font-medium font-body text-muted-light hover:text-black transition-colors block py-3"
               >
-                {link.label}
-              </a>
+                {navLink.label}
+              </Link>
             </li>
           ))}
         </ul>
-        <Button className="w-full mt-2 py-3.5 text-[15px]">Get in touch</Button>
-      </div>
-    </>
+      )}
+    </nav>
   );
 }

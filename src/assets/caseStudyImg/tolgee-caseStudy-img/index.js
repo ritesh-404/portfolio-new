@@ -7,3 +7,4 @@ export { default as PricingCard } from "./pricing card.png";
 export { default as UserReviews } from "./user-reviews.png";
 export { default as TolgeeHomepage } from "./tolgee-homepage.png";
 export { default as TolgeeDesktop } from "./tolgee-desktop.png";
+export { default as tolgeeCoverImg } from "./tolgeeCoverImg.png";

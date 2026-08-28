@@ -4,25 +4,32 @@ button > * {
   pointer-events: none;
 }
 
+::selection {
+  background-color: #000000;
+  color: white;
+}
+
 @theme inline {
   /* Typography Tokens */
   --font-title: "Instrument Sans", sans-serif;
   --font-body: "Instrument Sans", sans-serif;
   --font-serif: "Instrument Serif", serif;
   --font-headvig-serif: "Hedvig Letters Serif", serif;
+  --font-mono: "Geist Mono", monospace;
 
   /* text  */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-muted-light: #6f7688; /*for text */
   --color-muted-dark: #2e3238; /*for text */
+  --color-pink:#ff9e9e;
 
   /* bg  */
   --color-body: #fafafa;
   --color-surface: #f1f2f4; /* bg for pills tags  */
   --color-border: #dddfe4;
-  --color-img-container: #f6f7f8 /* bg for core case studies img container  */
-    --color-navbar-bg: #f0f0f0;
+  --color-img-container: #f6f7f8; /* bg for core case studies img container  */
+  --color-navbar-bg: #f0f0f0;
 }
 
 :root {
@@ -32,6 +39,8 @@ button > * {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  box-sizing: border-box;
 
   --shimmer-dur: 2000ms;
   --shimmer-base: #000000;
@@ -43,7 +52,6 @@ button > * {
 * {
   scrollbar-width: none;
 }
-
 
 /* text animation  */
 
@@ -60,11 +68,11 @@ button > * {
   pointer-events: none;
   background-image: linear-gradient(
     90deg,
-    transparent          0%,
-    transparent         40%,
+    transparent 0%,
+    transparent 40%,
     var(--shimmer-highlight) 50%,
-    transparent         60%,
-    transparent        100%
+    transparent 60%,
+    transparent 100%
   );
   background-size: var(--shimmer-band) 100%;
   background-repeat: no-repeat;
@@ -75,6 +83,10 @@ button > * {
   animation: t-shimmer var(--shimmer-dur) var(--shimmer-ease) infinite;
 }
 @keyframes t-shimmer {
-  0%   { background-position: 100% 0; }
-  100% { background-position: 0% 0; }
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
 }

@@ -1,33 +1,30 @@
-import {
-  MorphBg,
-  TolgeeBg,
-  MorphLogo,
-  TolgeeLogo,
-  PortfolioThumbnail,
-} from "../assets/featured-card-img";
-
+import { TolgeeImg } from "../assets/featured-card-img";
+import {MorphBoys} from "../assets/caseStudyImg/morph-caseStudy-img"
 
 const caseStudyData = [
   {
-    id: "morph",
-    imgUrl: MorphBg,
-    logo: MorphLogo,
-    category: "Concept — Branding & Identity",
-    title: "Morph: visual identity for a gymwear label",
-  },
-  {
     id: "tolgee",
-    imgUrl: TolgeeBg,
-    logo: TolgeeLogo,
-    category: "Concept — Website & UI",
-    title: "Tolgee: a redesign concept for a developer tool",
+    image: TolgeeImg,
+    tags: [
+      "development",
+      "web design",
+      "strategy",
+      "branding",
+      "Brand illustrations",
+      "visual identity",
+    ],
+    title: "Tolgee",
+    description:
+      "Bringing structure and perfect positining to tolgee's website",
   },
   {
-    id: "my-portfolio",
-    imgUrl: PortfolioThumbnail,
-    category: "Self-initiated — Design & Build",
-    title: "This site: a React portfolio I designed, built, and shipped myself",
-  }
+    id: "morph",
+    image: MorphBoys,
+    tags: ["Logo design", "Visual identity", "strategy", "branding"],
+    title: "Morph",
+    description:
+      "Giving morph a global positioning as a GYM wear clothing brand",
+  },
 ];
 
 export default caseStudyData;

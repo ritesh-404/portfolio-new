@@ -11,7 +11,7 @@ export default function Button({
 
   const variantStyles = {
     primary: "bg-black text-white border-transparent",
-    secondary: "bg-transparent text-black border-border",
+    secondary: "bg-transparent text-black",
   };
 
   return (

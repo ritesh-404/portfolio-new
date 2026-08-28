@@ -1,47 +1,37 @@
-// src/components/ui/CaseStudyCard.jsx
-import PillTagGroup from "./Pill";
+import Pill from "./Pill";
+import { Link } from "wouter";
 
 export default function CaseStudyCard({
   tags = [],
-  defaultSelectedTag,
-  onTagSelect,
   image,
-  title = "Tolgee",
-  description = "Tolgee is an open-source localization platform built for developers",
+  title = "",
+  description = "",
+  className = "",
+  id=""
 }) {
-  return (
-    <article className="flex w-full flex-col gap-4 font-[var(--font-body)]">
-      {/* Pills Navigation */}
-      {tags.length > 0 && (
-        <PillTagGroup
-          tags={tags}
-          defaultSelected={defaultSelectedTag}
-          onSelect={onTagSelect}
-        />
-      )}
 
-      {/* Image Preview Container */}
-      <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-img-container)] p-4 sm:p-6 md:p-8">
-        {image ? (
-          <img
-            src={image}
-            alt={`${title} case study preview`}
-            className="h-full w-full object-cover rounded-lg"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center rounded-lg bg-[var(--color-muted-dark)] text-sm font-medium text-[var(--color-white)]">
-            No Preview Available
-          </div>
-        )}
+  return (
+    <Link
+      href={`/work/${id}`}
+      className={`${className} flex flex-col max-w-[600px] min-w-[356px] w-full font-body cursor-pointer hover:border-black/40 border border-transparent transition-all duration-300`}
+    >
+      {/* header pills */}
+      <div className="lg:py-5 py-4 px-4 flex w-full justify-center items-center flex-wrap bg-white border border-b-0 border-border gap-2 h-full">
+        {tags.length > 0 && tags.map((label, i) => <Pill>{label}</Pill>)}
       </div>
 
-      {/* Title & Description Text */}
-      <p className="text-sm leading-relaxed sm:text-base text-[var(--color-muted-light)]">
-        <strong className="font-bold text-[var(--color-black)] font-[var(--font-title)]">
-          {title} :{" "}
-        </strong>
-        {description}
-      </p>
-    </article>
+      {/* responsive img container  */}
+      <div className="w-full bg-img-container lg:px-8 px-4 py-10 lg:py-20 border border-border h-full">
+        {image && <img src={image} alt="" className="lg:max-w-full" />}
+      </div>
+
+      <div className="w-full bg-surface border border-t-0 border-border lg:px-8 px-4 lg:py-9 py-3 h-full">
+        {title && description && (
+          <h3 className="text-muted-light lg:text-2xl text-xl leading-[28px] font-medium lg:leading-[36px] font-body">
+            <span className="text-black">{title}</span> : {description}
+          </h3>
+        )}
+      </div>
+    </Link>
   );
 }

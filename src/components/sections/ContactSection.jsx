@@ -1,343 +1,183 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import Section from "../ui/Section";
+import Container from "../ui/Container";
+import BaseGrid from "../ui/BaseGrid";
+import HeadingSubHeading from "../ui/HeadingSubHeading";
+import InputBox from "../ui/InputBox";
 import Button from "../ui/Button";
 
+export default function ContactSection({ className = "" }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null); // 'success' | 'error' | null
+  const [statusMessage, setStatusMessage] = useState("");
 
-const services = [
-  "Landing page design or redesign",
-  "Complete Website design or redesign",
-  "Web Development",
-  "Other",
-];
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
 
-const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+    const formElement = event.target;
+    const formData = new FormData(formElement);
+    formData.append("access_key", "d4ac9c64-0374-4f28-8a08-558f4b8a5c0d");
 
-export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    companyName: "",
-    email: "",
-    budget: "",
-    timeline: "",
-    message: "",
-    selectedServices: [],
-    honeypot: "",
-  });
-
-  const [focusedField, setFocusedField] = useState(null);
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const turnstileElementRef = useRef(null);
-
-  // Render the Cloudflare Turnstile widget once the script is available.
-  useEffect(() => {
-    if (!TURNSTILE_SITE_KEY) return;
-
-    let interval;
-    const tryRender = () => {
-      if (window.turnstile && turnstileElementRef.current) {
-        window.turnstile.render(turnstileElementRef.current, {
-          sitekey: TURNSTILE_SITE_KEY,
-          callback: (token) => setTurnstileToken(token),
-          "expired-callback": () => setTurnstileToken(""),
-          "error-callback": () => setTurnstileToken(""),
-        });
-        clearInterval(interval);
-      }
-    };
-
-    interval = setInterval(tryRender, 300);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const toggleService = (service) => {
-    setFormData((prev) => {
-      const alreadySelected = prev.selectedServices.includes(service);
-      if (alreadySelected) {
-        return {
-          ...prev,
-          selectedServices: prev.selectedServices.filter((s) => s !== service),
-        };
-      }
-      return {
-        ...prev,
-        selectedServices: [...prev.selectedServices, service],
-      };
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg("");
-
-    if (TURNSTILE_SITE_KEY && !turnstileToken) {
-      setStatus("error");
-      setErrorMsg("Please complete the human verification.");
-      return;
-    }
-
-    setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, turnstileToken }),
+        body: formData,
       });
 
-      if (res.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         setStatus("success");
-        setFormData({
-          fullName: "",
-          companyName: "",
-          email: "",
-          budget: "",
-          timeline: "",
-          message: "",
-          selectedServices: [],
-          honeypot: "",
-        });
-        setTurnstileToken("");
+        setStatusMessage("Thank you! Your message has been sent successfully.");
+        formElement.reset(); // Clears form inputs
       } else {
-        const data = await res.json().catch(() => ({}));
         setStatus("error");
-        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatusMessage(
+          data.message || "Something went wrong. Please try again.",
+        );
       }
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setErrorMsg("Network error. Please try again.");
+      setStatusMessage(
+        "Network error. Please check your connection and try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const inputBase =
-    "w-full bg-fff rounded-sm px-4 h-auto py-4 text-sm text-primary placeholder-muted-dark outline-none transition-all duration-300";
-
-  const inputFocus = "focus:border-accent focus:ring-1 focus:ring-accent";
-
-  const labelBase = "block text-sm mb-2";
+  const services = [
+    "Web Design & Development",
+    "Pitch Deck & One-Pager Design",
+    "Brand Strategy & Visual Identity",
+    "Mobile App Design ",
+  ];
 
   return (
-    <section
-      id="contact"
-      className="px-4 sm:px-6 lg:px-9 py-6 sm:py-12 lg:py-24 bg-fff h-auto w-full border-b border-border-dark"
-    >
-      <div className="flex flex-col gap-20 w-full">
-        {/* Top section: Heading + decorative line */}
-        <div className="flex flex-col gap-2">
-          <h2 className="display-sm md:display-md lg:display-lg text-(--color-primary)">
-            Want to work together? Let's talk.
-          </h2>
-          <h4 className="text-base sm:text-lg lg:display-xs text-(--color-muted-light)">
-            I reply within 24 hours.
-          </h4>
-        </div>
+    <Section id="contactSection">
+      <Container>
+        <BaseGrid>
+          {/* heading and subheading */}
+          <HeadingSubHeading
+            heading="Want to work together ?"
+            subHeading="The best work begins with the right introduction. Tell me what you're building and I’ll get back to you within 24 hours."
+          />
 
-        {/* Bottom section: Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-11 bg-surface border border-border-default px-4 sm:px-6 lg:px-9 py-6"
-        >
-          {/* form inputs  */}
-
-          <div className="flex flex-col gap-10">
-            {/* Row 1: Name + Company */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-              <div className="flex flex-col gap-2">
-                <label className={labelBase}>What&apos;s your name?</label>
-                <input
+          <div className="col-span-12 h-full mt-20">
+            <form
+              onSubmit={onSubmit}
+              className="w-full bg-img-container md:px-9 px-6 py-11 border border-border"
+            >
+              {/* content  */}
+              <div className="flex w-full items-start gap-6 flex-col">
+                {/* client name  */}
+                <InputBox
                   type="text"
-                  name="fullName"
-                  placeholder="Full name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("fullName")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`${inputBase} ${inputFocus} ${
-                    focusedField === "fullName" ? "border-accent" : ""
-                  }`}
+                  placeholderText="Full name"
+                  id="clientName"
+                  name="clientName"
+                  label="What's your name?"
+                  required
                 />
-              </div>
 
-              <div className="flex flex-col gap-2">
-                <label className={labelBase}>
-                  What&apos;s your company&apos;s name?
-                </label>
-                <input
+                {/* company name  */}
+                <InputBox
                   type="text"
+                  placeholderText="Company name"
+                  id="companyName"
                   name="companyName"
-                  placeholder="company name"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("companyName")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`${inputBase} ${inputFocus} ${
-                    focusedField === "companyName" ? "border-accent" : ""
-                  }`}
+                  label="What's your company's name?"
                 />
-              </div>
-            </div>
 
-            {/* Row 2: Email */}
-            <div className="flex flex-col gap-2">
-              <label className={labelBase}>
-                What&apos;s your email address?
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="e.g. example@gmail.com"
-                value={formData.email}
-                onChange={handleChange}
-                onFocus={() => setFocusedField("email")}
-                onBlur={() => setFocusedField(null)}
-                className={`${inputBase} ${inputFocus} ${
-                  focusedField === "email" ? "border-accent" : ""
-                }`}
-              />
-            </div>
+                {/* email  */}
+                <InputBox
+                  type="email"
+                  placeholderText="e.g. example@gmail.com"
+                  id="email"
+                  name="email"
+                  label="What's your email address?"
+                  required
+                />
 
-            {/* Row 3: Budget + Timeline */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div className="flex flex-col gap-2">
-                <label className={labelBase}>
-                  Estimated Budget{" "}
-                  <span className="text-muted-dark">(starts at just $999)</span>
-                </label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-dark text-sm select-none">
-                    $
-                  </span>
-                  <input
-                    type="number"
-                    name="budget"
-                    placeholder=""
-                    min="999"
-                    max="5999"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("budget")}
-                    onBlur={() => setFocusedField(null)}
-                    className={`${inputBase} ${inputFocus} pl-8 ${
-                      focusedField === "budget" ? "border-accent" : ""
-                    }`}
+                {/* social media links  */}
+                <div className="w-full flex flex-col gap-1">
+                  <InputBox
+                    type="text"
+                    placeholderText="linkedIn"
+                    id="linkedin"
+                    name="linkedin"
+                    label="Best place to connect with you online?"
                   />
+                  <InputBox
+                    type="text"
+                    placeholderText="Twitter(X)"
+                    id="twitter"
+                    name="twitter"
+                  />
+                </div>
+
+                {/* textarea */}
+                <InputBox
+                  placeholderText="e.g. what you do and who’s your audience etc..."
+                  id="company-brief"
+                  name="companyBrief"
+                  label="Tell me about your company a little bit."
+                  textarea
+                  required
+                />
+
+                {/* services  */}
+                <div className="flex flex-col gap-3 font-body text-base leading-[24px] text-black">
+                  <label>
+                    How can I help you? (If you need help with something else we
+                    can talk about that on call)
+                  </label>
+
+                  <div className="flex flex-wrap w-full gap-1.5">
+                    {services.map((service) => (
+                      <label className="cursor-pointer" key={service}>
+                        <input
+                          type="radio"
+                          name="service"
+                          className="sr-only peer"
+                          value={service}
+                        />
+                        <span className="inline-block px-5 py-1 rounded-full text-base border border-border bg-img-container text-muted-dark transition-all peer-checked:bg-black peer-checked:text-white hover:border-muted-dark">
+                          {service}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className={labelBase}>
-                  Timeline{" "}
-                  <span className="text-muted-dark">(2–3 weeks typical)</span>
-                </label>
-                <input
-                  type="number"
-                  name="timeline"
-                  placeholder="e.g. 3  -(weeks)"
-                  min="2"
-                  value={formData.timeline}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("timeline")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`${inputBase} ${inputFocus} ${
-                    focusedField === "timeline" ? "border-accent" : ""
+              {/* Status Message Feedback Banner */}
+              {status && (
+                <div
+                  className={`mt-6 p-4 rounded-md text-sm font-medium ${
+                    status === "success"
+                      ? "bg-green-100 text-green-800 border border-green-300"
+                      : "bg-red-100 text-red-800 border border-red-300"
                   }`}
-                />
-              </div>
-            </div>
+                >
+                  {statusMessage}
+                </div>
+              )}
 
-            {/* Row 4: Message */}
-            <div className="flex flex-col gap-2">
-              <label className={labelBase}>
-                Tell me about your project and expectations with me!
-              </label>
-              <textarea
-                name="message"
-                rows={5}
-                placeholder="e.g. what you do and who's your audience etc..."
-                value={formData.message}
-                onChange={handleChange}
-                onFocus={() => setFocusedField("message")}
-                onBlur={() => setFocusedField(null)}
-                className={`${inputBase} ${inputFocus} resize-none ${
-                  focusedField === "message" ? "border-accent" : ""
-                }`}
-              />
-            </div>
-
-            {/* Row 5: Service tags */}
-            <div className="flex flex-col gap-2">
-              <label className={labelBase}>
-                How can I help?{" "}
-                <span className="text-muted-dark">
-                  (select all that applies)
-                </span>
-              </label>
-              <p className="text-sm text-muted-dark">
-                Branding &amp; strategy available as add-ons — just ask.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {services.map((service, i) => {
-                  const isSelected =
-                    formData.selectedServices.includes(service);
-                  return (
-                    <Button>
-                      hello
-                    </Button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Honeypot: hidden from real users, catches bots */}
-            <input
-              type="text"
-              name="honeypot"
-              value={formData.honeypot}
-              onChange={handleChange}
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-              className="hidden"
-            />
-
-            {/* Cloudflare Turnstile widget */}
-            {TURNSTILE_SITE_KEY && (
-              <div
-                ref={turnstileElementRef}
-                className="min-h-[65px]"
-                aria-label="Human verification"
-              />
-            )}
-
-            {/* Status messages */}
-            {status === "success" && (
-              <p className="text-accent text-sm">
-                Thanks! Your message is on its way — I&apos;ll reply within 24
-                hours.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="text-red-400 text-sm">{errorMsg}</p>
-            )}
+              {/* button  */}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full mt-11 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Sending..." : "Send message"}
+              </Button>
+            </form>
           </div>
-
-          {/* Row 6: Submit button */}
-          <div>
-            <Button
-              className="w-full py-3 h-auto"
-              type="submit"
-              disabled={status === "submitting"}
-            >
-              {status === "submitting" ? "Sending..." : "Send message"}
-            </Button>
-          </div>
-        </form>
-      </div>
-    </section>
+        </BaseGrid>
+      </Container>
+    </Section>
   );
 }

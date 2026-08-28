@@ -21,7 +21,8 @@ import {
   PricingCard,
   UserReviews,
   TolgeeHomepage,
-  TolgeeDesktop
+  TolgeeDesktop,
+  tolgeeCoverImg
 } from "../assets/caseStudyImg/tolgee-caseStudy-img";
 
 import {
@@ -72,6 +73,7 @@ export const caseStudies = [
     slug: "morph",
     type: "Concept",
     title: "Morph case study",
+    credits: "Ritesh Nishad",
 
     overview:
       "Morph is a gymwear label. I set myself the brief of giving it a real visual identity — a logo system and a black-and-white foundation, with one accent colour held back so it punctuates instead of shouting.",
@@ -128,6 +130,11 @@ export const caseStudies = [
     slug: "tolgee",
     type: "Concept",
     title: "Tolgee case study",
+    credits: "Ritesh Nishad",
+    coverImageAlt: "Tolgee cover img",
+    coverImage: tolgeeCoverImg,
+
+
     overview:
       "Tolgee is an open-source localization platform built for developers — letting teams manage translations, edit text directly inside their live app, and use AI-assisted translation without slowing down their workflow.",
     challenge:

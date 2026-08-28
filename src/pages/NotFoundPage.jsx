@@ -1,12 +1,47 @@
-export default function NotFoundPage(params) {
+import Badge from "../components/ui/Badge";
+import Button from "../components/ui/Button";
+import Container from "../components/ui/Container";
+import Section from "../components/ui/Section";
+import gradient from "../assets/footer-gradients.png";
+import BaseGrid from "../components/ui/BaseGrid";
+import { scrollToSection } from "../utils/ScrollTo";
+
+export default function NotFoundPage() {
   return (
-    <div className="w-full h-[calc(100vh-224px)] flex justify-center items-center">
-      <div className="flex flex-col gap-0 justify-center items-center">
-        <h1 className="display-xl">
-          4<span className="text-muted-dark">0</span>4
-        </h1>
-        <h4 className="display-xs text-muted-light">Page not found</h4>
-      </div>
-    </div>
+    <Section id="heroSection" className="bg-body h-screen overflow-clip">
+      <Container className="relative z-10 h-full">
+        <BaseGrid className="h-full">
+          {/* content container  */}
+          <div className="col-span-12 flex lg:justify-center lg:items-start flex-col lg:gap-12 gap-10">
+            {/* badge  */}
+            <Badge>
+              <span
+                class="t-shimmer"
+                data-text="This link is broken but i got you - See what you want if its here ^_^"
+              >
+                <span>This link is broken but i got you ^_^</span>
+              </span>
+            </Badge>
+
+            {/* heading  */}
+            <div className="w-full flex flex-col gap-12 justify-center">
+              <h1 className="text-5xl font-medium tracking-tight mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
+                I help with brand identity, illustration, brand strategy, web design and
+                development for founders who need to look put-together fast.
+              </h1>
+
+              <div className="flex items-center justify-center gap-4 w-full md:w-[500px]">
+                <Button className="w-full">Visit working link</Button>
+              </div>
+            </div>
+          </div>
+        </BaseGrid>
+      </Container>
+      <img
+        src={gradient}
+        className="absolute lg:-bottom-0.5 bottom-20 lg:right-[-450px] max-w-none lg:w-[150%] w-[200%] pointer-events-none z-0"
+        alt=""
+      />
+    </Section>
   );
 }
