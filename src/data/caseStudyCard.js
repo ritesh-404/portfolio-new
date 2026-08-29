@@ -1,5 +1,6 @@
 import { TolgeeImg } from "../assets/featured-card-img";
 import {MorphBoys} from "../assets/caseStudyImg/morph-caseStudy-img"
+import { FinalPortfolio } from "../assets/caseStudyImg/myPortfolio-caseStudy-img";
 
 const caseStudyData = [
   {
@@ -25,6 +26,15 @@ const caseStudyData = [
     description:
       "Giving morph a global positioning as a GYM wear clothing brand",
   },
+  {
+    id: "portfolio",
+    image: FinalPortfolio,
+    tags: ["Web design", "Visual identity", "strategy", "branding"],
+    title: "v0.1 of My portfolio",
+    description:
+      "You are going to love this case study i promise!",
+  },
+
 ];
 
 export default caseStudyData;

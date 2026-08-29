@@ -5,7 +5,7 @@ import Section from "../ui/Section";
 import gradient from "../../assets/footer-gradients.png";
 import BaseGrid from "../ui/BaseGrid";
 import { scrollToSection } from "../../utils/ScrollTo";
-
+import ShimmerText from "../ui/ShimmerText";
 
 export default function HeroSection() {
   return (
@@ -16,26 +16,28 @@ export default function HeroSection() {
           <div className="col-span-12 flex lg:justify-center lg:items-start flex-col lg:gap-12 gap-10">
             {/* badge  */}
             <Badge>
-              <span
-                class="t-shimmer"
-                data-text="Independent design & Development partner for founders"
-              >
-                <span>
-                  Independent design & Development partner for founders
-                </span>
-              </span>
+              <ShimmerText text="Independent design partner for founders" />
             </Badge>
 
             {/* heading  */}
             <div className="w-full flex flex-col gap-12 justify-center">
-              <h1 className="text-5xl font-medium tracking-tight mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
+              <h1 className="text-5xl font-medium tracking-tighter mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
                 Brand identity, illustration, brand strategy, web design and
                 development for founders who need to look put-together fast.
               </h1>
 
               <div className="flex items-center justify-center gap-4 w-full md:w-[500px]">
-                <Button onClick={(e) => scrollToSection(e,"contactSection")} className="w-full">Get in touch</Button>
-                <Button onClick={(e) => scrollToSection(e,"caseStudySection")} variant="secondary" className="w-full border-black">
+                <Button
+                  onClick={(e) => scrollToSection(e, "contactSection")}
+                  className="w-full"
+                >
+                  Get in touch
+                </Button>
+                <Button
+                  onClick={(e) => scrollToSection(e, "caseStudySection")}
+                  variant="secondary"
+                  className="w-full border-black"
+                >
                   Browse my work
                 </Button>
               </div>

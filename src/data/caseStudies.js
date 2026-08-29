@@ -22,7 +22,7 @@ import {
   UserReviews,
   TolgeeHomepage,
   TolgeeDesktop,
-  tolgeeCoverImg
+  tolgeeCoverImg,
 } from "../assets/caseStudyImg/tolgee-caseStudy-img";
 
 import {
@@ -74,6 +74,8 @@ export const caseStudies = [
     type: "Concept",
     title: "Morph case study",
     credits: "Ritesh Nishad",
+    coverImageAlt: "Morph cover img",
+    coverImage: Pattern,
 
     overview:
       "Morph is a gymwear label. I set myself the brief of giving it a real visual identity — a logo system and a black-and-white foundation, with one accent colour held back so it punctuates instead of shouting.",
@@ -134,7 +136,6 @@ export const caseStudies = [
     coverImageAlt: "Tolgee cover img",
     coverImage: tolgeeCoverImg,
 
-
     overview:
       "Tolgee is an open-source localization platform built for developers — letting teams manage translations, edit text directly inside their live app, and use AI-assisted translation without slowing down their workflow.",
     challenge:
@@ -185,9 +186,12 @@ export const caseStudies = [
   },
 
   {
-    slug: "my-portfolio",
+    slug: "portfolio",
     type: "Self-initiated",
     title: "My portfolio : the site you're on, built end to end by me",
+    credits: "Ritesh Nishad",
+    coverImageAlt: "Portfolio cover img",
+    coverImage: PrototypeFigma,
 
     overview:
       "Quick honest note: this is the portfolio you're currently scrolling through. No client, no brief, no deadline — just me, a blank Figma file, and an unreasonable number of opinions about my own taste. It took me 4 weeks and 40+ design iterations to get to the version in front of you, which is either dedication or a mild inability to call something 'done.'",
@@ -306,12 +310,12 @@ export const caseStudies = [
         alt: "Featured projects page",
       },
       {
-        src: MyWorks,
-        alt: "My works page",
-      },
-      {
         src: CaseStudyPage,
         alt: "Case study page",
+      },
+      {
+        src: MyWorks,
+        alt: "My works page",
       },
       {
         src: AboutV1a,
@@ -334,12 +338,12 @@ export const caseStudies = [
         alt: "About page",
       },
       {
-        src: AboutMe,
-        alt: "About me page",
-      },
-      {
         src: ContactPage,
         alt: "Contact page",
+      },
+      {
+        src: AboutMe,
+        alt: "About me page",
       },
       {
         src: ContactMe,

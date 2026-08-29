@@ -27,7 +27,7 @@ export default function CaseStudyPage() {
   const [heroImage, ...restImages] = study.images ?? [];
 
   return (
-    <Section className="py-12 md:py-20">
+    <Section className="py-12 md:py-20 bg-[#E8E8E8]">
       <Container>
         <BaseGrid>
           {/* Back Link */}
@@ -115,39 +115,66 @@ export default function CaseStudyPage() {
             )}
 
             {/* Remaining Images */}
+            {/* Remaining Images */}
             {restImages.length > 0 && (
-              <div className="columns-1 md:columns-2 gap-6">
-                {restImages.map((img, index) => (
-                  <figure
-                    key={index}
-                    className="mb-6 break-inside-avoid group border border-border bg-img-container p-3 md:p-4 rounded-none hover:border-black transition-all duration-300"
-                  >
-                    <div className="overflow-hidden rounded-[4px] bg-white">
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        loading="lazy"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                {/* Left Column */}
+                <div className="flex flex-col gap-6">
+                  {restImages
+                    .filter((_, i) => i % 2 === 0)
+                    .map((img, index) => (
+                      <figure
+                        key={`col1-${index}`}
+                        className="group border border-border bg-img-container p-3 md:p-4 rounded-none hover:border-black transition-all duration-300"
+                      >
+                        <div className="overflow-hidden rounded-[4px] bg-white">
+                          <img
+                            src={img.src}
+                            alt={img.alt}
+                            loading="lazy"
+                            className="w-full h-auto object-cover"
+                          />
+                        </div>
+                        {img.alt && (
+                          <figcaption className="pt-3 text-xs font-mono uppercase tracking-[0.15em] text-muted-light">
+                            {img.alt}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                </div>
 
-                    {img.alt && (
-                      <figcaption className="pt-3 text-xs font-mono uppercase tracking-[0.15em] text-muted-light">
-                        {img.alt}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
+                {/* Right Column */}
+                <div className="flex flex-col gap-6">
+                  {restImages
+                    .filter((_, i) => i % 2 === 1)
+                    .map((img, index) => (
+                      <figure
+                        key={`col2-${index}`}
+                        className="group border border-border bg-img-container p-3 md:p-4 rounded-none hover:border-black transition-all duration-300"
+                      >
+                        <div className="overflow-hidden rounded-[4px] bg-white">
+                          <img
+                            src={img.src}
+                            alt={img.alt}
+                            loading="lazy"
+                            className="w-full h-auto object-cover"
+                          />
+                        </div>
+                        {img.alt && (
+                          <figcaption className="pt-3 text-xs font-mono uppercase tracking-[0.15em] text-muted-light">
+                            {img.alt}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                </div>
               </div>
             )}
           </div>
 
           {/* Footer */}
-          <div className="col-span-12 flex flex-col items-center gap-8 mt-16 pt-10 border-t border-border">
-            <span className={`${eyebrow} self-start`}>
-              Credits : {study.credits ?? "@Ritesh (twitter)"}
-            </span>
-
+          <div className="col-span-12 flex flex-col items-center gap-8 mt-16 pt-10">
             <Link href="/">
               <Button>Go to homepage</Button>
             </Link>

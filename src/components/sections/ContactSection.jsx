@@ -56,7 +56,7 @@ export default function ContactSection({ className = "" }) {
   ];
 
   return (
-    <Section id="contactSection">
+    <Section id="contactSection" className={className}>
       <Container>
         <BaseGrid>
           {/* heading and subheading */}

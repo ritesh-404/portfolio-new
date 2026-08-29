@@ -17,7 +17,7 @@ export default function CaseStudyCard({
     >
       {/* header pills */}
       <div className="lg:py-5 py-4 px-4 flex w-full justify-center items-center flex-wrap bg-white border border-b-0 border-border gap-2 h-full">
-        {tags.length > 0 && tags.map((label, i) => <Pill>{label}</Pill>)}
+        {tags.length > 0 && tags.map((label) => <Pill key={label}>{label}</Pill>)}
       </div>
 
       {/* responsive img container  */}

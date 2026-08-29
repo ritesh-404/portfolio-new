@@ -5,7 +5,7 @@ export default function ServiceSectionCard({ title = "", description = "",classN
     >
       {/* content */}
         <h3 className="text-xl leading-[24px] tracking-tight w-full">{title}</h3>
-        <h3 className="text-sm w-full">{description}</h3>
+        <p className="text-sm w-full">{description}</p>
     </div>
   );
 }

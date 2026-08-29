@@ -4,7 +4,7 @@ import Container from "../components/ui/Container";
 import Section from "../components/ui/Section";
 import gradient from "../assets/footer-gradients.png";
 import BaseGrid from "../components/ui/BaseGrid";
-import { scrollToSection } from "../utils/ScrollTo";
+import ShimmerText from "../components/ui/ShimmerText";
 
 export default function NotFoundPage() {
   return (
@@ -15,19 +15,15 @@ export default function NotFoundPage() {
           <div className="col-span-12 flex lg:justify-center lg:items-start flex-col lg:gap-12 gap-10">
             {/* badge  */}
             <Badge>
-              <span
-                class="t-shimmer"
-                data-text="This link is broken but i got you - See what you want if its here ^_^"
-              >
-                <span>This link is broken but i got you ^_^</span>
-              </span>
+              <ShimmerText text="This link is broken but i got you ^_^" />
             </Badge>
 
             {/* heading  */}
             <div className="w-full flex flex-col gap-12 justify-center">
               <h1 className="text-5xl font-medium tracking-tight mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
-                I help with brand identity, illustration, brand strategy, web design and
-                development for founders who need to look put-together fast.
+                I help with brand identity, illustration, brand strategy, web
+                design and development for founders who need to look
+                put-together fast.
               </h1>
 
               <div className="flex items-center justify-center gap-4 w-full md:w-[500px]">

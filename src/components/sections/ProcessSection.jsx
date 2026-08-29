@@ -3,7 +3,9 @@ import Container from "../ui/Container";
 import HeadingSubHeading from "../ui/HeadingSubHeading";
 import ProcessSectionCard from "../ui/ProcessSectionCard";
 import Section from "../ui/Section";
- 
+
+const formatStep = (n) => `${String(n).padStart(2, "0")}`;
+
 const processCardsData = [
   {
     id: "step1",
@@ -67,7 +69,7 @@ export default function ProcessSection() {
                   key={data.id}
                   title={data.title}
                   description={data.description}
-                  number={index + 1 < 10 ? `(0${index + 1})` : `(${index + 1})`}
+                  number={formatStep(index + 1)}
                 />
               ))}
             </div>
@@ -82,7 +84,7 @@ export default function ProcessSection() {
                   key={data.id}
                   title={data.title}
                   description={data.description}
-                  number={index + 1 < 10 ? `(0${index + 1})` : `(${index + 1})`}
+                  number={formatStep(index + 1)}
                 />
               ))}
             </div>
