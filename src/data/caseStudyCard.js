@@ -1,11 +1,9 @@
-import { TolgeeImg } from "../assets/featured-card-img";
-import {MorphBoys} from "../assets/caseStudyImg/morph-caseStudy-img"
-import { FinalPortfolio } from "../assets/caseStudyImg/myPortfolio-caseStudy-img";
+import { TolgeeCard,MorphCard,Portfolio1Card,Portfolio2Card } from "../assets/caseStudy-card";
 
 const caseStudyData = [
   {
     id: "tolgee",
-    image: TolgeeImg,
+    image: TolgeeCard,
     tags: [
       "development",
       "web design",
@@ -20,7 +18,7 @@ const caseStudyData = [
   },
   {
     id: "morph",
-    image: MorphBoys,
+    image: MorphCard,
     tags: ["Logo design", "Visual identity", "strategy", "branding"],
     title: "Morph",
     description:
@@ -28,13 +26,18 @@ const caseStudyData = [
   },
   {
     id: "portfolio",
-    image: FinalPortfolio,
+    image: Portfolio1Card,
     tags: ["Web design", "Visual identity", "strategy", "branding"],
-    title: "v0.1 of My portfolio",
-    description:
-      "You are going to love this case study i promise!",
+    title: "v1.0 portfolio",
+    description: "This is the first version of my portfolio",
   },
-
+  {
+    id: "portfolio-v2",
+    image: Portfolio2Card,
+    tags: ["Web design", "Visual identity", "strategy", "branding"],
+    title: "v2.0 portfolio",
+    description: "This is the second version of my portfolio - final one",
+  },
 ];
 
 export default caseStudyData;

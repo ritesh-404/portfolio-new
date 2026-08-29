@@ -21,7 +21,7 @@ export default function CaseStudyCard({
       </div>
 
       {/* responsive img container  */}
-      <div className="w-full bg-img-container lg:px-8 px-4 py-10 lg:py-20 border border-border h-full">
+      <div className="w-full bg-img-container lg:px-8 px-4 py-10 border border-border h-full">
         {image && <img src={image} alt="" className="lg:max-w-full" />}
       </div>
 

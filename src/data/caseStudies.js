@@ -1,72 +1,12 @@
 // src/data/caseStudies.js
+import morphCover from "../assets/cover-img/morph-cover.webp";
+import tolgeeCover from "../assets/cover-img/tolgee-cover.webp";
+import portfolio1Cover from "../assets/cover-img/portfolio-v1-cover.webp";
+import portfolio2Cover from "../assets/cover-img/portfolio-v2-cover.webp";
 
-import {
-  BrandGuide,
-  LogoVariants,
-  MorphBoys,
-  MorphOutdoor,
-  MorphStore,
-  MorphVariations,
-  Morph,
-  StackVariants,
-  Pattern,
-} from "../assets/caseStudyImg/morph-caseStudy-img";
 
-import {
-  EventsPage,
-  FeaturesSection,
-  LaptopMockup,
-  LogoMarquee,
-  Mobile,
-  PricingCard,
-  UserReviews,
-  TolgeeHomepage,
-  TolgeeDesktop,
-  tolgeeCoverImg,
-} from "../assets/caseStudyImg/tolgee-caseStudy-img";
-
-import {
-  FavIteration10,
-  FavIteration13,
-  FavIteration6,
-  HeroHomeAlt,
-  HeroHome,
-  HeroIteration1,
-  HeroIteration11,
-  HeroIteration12,
-  HeroIteration2,
-  HeroIteration3,
-  HeroIteration4,
-  HeroIteration5,
-  HeroIteration7,
-  HeroIteration8,
-  HeroIteration9,
-  AboutV1a,
-  AboutV1b,
-  AboutV1c,
-  AboutV1d,
-  AboutPage,
-  AboutMe,
-  CaseStudyPage,
-  ContactPage,
-  ContactMe,
-  FeaturedProjects,
-  HomeV1,
-  HomePage,
-  MyWorks,
-  PricingPage,
-  ProcessPage,
-  Writings,
-  CleanLayers,
-  FinalPortfolio,
-  IterationHome,
-  IterationMoodboard,
-  IterationProjects,
-  OldNewLayout,
-  Planning,
-  PrototypeFigma,
-  WritingPost,
-} from "../assets/caseStudyImg/myPortfolio-caseStudy-img";
+const PROJECT_URL =
+  "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies";
 
 export const caseStudies = [
   {
@@ -75,7 +15,7 @@ export const caseStudies = [
     title: "Morph case study",
     credits: "Ritesh Nishad",
     coverImageAlt: "Morph cover img",
-    coverImage: Pattern,
+    coverImage: morphCover,
 
     overview:
       "Morph is a gymwear label. I set myself the brief of giving it a real visual identity — a logo system and a black-and-white foundation, with one accent colour held back so it punctuates instead of shouting.",
@@ -87,45 +27,21 @@ export const caseStudies = [
       "I built the identity around restraint — a refined logo system on a black-and-white base, with an electric blue accent reserved to mark key moments rather than fill the palette. Every spacing and export decision was made so the brand holds up from packaging to product tags.",
 
     scope: ["branding", "logo design", "identity system"],
-
     images: [
-      {
-        src: BrandGuide,
-        alt: "MØRPH brand guidelines",
-      },
-      {
-        src: LogoVariants,
-        alt: "MØRPH logo variations",
-      },
-      {
-        src: MorphVariations,
-        alt: "MØRPH visual identity variations",
-      },
-      {
-        src: StackVariants,
-        alt: "MØRPH stacked logo variations",
-      },
-      {
-        src: Morph,
-        alt: "MØRPH brand identity presentation",
-      },
-      {
-        src: MorphBoys,
-        alt: "MØRPH campaign featuring athletes",
-      },
-      {
-        src: MorphOutdoor,
-        alt: "MØRPH outdoor advertising campaign",
-      },
-      {
-        src: MorphStore,
-        alt: "MØRPH retail and storefront application",
-      },
-      {
-        src: Pattern,
-        alt: "MØRPH brand pattern",
-      },
-    ],
+      "morph-boys.webp",
+      "morph-outdoor.webp",
+      "morph-store.webp",
+      "morph-variations.webp",
+      "brand-guide.webp",
+      "pattern.webp",
+      "stack-variants.webp",
+    ].map((fileName) => ({
+      src: `${PROJECT_URL}/morph/${fileName}`,
+      alt: fileName
+        .replace(".webp", "")
+        .replace(/([A-Z])/g, " $1")
+        .trim(),
+    })),
   },
 
   {
@@ -134,7 +50,7 @@ export const caseStudies = [
     title: "Tolgee case study",
     credits: "Ritesh Nishad",
     coverImageAlt: "Tolgee cover img",
-    coverImage: tolgeeCoverImg,
+    coverImage: tolgeeCover,
 
     overview:
       "Tolgee is an open-source localization platform built for developers — letting teams manage translations, edit text directly inside their live app, and use AI-assisted translation without slowing down their workflow.",
@@ -143,228 +59,90 @@ export const caseStudies = [
     approach:
       "For this concept I rebuilt the landing page around a clearer narrative — leading with the core promise, then giving each feature (in-context translation, AI-powered accuracy, framework integrations) its own focused moment instead of competing for attention. I tightened the typography and spacing for a premium developer-tool feel, and simplified the hierarchy so the capabilities read at a glance. I shared the concept with Tolgee's founders, who responded positively to the direction.",
     scope: ["web design", "UI/UX", "concept exploration"],
+
     images: [
-      {
-        src: TolgeeHomepage,
-        alt: "Tolgee homepage",
-      },
-      {
-        src: LaptopMockup,
-        alt: "Tolgee laptop mockup",
-      },
-      {
-        src: Mobile,
-        alt: "Tolgee mobile view",
-      },
-      {
-        src: PricingCard,
-        alt: "Tolgee pricing card",
-      },
-
-      {
-        src: UserReviews,
-        alt: "Tolgee user reviews",
-      },
-      {
-        src: EventsPage,
-        alt: "Tolgee events page",
-      },
-      {
-        src: FeaturesSection,
-        alt: "Tolgee features section",
-      },
-
-      {
-        src: LogoMarquee,
-        alt: "Tolgee logo marquee",
-      },
-      {
-        src: TolgeeDesktop,
-        alt: "Tolgee full img",
-      },
-    ],
+      "events-page.webp",
+      "features-section.webp",
+      "laptop-mockup.webp",
+      "mobile.webp",
+      "morph-1.webp",
+      "pricing-card.webp",
+      "tlogo-marquee.webp",
+      "ttolgee-desktop.webp",
+      "tolgee-homepage.webp",
+      "user-reviews.webp",
+    ].map((fileName) => ({
+      src: `${PROJECT_URL}/tolgee/${fileName}`,
+      alt: fileName
+        .replace(".webp", "")
+        .replace(/([A-Z])/g, " $1")
+        .trim(),
+    })),
   },
 
   {
-    slug: "portfolio",
-    type: "Self-initiated",
-    title: "My portfolio : the site you're on, built end to end by me",
-    credits: "Ritesh Nishad",
-    coverImageAlt: "Portfolio cover img",
-    coverImage: PrototypeFigma,
+  slug: "portfolio",
+  type: "Self-initiated",
+  title: "Portfolio v1",
+  credits: "Ritesh Nishad",
+  coverImageAlt: "Portfolio v1 cover img",
+  coverImage: portfolio1Cover,
 
-    overview:
-      "Quick honest note: this is the portfolio you're currently scrolling through. No client, no brief, no deadline — just me, a blank Figma file, and an unreasonable number of opinions about my own taste. It took me 4 weeks and 40+ design iterations to get to the version in front of you, which is either dedication or a mild inability to call something 'done.'",
+  overview:
+    "The first attempt at this site. Built in Figma over a few weeks, never actually launched. I kept redoing the same sections until I lost track of what I even wanted anymore.",
 
-    challenge:
-      "The hardest client I've ever worked with is myself. There was no one to please except the voice in my head that kept whispering 'is this too boring?' at 1am. I swung between 'clean and minimal' and 'wait, add more' so many times I filled an entire folder with hero sections that will never see the light of day. Designing for yourself turns out to be way scarier than designing for a paying client.",
+  challenge:
+    "There was no client and no deadline, which sounds nice until you realize the only feedback you're getting is from yourself at midnight, and you're a terrible client. I'd finish a version, hate it two days later, and start over. Did that more times than I want to count.",
 
-    approach:
-      "I stopped trying to be clever and started being honest. I planned the structure, built moodboards, prototyped in Figma, argued with myself, and threw away roughly 95% of what I made. The final design you're looking at is the small, stubborn 5% of iterations that actually felt like me — built in React, because if I'm going to overthink something, I might as well ship it.",
+  approach:
+    "Mostly just iterating — moodboards, layout attempts, throwing most of it away. It stayed in Figma and never got built, but a lot of what ended up in v2 came out of figuring out what wasn't working here.",
 
-    scope: ["web design", "UI/UX", "branding", "front-end"],
+  scope: ["web design", "UI/UX", "branding"],
+  images: [
+    "hero-section-iterations.webp",
+    "other-itrations.webp",
+    "page-itrations.webp",
+  ].map((fileName) => ({
+    src: `${PROJECT_URL}/portfolio-v1/${fileName}`,
+    alt: fileName
+      .replace(".webp", "")
+      .replace(/([A-Z])/g, " $1")
+      .trim(),
+  })),
+},
 
-    images: [
-      {
-        src: FinalPortfolio,
-        alt: "Final portfolio design",
-      },
-      {
-        src: HeroHome,
-        alt: "Hero home exploration",
-      },
-      {
-        src: HeroHomeAlt,
-        alt: "Hero home alternative",
-      },
-      {
-        src: HeroIteration1,
-        alt: "Hero iteration 1",
-      },
-      {
-        src: HeroIteration2,
-        alt: "Hero iteration 2",
-      },
-      {
-        src: HeroIteration3,
-        alt: "Hero iteration 3",
-      },
-      {
-        src: HeroIteration4,
-        alt: "Hero iteration 4",
-      },
-      {
-        src: HeroIteration5,
-        alt: "Hero iteration 5",
-      },
-      {
-        src: HeroIteration7,
-        alt: "Hero iteration 7",
-      },
-      {
-        src: HeroIteration8,
-        alt: "Hero iteration 8",
-      },
-      {
-        src: HeroIteration9,
-        alt: "Hero iteration 9",
-      },
-      {
-        src: HeroIteration11,
-        alt: "Hero iteration 11",
-      },
-      {
-        src: HeroIteration12,
-        alt: "Hero iteration 12",
-      },
-      {
-        src: FavIteration6,
-        alt: "Favorite hero iteration 6",
-      },
-      {
-        src: FavIteration10,
-        alt: "Favorite hero iteration 10",
-      },
-      {
-        src: FavIteration13,
-        alt: "Favorite hero iteration 13",
-      },
-      {
-        src: Planning,
-        alt: "Portfolio planning",
-      },
-      {
-        src: IterationMoodboard,
-        alt: "Moodboard iteration",
-      },
-      {
-        src: OldNewLayout,
-        alt: "Old vs new layout direction",
-      },
-      {
-        src: IterationHome,
-        alt: "Home page iteration",
-      },
-      {
-        src: IterationProjects,
-        alt: "Projects page iteration",
-      },
-      {
-        src: PrototypeFigma,
-        alt: "Figma prototype",
-      },
-      {
-        src: CleanLayers,
-        alt: "Clean layers exploration",
-      },
-      {
-        src: HomeV1,
-        alt: "Home v1",
-      },
-      {
-        src: HomePage,
-        alt: "Home page",
-      },
-      {
-        src: FeaturedProjects,
-        alt: "Featured projects page",
-      },
-      {
-        src: CaseStudyPage,
-        alt: "Case study page",
-      },
-      {
-        src: MyWorks,
-        alt: "My works page",
-      },
-      {
-        src: AboutV1a,
-        alt: "About v1 exploration",
-      },
-      {
-        src: AboutV1b,
-        alt: "About v1 exploration",
-      },
-      {
-        src: AboutV1c,
-        alt: "About v1 exploration",
-      },
-      {
-        src: AboutV1d,
-        alt: "About v1 exploration",
-      },
-      {
-        src: AboutPage,
-        alt: "About page",
-      },
-      {
-        src: ContactPage,
-        alt: "Contact page",
-      },
-      {
-        src: AboutMe,
-        alt: "About me page",
-      },
-      {
-        src: ContactMe,
-        alt: "Contact me page",
-      },
-      {
-        src: PricingPage,
-        alt: "Pricing page",
-      },
-      {
-        src: ProcessPage,
-        alt: "Process page",
-      },
-      {
-        src: Writings,
-        alt: "Writings page",
-      },
-      {
-        src: WritingPost,
-        alt: "Writing post page",
-      },
-    ],
-  },
+{
+  slug: "portfolio-v2",
+  type: "Self-initiated",
+  title: "Portfolio v2",
+  credits: "Ritesh Nishad",
+  coverImageAlt: "Portfolio v2 cover img",
+  coverImage: portfolio2Cover,
+
+  overview:
+    "This is the site you're on right now. Designed and built by me, actually shipped this time.",
+
+  challenge:
+    "After v1 sat unfinished for weeks, the real problem wasn't design, it was finishing. I had to stop tweaking spacing for the tenth time and just decide something was good enough to put live.",
+
+  approach:
+    "Took what I learned from v1, cut a lot of it down, and rebuilt the whole thing with a clearer structure. Wrote the copy myself instead of defaulting to portfolio-speak. Built it in React and pushed it live.",
+
+  scope: ["web design", "UI/UX", "branding", "front-end"],
+  images: [
+    "hero-section.webp",
+    "work-section.webp",
+    "service-section.webp",
+    "process-section.webp",
+    "about-me-footer-section.webp",
+    "contact-section.webp",
+  ].map((fileName) => ({
+    src: `${PROJECT_URL}/portfolio-v2/${fileName}`,
+    alt: fileName
+      .replace(".webp", "")
+      .replace(/([A-Z])/g, " $1")
+      .trim(),
+  })),
+},
+
 ];
