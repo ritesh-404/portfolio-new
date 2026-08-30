@@ -27,9 +27,9 @@ export default function CaseStudyCard({
 
       <div className="w-full bg-surface border border-t-0 border-border lg:px-8 px-4 lg:py-9 py-3 h-full">
         {title && description && (
-          <h3 className="text-muted-light lg:text-2xl text-xl leading-[28px] font-medium lg:leading-[36px] font-body">
+          <h4 className="text-muted-light lg:text-2xl text-xl leading-[28px] font-medium lg:leading-[36px] font-body">
             <span className="text-black">{title}</span> : {description}
-          </h3>
+          </h4>
         )}
       </div>
     </Link>

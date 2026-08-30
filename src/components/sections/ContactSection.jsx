@@ -170,10 +170,48 @@ export default function ContactSection({ className = "" }) {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-11 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full mt-11 disabled:opacity-50 disabled:cursor-not-allowed py-6 rounded-[50px]" 
               >
                 {isSubmitting ? "Sending..." : "Send message"}
               </Button>
+
+              {/* Divider */}
+              <div className="relative my-8 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border" />
+                </div>
+                <span className="relative bg-img-container px-4 text-xs font-mono uppercase tracking-widest text-muted-dark">
+                  Or skip the form
+                </span>
+              </div>
+
+              {/* Book Call Secondary Button */}
+              <a
+                href="https://cal.com/ritesh-n/15min?overlayCalendar=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 border border-black bg-transparent px-6 py-4 font-body text-base font-medium text-black transition-all hover:bg-black hover:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                </svg>
+                Book a 15-min call directly
+              </a>
+
+
             </form>
           </div>
         </BaseGrid>
