@@ -8,7 +8,7 @@ import HeadingSubHeading from "../ui/HeadingSubHeading";
 
 export default function CaseStudiesSection() {
   return (
-    <Section id="caseStudySection">
+    <Section id="caseStudySection" className="pt-5">
       <Container>
         <BaseGrid>
           {/* heading and subheading */}
