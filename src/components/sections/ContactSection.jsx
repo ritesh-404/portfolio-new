@@ -109,12 +109,14 @@ export default function ContactSection({ className = "" }) {
                     id="linkedin"
                     name="linkedin"
                     label="Best place to connect with you online?"
+                    required
                   />
                   <InputBox
                     type="text"
                     placeholderText="Twitter(X)"
                     id="twitter"
                     name="twitter"
+                    required
                   />
                 </div>
 
@@ -170,7 +172,7 @@ export default function ContactSection({ className = "" }) {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-11 disabled:opacity-50 disabled:cursor-not-allowed py-6 rounded-[50px]" 
+                className="w-full mt-11 disabled:opacity-50 disabled:cursor-not-allowed py-6 rounded-[50px]"
               >
                 {isSubmitting ? "Sending..." : "Send message"}
               </Button>
@@ -210,8 +212,6 @@ export default function ContactSection({ className = "" }) {
                 </svg>
                 Book a 15-min call directly
               </a>
-
-
             </form>
           </div>
         </BaseGrid>

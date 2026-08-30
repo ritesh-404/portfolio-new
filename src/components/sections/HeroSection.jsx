@@ -21,7 +21,7 @@ export default function HeroSection() {
 
             {/* heading  */}
             <div className="w-full flex flex-col gap-12 justify-center">
-              <h1 className="text-5xl font-bold tracking-tighter mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
+              <h1 className="text-5xl font-medium tracking-tighter mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
                 Brand identity, illustration, brand strategy, web design and
                 development for founders who need to look put-together fast.
               </h1>
