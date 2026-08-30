@@ -22,7 +22,7 @@ export default function CaseStudyCard({
 
       {/* responsive img container  */}
       <div className="w-full bg-img-container lg:px-8 px-4 py-10 border border-border h-full">
-        {image && <img src={image} alt="" className="lg:max-w-full" />}
+        {image && <img src={image} alt="" loading="lazy" className="lg:max-w-full img-fallback" onLoad={(e) => e.currentTarget.classList.add('loaded')} />}
       </div>
 
       <div className="w-full bg-surface border border-t-0 border-border lg:px-8 px-4 lg:py-9 py-3 h-full">

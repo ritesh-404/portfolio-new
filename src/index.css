@@ -92,3 +92,14 @@ button > * {
     background-position: 0% 0;
   }
 }
+
+/* img blur-to-clear fallback */
+.img-fallback {
+  filter: blur(12px);
+  opacity: 0.6;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+.img-fallback.loaded {
+  filter: blur(0);
+  opacity: 1;
+}

@@ -4,7 +4,6 @@ import tolgeeCover from "../assets/cover-img/tolgee-cover.webp";
 import portfolio1Cover from "../assets/cover-img/portfolio-v1-cover.webp";
 import portfolio2Cover from "../assets/cover-img/portfolio-v2-cover.webp";
 
-
 const PROJECT_URL =
   "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies";
 
@@ -81,68 +80,67 @@ export const caseStudies = [
   },
 
   {
-  slug: "portfolio",
-  type: "Self-initiated",
-  title: "Portfolio v1",
-  credits: "Ritesh Nishad",
-  coverImageAlt: "Portfolio v1 cover img",
-  coverImage: portfolio1Cover,
+    slug: "portfolio",
+    type: "Self-initiated",
+    title: "Portfolio v1",
+    credits: "Ritesh Nishad",
+    coverImageAlt: "Portfolio v1 cover img",
+    coverImage: portfolio1Cover,
 
-  overview:
-    "The first attempt at this site. Built in Figma over a few weeks, never actually launched. I kept redoing the same sections until I lost track of what I even wanted anymore.",
+    overview:
+      "The first attempt at this site. Built in Figma over a few weeks, never actually launched. I kept redoing the same sections until I lost track of what I even wanted anymore.",
 
-  challenge:
-    "There was no client and no deadline, which sounds nice until you realize the only feedback you're getting is from yourself at midnight, and you're a terrible client. I'd finish a version, hate it two days later, and start over. Did that more times than I want to count.",
+    challenge:
+      "There was no client and no deadline, which sounds nice until you realize the only feedback you're getting is from yourself at midnight, and you're a terrible client. I'd finish a version, hate it two days later, and start over. Did that more times than I want to count.",
 
-  approach:
-    "Mostly just iterating — moodboards, layout attempts, throwing most of it away. It stayed in Figma and never got built, but a lot of what ended up in v2 came out of figuring out what wasn't working here.",
+    approach:
+      "Mostly just iterating — moodboards, layout attempts, throwing most of it away. It stayed in Figma and never got built, but a lot of what ended up in v2 came out of figuring out what wasn't working here.",
 
-  scope: ["web design", "UI/UX", "branding"],
-  images: [
-    "hero-section-iterations.webp",
-    "other-itrations.webp",
-    "page-itrations.webp",
-  ].map((fileName) => ({
-    src: `${PROJECT_URL}/portfolio-v1/${fileName}`,
-    alt: fileName
-      .replace(".webp", "")
-      .replace(/([A-Z])/g, " $1")
-      .trim(),
-  })),
-},
+    scope: ["web design", "UI/UX", "branding"],
+    images: [
+      "hero-section-iterations.webp",
+      "other-itrations.webp",
+      "page-itrations.webp",
+    ].map((fileName) => ({
+      src: `${PROJECT_URL}/portfolio-v1/${fileName}`,
+      alt: fileName
+        .replace(".webp", "")
+        .replace(/([A-Z])/g, " $1")
+        .trim(),
+    })),
+  },
 
-{
-  slug: "portfolio-v2",
-  type: "Self-initiated",
-  title: "Portfolio v2",
-  credits: "Ritesh Nishad",
-  coverImageAlt: "Portfolio v2 cover img",
-  coverImage: portfolio2Cover,
+  {
+    slug: "portfolio-v2",
+    type: "Self-initiated",
+    title: "Portfolio v2",
+    credits: "Ritesh Nishad",
+    coverImageAlt: "Portfolio v2 cover img",
+    coverImage: portfolio2Cover,
 
-  overview:
-    "This is the site you're on right now. Designed and built by me, actually shipped this time.",
+    overview:
+      "This is the site you're on right now. Designed and built by me, actually shipped this time.",
 
-  challenge:
-    "After v1 sat unfinished for weeks, the real problem wasn't design, it was finishing. I had to stop tweaking spacing for the tenth time and just decide something was good enough to put live.",
+    challenge:
+      "After v1 sat unfinished for weeks, the real problem wasn't design, it was finishing. I had to stop tweaking spacing for the tenth time and just decide something was good enough to put live.",
 
-  approach:
-    "Took what I learned from v1, cut a lot of it down, and rebuilt the whole thing with a clearer structure. Wrote the copy myself instead of defaulting to portfolio-speak. Built it in React and pushed it live.",
+    approach:
+      "Took what I learned from v1, cut a lot of it down, and rebuilt the whole thing with a clearer structure. Wrote the copy myself instead of defaulting to portfolio-speak. Built it in React and pushed it live.",
 
-  scope: ["web design", "UI/UX", "branding", "front-end"],
-  images: [
-    "hero-section.webp",
-    "work-section.webp",
-    "service-section.webp",
-    "process-section.webp",
-    "about-me-footer-section.webp",
-    "contact-section.webp",
-  ].map((fileName) => ({
-    src: `${PROJECT_URL}/portfolio-v2/${fileName}`,
-    alt: fileName
-      .replace(".webp", "")
-      .replace(/([A-Z])/g, " $1")
-      .trim(),
-  })),
-},
-
+    scope: ["web design", "UI/UX", "branding", "front-end"],
+    images: [
+      "hero-section.webp",
+      "work-section.webp",
+      "service-section.webp",
+      "process-section.webp",
+      "about-me-footer-section.webp",
+      "contact-section.webp",
+    ].map((fileName) => ({
+      src: `${PROJECT_URL}/portfolio-v2/${fileName}`,
+      alt: fileName
+        .replace(".webp", "")
+        .replace(/([A-Z])/g, " $1")
+        .trim(),
+    })),
+  },
 ];

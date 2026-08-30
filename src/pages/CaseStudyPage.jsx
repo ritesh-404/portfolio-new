@@ -58,7 +58,9 @@ export default function CaseStudyPage() {
                 <img
                   src={study.coverImage}
                   alt={study.coverImageAlt ?? study.title}
-                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  className="w-full h-full object-cover img-fallback"
+                  onLoad={(e) => e.currentTarget.classList.add('loaded')}
                 />
               ) : (
                 <span className={eyebrow}>cover image</span>
@@ -102,7 +104,8 @@ export default function CaseStudyPage() {
                     src={heroImage.src}
                     alt={heroImage.alt}
                     loading="lazy"
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-cover img-fallback"
+                    onLoad={(e) => e.currentTarget.classList.add('loaded')}
                   />
                 </div>
 
@@ -132,7 +135,8 @@ export default function CaseStudyPage() {
                             src={img.src}
                             alt={img.alt}
                             loading="lazy"
-                            className="w-full h-auto object-cover"
+                            className="w-full h-auto object-cover img-fallback"
+                            onLoad={(e) => e.currentTarget.classList.add('loaded')}
                           />
                         </div>
                         {img.alt && (
@@ -158,7 +162,8 @@ export default function CaseStudyPage() {
                             src={img.src}
                             alt={img.alt}
                             loading="lazy"
-                            className="w-full h-auto object-cover"
+                            className="w-full h-auto object-cover img-fallback"
+                            onLoad={(e) => e.currentTarget.classList.add('loaded')}
                           />
                         </div>
                         {img.alt && (

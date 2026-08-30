@@ -47,8 +47,10 @@ export default function HeroSection() {
       </Container>
       <img
         src={gradient}
-        className="absolute lg:-bottom-0.5 bottom-20 lg:right-[-450px] max-w-none lg:w-[150%] w-[200%] pointer-events-none z-0"
+        loading="lazy"
+        className="absolute lg:-bottom-0.5 bottom-20 lg:right-[-450px] max-w-none lg:w-[150%] w-[200%] pointer-events-none z-0 img-fallback"
         alt=""
+        onLoad={(e) => e.currentTarget.classList.add('loaded')}
       />
     </Section>
   );
