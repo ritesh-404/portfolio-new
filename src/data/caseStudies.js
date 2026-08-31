@@ -64,10 +64,9 @@ export const caseStudies = [
       "features-section.webp",
       "laptop-mockup.webp",
       "mobile.webp",
-      "morph-1.webp",
+      "hopepage-tolgee.webp",
       "pricing-card.webp",
       "tlogo-marquee.webp",
-      "ttolgee-desktop.webp",
       "tolgee-homepage.webp",
       "user-reviews.webp",
     ].map((fileName) => ({

@@ -22,11 +22,12 @@ export default function AboutSection() {
             {/* Top Text Block */}
             <div className="w-full flex justify-start p-4">
               <div className="flex flex-col gap-5 md:w-[60%] w-full text-2xl text-black">
-                <p>Hello my name’s Ritesh and </p>
+                <p>Independent design practice based in India.</p>
                 <p className="text-muted-light">
-                  I design brand identities, custom illustrations, and
-                  production-ready websites for founders who need to look
-                  credible from day one.
+                  Hey, I'm Ritesh — a designer and developer currently based in
+                  India. My work covers illustration, iconography, and brand
+                  identity, with landing page design and development thrown in
+                  for good measure.
                 </p>
               </div>
             </div>
@@ -37,13 +38,14 @@ export default function AboutSection() {
             <div className="w-full flex justify-end p-4">
               <div className="flex flex-col gap-5 md:w-[60%] w-full text-2xl text-black text-end">
                 <p>
-                  Because I write code alongside designing in Figma, you don't
-                  have to hire a separate front-end developer to bring the work
-                  to life. You get structured design systems, clean assets, and
-                  responsive web builds delivered fast without handoff friction.
+                  I got into design chasing a simple idea: that software doesn't
+                  have to look boring. What started as making icons and visuals
+                  for products I liked turned into a focus on product
+                  illustration and brand work for software companies.
                 </p>
                 <p className="text-muted-light">
-                  Based in Mumbai. Partnering with ambitious founders worldwide.
+                  Most of what I make exists to solve a specific business
+                  problem and improve user experience.
                 </p>
               </div>
             </div>
@@ -54,15 +56,18 @@ export default function AboutSection() {
             <div className="w-full flex justify-start p-4">
               <div className="flex flex-col gap-5 md:w-[60%] w-full text-2xl text-black">
                 <p>
-                  Most of what I make exists to solve a specific business
-                  problem: making sure your first impression is accurate,
-                  high-value, and memorable.{" "}
+                  I'm still early in this journey — building alongside a
+                  computer science degree, taking on projects, and learning fast
+                  with every one. I care a lot about understanding what a
+                  business actually needs before I open Figma, and about work
+                  that has real taste, not just polish. I'm proud of what I've
+                  made so far, but I'm most excited about the studio this is
+                  becoming.
                 </p>
                 <p className="text-muted-light">
-                  Whether it’s the logo shown to investors, the product
-                  illustrations explaining a core feature, or the landing page
-                  converting cold traffic, I focus on positioning your business
-                  clearly over chasing short-lived design trends.
+                  This isn't a side project for me — it's what I'm building my
+                  whole career around, which means your project gets the same
+                  care I'd give my own 🩵
                 </p>
               </div>
             </div>
@@ -72,7 +77,10 @@ export default function AboutSection() {
             {/* social media links  */}
             <div className="w-full flex lg:justify-end justify-center py-9 px-4 gap-5">
               {socialLinks.map((link) => (
-                <div key={link.label} className="border border-pink border-dashed bg-transparent rounded-none hover:rounded-[20px] cursor-pointer transition-all duration-300 ease-in-out">
+                <div
+                  key={link.label}
+                  className="border border-pink border-dashed bg-transparent rounded-none hover:rounded-[20px] cursor-pointer transition-all duration-300 ease-in-out"
+                >
                   <a
                     target="_blank"
                     className="w-full h-full block lg:px-6 lg:py-2 px-2 py-1"
