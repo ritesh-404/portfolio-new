@@ -34,8 +34,8 @@ export default function ServiceSection() {
         <BaseGrid>
           {/* heading and subheading */}
           <HeadingSubHeading
-            heading="I can i help you ?"
-            subHeading="Strategy, design, development, UI/UX all together from day one."
+            heading="How can i help you ?"
+            subHeading="Pick the entry point that matches where you are — Strategy, design, development, UI/UX all together."
           />
 
           {/* grid layout  */}
