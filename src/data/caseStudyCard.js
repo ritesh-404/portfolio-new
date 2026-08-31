@@ -34,7 +34,7 @@ const caseStudyData = [
   {
     id: "portfolio-v2",
     image: Portfolio2Card,
-    tags: ["Web design", "Visual identity", "strategy", "branding"],
+    tags: ["Web design", "Visual identity", "strategy", "branding", "Web development"],
     title: "v2.0 portfolio",
     description: "This is the second version of my portfolio - final one",
   },
