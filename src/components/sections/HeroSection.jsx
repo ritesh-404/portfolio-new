@@ -9,7 +9,10 @@ import ShimmerText from "../ui/ShimmerText";
 
 export default function HeroSection() {
   return (
-    <Section id="heroSection" className="bg-body lg:h-screen h-full overflow-clip">
+    <Section
+      id="heroSection"
+      className="bg-body lg:h-screen h-full overflow-clip"
+    >
       <Container className="relative z-10 h-full">
         <BaseGrid className="h-full">
           {/* content container  */}
@@ -22,8 +25,9 @@ export default function HeroSection() {
             {/* heading  */}
             <div className="w-full flex flex-col gap-12 justify-center">
               <h1 className="text-5xl font-medium tracking-tighter mt-4 font-title lg:max-w-[1152px] max-w-[400px] lg:leading-[58px] leading-[52px] w-full">
-                Brand identity, illustration, brand strategy, web design and
-                development for founders who need to look put-together fast.
+                Brand identity, software interfaces, design systems, and
+                marketing websites for founders who need their product to look
+                as good as it works.
               </h1>
 
               <div className="flex items-center justify-center gap-4 w-full md:w-[500px]">
@@ -50,7 +54,7 @@ export default function HeroSection() {
         loading="lazy"
         className="absolute lg:-bottom-0.5 bottom-20 lg:right-[-450px] max-w-none lg:w-[150%] w-[200%] pointer-events-none z-0 img-fallback"
         alt=""
-        onLoad={(e) => e.currentTarget.classList.add('loaded')}
+        onLoad={(e) => e.currentTarget.classList.add("loaded")}
       />
     </Section>
   );
