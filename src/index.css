@@ -53,6 +53,7 @@ button > * {
 
 * {
   scrollbar-width: none;
+  cursor: none !important;
 }
 
 /* text animation  */
