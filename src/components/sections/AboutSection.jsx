@@ -24,10 +24,10 @@ export default function AboutSection() {
               <div className="flex flex-col gap-5 md:w-[60%] w-full text-2xl">
                 <p className="text-muted-light">
                   <span className="text-black">Hey, I'm Ritesh</span> — a
-                  designer and developer currently based in India. My work
-                  covers website designs, landing page design and development,
-                  brand identity, and product design to improve overall user
-                  experience.
+                  designer and developer currently based in India. Design
+                  partner for startups founders. Focusing on software interface,
+                  design system, UI/UX, and marketing website. to improve
+                  overall user experience.
                 </p>
               </div>
             </div>
