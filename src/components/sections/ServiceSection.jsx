@@ -3,7 +3,7 @@ import Container from "../ui/Container";
 import HeadingSubHeading from "../ui/HeadingSubHeading";
 import Section from "../ui/Section";
 import ServiceSectionCard from "../ui/ServiceSectionCard";
- 
+
 const serviceData = [
   {
     title: "Web Design & Development",
@@ -34,8 +34,8 @@ export default function ServiceSection() {
         <BaseGrid>
           {/* heading and subheading */}
           <HeadingSubHeading
-            heading="How I Can Help"
-            subHeading="Pick the entry point that matches where you are — identity, a deck, a site, or a second opinion on what you've already got."
+            heading="I can i help you ?"
+            subHeading="Strategy, design, development, UI/UX all together from day one."
           />
 
           {/* grid layout  */}
