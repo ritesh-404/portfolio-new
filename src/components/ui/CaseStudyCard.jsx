@@ -27,7 +27,7 @@ export default function CaseStudyCard({
 
       <div className="w-full bg-surface border border-t-0 border-black/50  px-5 py-6 h-fit transition-all duration-300 group-hover:border-black/80">
         {title && description && (
-          <h4 className="text-2xl text-[#000080]">
+          <h4 className="md:text-2xl text-xl text-[#000080]">
             <span>{title}</span> : {description}
           </h4>
         )}
