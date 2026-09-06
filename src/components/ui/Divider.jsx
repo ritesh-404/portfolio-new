@@ -2,7 +2,7 @@ export default function Divider() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[1000] hidden md:block"
+      className="pointer-events-none fixed inset-0 z-[1000]"
     >
       {/* Top bar with glass blur effect */}
       <div

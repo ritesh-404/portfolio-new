@@ -4,6 +4,7 @@ import BaseGrid from "../ui/BaseGrid";
 import CaseStudyCard from "../ui/CaseStudyCard";
 import caseStudyData from "../../data/caseStudyCard";
 import Divider from "../ui/Divider";
+import SectionDiverText from "../ui/SectionDiverText";
 
 export default function HeroSection() {
   let linkStyle =
@@ -28,13 +29,13 @@ export default function HeroSection() {
   }));
 
   return (
-    <Section id="heroSection">
+    <Section id="heroSection" className="overflow-clip">
       <Divider />
       <Container className="mt-10">
         <BaseGrid>
           {/* heading + buttons */}
           <div className="col-span-12 lg:col-span-6 flex flex-col gap-12">
-            <h1 className="text-3xl font-dm-sans w-full">
+            <h1 className="lg:text-3xl text-2xl font-dm-sans w-full">
               Ritesh runs an independent design practice specializing in{" "}
               Product, Web, Logo, and Brand design. focused on emerging tech
               teams across crypto, biotech, infra, and AI.
@@ -78,7 +79,7 @@ export default function HeroSection() {
           </div>
 
           {/* about me */}
-          <div className="col-span-12 lg:col-span-6 flex justify-end gap-10 mt-80">
+          <div className="col-span-12 lg:col-span-6 flex justify-end gap-10 lg:mt-80 mt-42">
             <p className="text-white/80 underline decoration-white/20 underline-offset-2 text-right max-w-[500px] font-dm-sans">
               My work spans full identity systems, logo design, and brand-led
               web design - Using human psychology and UI/UX principles with
@@ -87,10 +88,22 @@ export default function HeroSection() {
               <br />
               You can connect with me here :
               <span>
-                <a target="_blank" href="https://x.com/Riteshxdev" className={`${linkStyle}`}>Twitter</a>
+                <a
+                  target="_blank"
+                  href="https://x.com/Riteshxdev"
+                  className={`${linkStyle}`}
+                >
+                  Twitter
+                </a>
               </span>
               <span>
-                <a target="_blank" href="https://www.linkedin.com/in/ritesh-nishad-abb9363a4/" className={`${linkStyle}`}>LinkedIn</a>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/ritesh-nishad-abb9363a4/"
+                  className={`${linkStyle}`}
+                >
+                  LinkedIn
+                </a>
               </span>
             </p>
           </div>
@@ -122,10 +135,10 @@ export default function HeroSection() {
             </div>
           </div>
 
+          <SectionDiverText>Swipe files</SectionDiverText>
 
           {/* Masonry Gallery */}
-          <div className="col-span-12 mt-40">
-            
+          <div className="col-span-12 mt-30">
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
               {images.map((img, index) => (
                 <div

@@ -10,7 +10,7 @@ export default function CaseStudyCard({
   return (
     <Link
       href={`/work/${id}`}
-      className={`${className} group flex flex-col max-w-[1000px] min-w-[356px] w-full font-dm-sans cursor-pointer`}
+      className={`${className} group flex flex-col max-w-[1000px] min-w-[250px] w-full font-dm-sans cursor-pointer`}
     >
       {/* responsive img container */}
       <div className="w-full bg-img-container p-4 border border-black/50 overflow-hidden">
