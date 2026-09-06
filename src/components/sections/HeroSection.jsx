@@ -51,6 +51,7 @@ export default function HeroSection() {
     "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies/";
 
   let images = [
+    "poster.webp",
     "design-audit.webp",
     "github-card.webp",
     "pricing-card.webp",
