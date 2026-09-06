@@ -7,18 +7,17 @@ button > * {
 }
 
 ::selection {
-  background-color: #000000;
-  color: white;
+  background-color: white;
+  color: #000080;
 }
 
 @theme inline {
   /* Typography Tokens */
   --font-title: "Instrument Sans", sans-serif;
   --font-body: "Instrument Sans", sans-serif;
-  --font-serif: "Instrument Serif", serif;
   --font-headvig-serif: "Hedvig Letters Serif", serif;
   --font-mono: "Geist Mono", monospace;
-
+--font-dm-sans : 'DM Sans Variable', sans-serif;
   /* text  */
   --color-black: #000000;
   --color-white: #ffffff;

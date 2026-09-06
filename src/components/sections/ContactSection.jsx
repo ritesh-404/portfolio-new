@@ -2,7 +2,6 @@ import { useState } from "react";
 import Section from "../ui/Section";
 import Container from "../ui/Container";
 import BaseGrid from "../ui/BaseGrid";
-import HeadingSubHeading from "../ui/HeadingSubHeading";
 import InputBox from "../ui/InputBox";
 import Button from "../ui/Button";
 
@@ -59,16 +58,11 @@ export default function ContactSection({ className = "" }) {
     <Section id="contactSection" className={className}>
       <Container>
         <BaseGrid>
-          {/* heading and subheading */}
-          <HeadingSubHeading
-            heading="Want to work together ?"
-            subHeading="The best work begins with the right introduction. Tell me what you're building and I’ll get back to you within 24 hours."
-          />
 
           <div className="col-span-12 h-full mt-20">
             <form
               onSubmit={onSubmit}
-              className="w-full bg-img-container md:px-9 px-6 py-11 border border-border"
+              className="w-full lg:w-full bg-img-container md:px-9 px-6 py-11 border border-border"
             >
               {/* content  */}
               <div className="flex w-full items-start gap-6 flex-col">
@@ -131,7 +125,7 @@ export default function ContactSection({ className = "" }) {
                 />
 
                 {/* services  */}
-                <div className="flex flex-col gap-3 font-body text-base leading-[24px] text-black">
+                <div className="flex flex-col gap-3 font-dm-sans text-base leading-[24px] text-black">
                   <label>
                     How can I help you? (If you need help with something else we
                     can talk about that on call)
@@ -189,10 +183,8 @@ export default function ContactSection({ className = "" }) {
 
               {/* Book Call Secondary Button */}
               <a
-                href="https://cal.com/ritesh-n/15min?overlayCalendar=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 border border-black bg-transparent px-6 py-4 font-body text-base font-medium text-black transition-all hover:bg-black hover:text-white"
+                
+                className="flex w-full items-center justify-center gap-2 border border-black bg-transparent px-6 py-4 font-dm-sans text-base font-medium text-black transition-all hover:bg-black hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +202,7 @@ export default function ContactSection({ className = "" }) {
                   <line x1="8" x2="8" y1="2" y2="6" />
                   <line x1="3" x2="21" y1="10" y2="10" />
                 </svg>
-                Book a 15-min call directly
+                Book a 15-min call 
               </a>
             </form>
           </div>

@@ -11,7 +11,7 @@ export const caseStudies = [
   {
     slug: "morph",
     type: "Concept",
-    title: "Morph case study",
+    title: "Morph",
     credits: "Ritesh Nishad",
     coverImageAlt: "Morph cover img",
     coverImage: morphCover,
@@ -46,7 +46,7 @@ export const caseStudies = [
   {
     slug: "tolgee",
     type: "Concept",
-    title: "Tolgee case study",
+    title: "Tolgee",
     credits: "Ritesh Nishad",
     coverImageAlt: "Tolgee cover img",
     coverImage: tolgeeCover,

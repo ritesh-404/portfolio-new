@@ -6,8 +6,9 @@ import App from "./App.jsx";
 // fonts
 import "@fontsource/geist-mono";
 import "@fontsource/hedvig-letters-serif";
-import "@fontsource/instrument-serif";
 import "@fontsource/instrument-sans";
+import "@fontsource-variable/dm-sans";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

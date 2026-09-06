@@ -16,7 +16,7 @@ export default function InputBox({
   };
 
   return (
-    <div className="flex flex-col w-full items-start gap-3 font-body text-base leading-[24px]">
+    <div className="flex flex-col w-full items-start gap-3 font-dm-sans text-base leading-[24px]">
       <label htmlFor={id} className="text-black">
         {label}
       </label>

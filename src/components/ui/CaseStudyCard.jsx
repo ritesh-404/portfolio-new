@@ -1,34 +1,34 @@
-import Pill from "./Pill";
 import { Link } from "wouter";
 
 export default function CaseStudyCard({
-  tags = [],
   image,
   title = "",
   description = "",
   className = "",
-  id=""
+  id = "",
 }) {
-
   return (
     <Link
       href={`/work/${id}`}
-      className={`${className} flex flex-col max-w-[600px] min-w-[356px] w-full font-body cursor-pointer hover:border-black/40 border border-transparent transition-all duration-300`}
+      className={`${className} group flex flex-col max-w-[1000px] min-w-[356px] w-full font-dm-sans cursor-pointer`}
     >
-      {/* header pills */}
-      <div className="lg:py-5 py-4 px-4 flex w-full justify-center items-center flex-wrap bg-white border border-b-0 border-border gap-2 h-full">
-        {tags.length > 0 && tags.map((label) => <Pill key={label}>{label}</Pill>)}
+      {/* responsive img container */}
+      <div className="w-full bg-img-container p-4 border border-black/50 overflow-hidden">
+        {image && (
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            className="w-full h-auto object-cover transition-transform duration-200 ease-out group-hover:scale-96 will-change-transform"
+            onLoad={(e) => e.currentTarget.classList.add("loaded")}
+          />
+        )}
       </div>
 
-      {/* responsive img container  */}
-      <div className="w-full bg-img-container lg:px-8 px-4 py-10 border border-border h-full">
-        {image && <img src={image} alt="" loading="lazy" className="lg:max-w-full img-fallback" onLoad={(e) => e.currentTarget.classList.add('loaded')} />}
-      </div>
-
-      <div className="w-full bg-surface border border-t-0 border-border lg:px-8 px-4 lg:py-9 py-3 h-full">
+      <div className="w-full bg-surface border border-t-0 border-black/50  px-5 py-6 h-fit transition-all duration-300 group-hover:border-black/80">
         {title && description && (
-          <h4 className="text-muted-light lg:text-2xl text-xl leading-[28px] font-medium lg:leading-[36px] font-body">
-            <span className="text-black">{title}</span> : {description}
+          <h4 className="text-2xl text-[#000080]">
+            <span>{title}</span> : {description}
           </h4>
         )}
       </div>

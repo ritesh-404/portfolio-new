@@ -1,4 +1,9 @@
-import { TolgeeCard,MorphCard,Portfolio1Card,Portfolio2Card } from "../assets/caseStudy-card";
+import {
+  TolgeeCard,
+  MorphCard,
+  Portfolio1Card,
+  Portfolio2Card,
+} from "../assets/caseStudy-card";
 
 const caseStudyData = [
   {
@@ -34,9 +39,15 @@ const caseStudyData = [
   {
     id: "portfolio-v2",
     image: Portfolio2Card,
-    tags: ["Web design", "Visual identity", "strategy", "branding", "Web development"],
+    tags: [
+      "Web design",
+      "Visual identity",
+      "strategy",
+      "branding",
+      "Web development",
+    ],
     title: "v2.0 portfolio",
-    description: "This is the second version of my portfolio - final one",
+    description: "This is the second version of my portfolio",
   },
 ];
 
