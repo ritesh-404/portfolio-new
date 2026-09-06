@@ -7,7 +7,7 @@ export default function NotFoundPage() {
       id="heroSection"
       className="bg-[#000080] text-white w-full h-screen flex justify-center items-center flex-col gap-4"
     >
-      <h1>404 Not found</h1>
+      <h1>Not found</h1>
       <BackLinkBtn />
     </Section>
   );
