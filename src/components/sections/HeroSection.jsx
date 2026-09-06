@@ -225,7 +225,7 @@ export default function HeroSection() {
                   className="mb-6 break-inside-avoid group border border-border border-dashed p-3 md:p-4 rounded-none transition-all duration-300"
                   variants={itemBlurFade}
                 >
-                  <div className="overflow-hidden rounded-[4px] bg-white">
+                  <div className="overflow-hidden bg-white">
                     <img
                       src={img.src}
                       alt={img.alt}
