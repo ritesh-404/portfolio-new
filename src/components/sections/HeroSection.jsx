@@ -52,6 +52,8 @@ export default function HeroSection() {
 
   let images = [
     "poster-1.webp",
+    "poster-2.webp",
+    "yookai.webp",
     "design-audit.webp",
     "github-card.webp",
     "pricing-card.webp",
