@@ -98,7 +98,7 @@ export default function HeroSection() {
                 href="https://cal.com/ritesh-n/15min?overlayCalendar=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group w-full inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full border transition-all duration-300 ease-out cursor-pointer h-11 hover:bg-white hover:text-[#000080] bg-transparent text-white`}
+                className={`group w-full inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full border transition-all duration-300 ease-out cursor-pointer h-11 bg-white text-[#000080] hover:bg-transparent hover:text-white`}
               >
                 <span className="tracking-wide text-base font-medium font-dm-sans">
                   Book a 15 min call
@@ -109,7 +109,7 @@ export default function HeroSection() {
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:stroke-[#000080] stroke-white"
+                  className="transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 stroke-[#000080] group-hover:stroke-white"
                 >
                   <path
                     d="M17 7L7 17"
