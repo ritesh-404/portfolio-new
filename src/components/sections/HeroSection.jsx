@@ -85,7 +85,7 @@ export default function HeroSection() {
               variants={itemBlurFade}
             >
               Ritesh runs an independent design practice specializing in{" "}
-              Product, Website, and Brand design. focused on emerging tech
+              <span className="text-blue-300">Product, Website, and Brand design.</span> focused on emerging tech
               teams across crypto, biotech, infra, and AI.
             </motion.h1>
 
