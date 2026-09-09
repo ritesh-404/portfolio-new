@@ -58,7 +58,6 @@ export default function HeroSection() {
     "github-card.webp",
     "pricing-card.webp",
     "pricing-cards-2.webp",
-    "profound-inspiration.webp",
     "random-pink.webp",
   ].map((fileName) => ({
     src: `${PROJECT_URL}/images-grid/${fileName}`,
@@ -85,8 +84,11 @@ export default function HeroSection() {
               variants={itemBlurFade}
             >
               Ritesh runs an independent design practice specializing in{" "}
-              <span className="text-blue-300">Product, Website, and Brand design.</span> focused on emerging tech
-              teams across crypto, biotech, infra, and AI.
+              <span className="text-blue-300">
+                Product, Website, and Brand design.
+              </span>{" "}
+              focused on emerging tech teams across crypto, biotech, infra, and
+              AI.
             </motion.h1>
 
             {/* call button */}
@@ -220,7 +222,7 @@ export default function HeroSection() {
             animate="visible"
             variants={staggerContainer}
           >
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+            <div className="columns-1 md:columns-2 gap-6">
               {images.map((img, index) => (
                 <motion.div
                   key={index}
