@@ -1,0 +1,52 @@
+
+// might use later its a gallery of images
+
+
+// const PROJECT_URL =
+//     "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies/";
+
+//   let images = [
+//     "poster-1.webp",
+//     "poster-2.webp",
+//     "yookai.webp",
+//     "design-audit.webp",
+//     "github-card.webp",
+//     "pricing-card.webp",
+//     "pricing-cards-2.webp",
+//     "random-pink.webp",
+//   ].map((fileName) => ({
+//     src: `${PROJECT_URL}/images-grid/${fileName}`,
+//     alt: fileName
+//       .replace(".webp", "")
+//       .replace(/([A-Z])/g, " $1")
+//       .trim(),
+//   }));
+
+
+  
+//           { <motion.div
+//             className="col-span-12 mt-30"
+//             initial="hidden"
+//             animate="visible"
+//             variants={staggerContainer}
+//           >
+//             <div className="columns-1 md:columns-2 gap-6">
+//               {images.map((img, index) => (
+//                 <motion.div
+//                   key={index}
+//                   className="mb-6 break-inside-avoid group border border-border border-dashed p-3 md:p-4 rounded-none transition-all duration-300"
+//                   variants={itemBlurFade}
+//                 >
+//                   <div className="overflow-hidden bg-white">
+//                     <img
+//                       src={img.src}
+//                       alt={img.alt}
+//                       loading="lazy"
+//                       className="w-full h-auto object-cover img-fallback"
+//                       onLoad={(e) => e.currentTarget.classList.add("loaded")}
+//                     />
+//                   </div>
+//                 </motion.div>
+//               ))}
+//             </div>
+//           </motion.div> }

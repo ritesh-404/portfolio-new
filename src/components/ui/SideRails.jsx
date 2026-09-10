@@ -6,13 +6,13 @@ export default function SideRails() {
     >
       {/* Left rail */}
       <div
-        className="absolute left-0 top-0 h-full md:w-[48px] w-[30px] border-r border-white
+        className="absolute left-0 top-0 h-full md:w-[48px] w-[20px] border-r border-white
           bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_7px,rgba(255,255,255,0.3)_7px,rgba(255,255,255,0.3)_8px)]"
       />
 
       {/* Right rail */}
       <div
-        className="absolute right-0 top-0 h-full md:w-[48px] w-[30px] border-l border-white
+        className="absolute right-0 top-0 h-full md:w-[48px] w-[20px] border-l border-white
           bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_7px,rgba(255,255,255,0.3)_7px,rgba(255,255,255,0.3)_8px)]"
       />
     </div>
