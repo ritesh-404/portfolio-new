@@ -11,7 +11,8 @@ import BackLinkBtn from "../components/ui/BackLinkBtn";
 
 const eyebrow = "font-mono text-xs md:text-sm uppercase tracking-[0.18em]";
 
-const bracketLabel = "font-dm-sans text-base tracking-[0.1em] bg-white text-black w-fit p-1";
+const bracketLabel =
+  "font-dm-sans text-base tracking-[0.1em] bg-white text-black w-fit p-1";
 
 export default function CaseStudyPage() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ export default function CaseStudyPage() {
   return (
     <div className="relative">
       <SideRails />
-      <Section className="py-12 md:py-20 bg-[#000080] text-white">
+      <Section className="py-12 md:py-20 md:px-72 bg-[#000080] text-white">
         <Container>
           <BaseGrid>
             {/* Back Link */}
@@ -42,7 +43,7 @@ export default function CaseStudyPage() {
                 {study.title}
               </h1>
 
-              <p className="text-base font-mono max-w-[65ch] text-white/90">
+              <p className="md:text-base text-sm font-mono max-w-[65ch] text-white/90">
                 {study.overview}
               </p>
             </div>
@@ -69,7 +70,7 @@ export default function CaseStudyPage() {
               <div className="flex flex-col gap-4">
                 <span className={bracketLabel}>The Problem</span>
 
-                <p className="text-base font-mono text-white/80">
+                <p className="md:text-base text-sm font-mono text-white/80">
                   {study.challenge}
                 </p>
               </div>
@@ -77,7 +78,7 @@ export default function CaseStudyPage() {
               <div className="flex flex-col gap-4 md:border-border md:pl-10">
                 <span className={bracketLabel}>The Approach</span>
 
-                <p className="text-base font-mono text-white/80">
+                <p className="md:text-base text-sm font-mono text-white/80">
                   {study.approach}
                 </p>
               </div>
@@ -103,11 +104,11 @@ export default function CaseStudyPage() {
                     />
                   </div>
 
-                  {heroImage.alt && (
+                  {/* {heroImage.alt && (
                     <figcaption className="pt-3 text-xs font-mono uppercase tracking-[0.15em]">
                       {heroImage.alt}
                     </figcaption>
-                  )}
+                  )} */}
                 </figure>
               )}
 
@@ -158,11 +159,11 @@ export default function CaseStudyPage() {
                               }
                             />
                           </div>
-                          {img.alt && (
+                          {/* {img.alt && (
                             <figcaption className="pt-3 text-xs font-mono uppercase tracking-[0.15em]">
                               {img.alt}
                             </figcaption>
-                          )}
+                          )} */}
                         </figure>
                       ))}
                   </div>
