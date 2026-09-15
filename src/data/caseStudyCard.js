@@ -28,27 +28,7 @@ const caseStudyData = [
     title: "Morph",
     description:
       "Giving morph a global positioning as a GYM wear clothing brand",
-  },
-  {
-    id: "portfolio",
-    image: Portfolio1Card,
-    tags: ["Web design", "Visual identity", "strategy", "branding"],
-    title: "v1.0 portfolio",
-    description: "This is the first version of my portfolio",
-  },
-  {
-    id: "portfolio-v2",
-    image: Portfolio2Card,
-    tags: [
-      "Web design",
-      "Visual identity",
-      "strategy",
-      "branding",
-      "Web development",
-    ],
-    title: "v2.0 portfolio",
-    description: "This is the second version of my portfolio",
-  },
+  }
 ];
 
 export default caseStudyData;
