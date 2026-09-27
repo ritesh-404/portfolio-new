@@ -8,6 +8,15 @@ import "@fontsource/geist-mono";
 import "@fontsource/hedvig-letters-serif";
 import "@fontsource/instrument-sans";
 import "@fontsource-variable/dm-sans";
+import '@fontsource/solway';
+import '@fontsource/geist-sans';
+
+// Import the base CSS (defaults to weight 400)
+import "@fontsource/inter"; 
+
+// Optional: Import specific weights or styles if needed
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/700.css";
 
 
 createRoot(document.getElementById("root")).render(

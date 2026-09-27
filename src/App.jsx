@@ -6,6 +6,14 @@ import CaseStudyPage from "./pages/CaseStudyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SideRails from "./components/ui/SideRails";
 function App() {
+  document.onkeydown = (event) => {
+    if (event.key.toLowerCase() === "p") {
+      window.open(
+        "https://cal.com/ritesh-n/15min?overlayCalendar=true",
+        "_blank",
+      );
+    }
+  };
   return (
     <>
       <SideRails />

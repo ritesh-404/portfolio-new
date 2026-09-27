@@ -4,32 +4,26 @@ export default function BackLinkBtn() {
   return (
     <Link
       href="/"
-      className={`group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border transition-all duration-300 ease-out`}
+      className="group inline-flex items-center gap-2 rounded-sm border border-white/80 px-3 py-2 font-mono text-xs uppercase tracking-[0.08em] text-white transition-all duration-200 ease-out hover:border-white hover:bg-white hover:text-black"
     >
       <svg
-        width="20"
-        height="20"
+        width="14"
+        height="14"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="transition-transform duration-300 ease-out group-hover:-translate-x-0.5"
+        className="transition-transform duration-200 ease-out group-hover:-translate-x-0.5"
       >
         <path
-          d="M9 14L5 10L9 6"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M5 10H16C17.0609 10 18.0783 10.4214 18.8284 11.1716C19.5786 11.9217 20 12.9391 20 14C20 15.0609 19.5786 16.0783 18.8284 16.8284C18.0783 17.5786 17.0609 18 16 18H15"
+          d="M19 12H5M5 12L11 6M5 12L11 18"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
       </svg>
-      <span className="tracking-wide uppercase text-sm font-medium">Back</span>
+
+      <span>Back</span>
     </Link>
   );
 }

@@ -1,34 +1,28 @@
 @import "tailwindcss";
 
-
-
 button > * {
   pointer-events: none;
 }
 
-::selection {
-  background-color: white;
-  color: #000080;
-}
-
 @theme inline {
   /* Typography Tokens */
-  --font-title: "Instrument Sans", sans-serif;
-  --font-body: "Instrument Sans", sans-serif;
-  --font-headvig-serif: "Hedvig Letters Serif", serif;
   --font-mono: "Geist Mono", monospace;
---font-dm-sans : 'DM Sans Variable', sans-serif;
+  --font-dm-sans: "DM Sans Variable", sans-serif;
+  --font-solway: "Solway", serif;
+  --font-geist-sans: 'Geist Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;;
   /* text  */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-muted-light: #6f7688; /*for text */
   --color-muted-dark: #2e3238; /*for text */
-  --color-pink:#ff9e9e;
+  --color-pink: #ff9e9e;
+  --color-violet-light : #67648D;
 
   /* bg  */
   --color-body: #fafafa;
   --color-surface: #f1f2f4; /* bg for pills tags  */
-  --color-border: #dddfe4;
+  --color-border: #DEDEDE;
   --color-img-container: #f6f7f8; /* bg for core case studies img container  */
   --color-navbar-bg: #f0f0f0;
 }
@@ -38,6 +32,7 @@ button > * {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* user-select: none; */
 
   box-sizing: border-box;
 }
@@ -50,7 +45,9 @@ button > * {
 .img-fallback {
   filter: blur(12px);
   opacity: 0.6;
-  transition: filter 0.4s ease, opacity 0.4s ease;
+  transition:
+    filter 0.4s ease,
+    opacity 0.4s ease;
 }
 .img-fallback.loaded {
   filter: blur(0);
