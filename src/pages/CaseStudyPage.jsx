@@ -20,7 +20,7 @@ export default function CaseStudyPage() {
 
   return (
     <div className="relative min-h-screen bg-[#f7f8fa] text-[#202020] antialiased">
-      <main className="mx-auto w-full max-w-[960px] px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:px-10">
+      <main className="mx-auto w-full max-w-[960px] py-8 px-10 sm:py-10 md:px-8 md:py-12 lg:px-10">
         {/* Back */}
         <div className="mb-14 md:mb-16">
           <BackLinkBtn />
