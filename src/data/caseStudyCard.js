@@ -44,7 +44,7 @@ const caseStudies = [
 
     tags: ["Web design", "Design system", "Strategy", "Illustrations"],
 
-    images: [img1, img2, img3, img4, img5, img6, img7, img8],
+    images: [img8,img1, img2, img3, img4, img5, img6, img7],
     caseStudy: true,
   },
 

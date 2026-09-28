@@ -5,6 +5,6 @@ import img4 from "./4.webp";
 import img5 from "./5.webp";
 import img6 from "./6.webp";
 import img7 from "./7.webp";
-import img8 from "./8.webp";
+import img8 from "./8.avif";
 
 export { img1, img2, img3, img4, img5, img6, img7, img8 };
