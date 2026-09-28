@@ -33,7 +33,7 @@ export default function CaseStudyPage() {
           </h1>
 
           {study.overview && (
-            <p className="mt-5 max-w-[80%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
+            <p className="mt-5 max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
               {study.overview}
             </p>
           )}
@@ -67,7 +67,7 @@ export default function CaseStudyPage() {
               return (
                 <p
                   key={index}
-                  className="max-w-[80%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]"
+                  className="max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]"
                 >
                   {block.text}
                 </p>
@@ -82,13 +82,13 @@ export default function CaseStudyPage() {
               return (
                 <section key={index}>
                   {block.heading && (
-                    <h2 className="max-w-[85%] text-pretty font-dm-sans text-2xl font-medium leading-[1.12] tracking-[-0.025em] sm:text-3xl">
+                    <h2 className="max-w-[100%] text-pretty font-dm-sans text-2xl font-medium leading-[1.12] tracking-[-0.025em] sm:text-3xl">
                       {block.heading}
                     </h2>
                   )}
 
                   {block.paragraphs?.length > 0 && (
-                    <div className="mt-4 max-w-[80%] space-y-3 text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
+                    <div className="mt-4 max-w-[100%] space-y-3 text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
                       {block.paragraphs.map((paragraph, paragraphIndex) => (
                         <p key={paragraphIndex}>{paragraph}</p>
                       ))}
@@ -116,7 +116,7 @@ export default function CaseStudyPage() {
                   </MediaFrame>
 
                   {block.label && (
-                    <figcaption className="mx-auto mt-3 max-w-[80%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
+                    <figcaption className="mx-auto mt-3 max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
                       {block.label}
                     </figcaption>
                   )}
@@ -144,7 +144,7 @@ export default function CaseStudyPage() {
                   </MediaFrame>
 
                   {block.label && (
-                    <figcaption className="mx-auto mt-3 max-w-[80%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
+                    <figcaption className="mx-auto mt-3 max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
                       {block.label}
                     </figcaption>
                   )}
