@@ -64,18 +64,17 @@ const ImageGallery = ({ images }) => {
           type="button"
           onClick={previousImage}
           aria-label="Previous image"
-          className="flex size-10 items-center justify-center rounded-sm border border-border bg-white transition-colors hover:bg-neutral-100"
+          className="group inline-flex h-11 w-11 items-center justify-center rounded-none cursor-pointer bg-[#f0f1f2] text-[#424242]/80 transition-all duration-250 hover:bg-[#e5e6e8] hover:text-[#202020] border border-[#424242]/30 hover:border-[#202020]"
         >
-          <Chevron direction="left" color="#000000" />
+          <Chevron direction="left" color="currentColor" />
         </button>
-
         <button
           type="button"
           onClick={nextImage}
-          aria-label="Next image"
-          className="flex size-10 items-center justify-center rounded-sm border border-border bg-white transition-colors hover:bg-neutral-100"
+          aria-label="Previous image"
+          className="group inline-flex h-11 w-11 items-center justify-center rounded-none cursor-pointer bg-[#f0f1f2] text-[#424242]/80 transition-all duration-250 hover:bg-[#e5e6e8] hover:text-[#202020] border border-[#424242]/30 hover:border-[#202020]"
         >
-          <Chevron color="#000000" />
+          <Chevron color="currentColor" />
         </button>
       </div>
 

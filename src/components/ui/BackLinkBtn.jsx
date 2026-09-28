@@ -4,26 +4,24 @@ export default function BackLinkBtn() {
   return (
     <Link
       href="/"
-      className="group inline-flex items-center gap-2 rounded-sm border border-white/80 px-3 py-2 font-mono text-xs uppercase tracking-[0.08em] text-white transition-all duration-200 ease-out hover:border-white hover:bg-white hover:text-black"
+      aria-label="Back to home"
+      className="group inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#f0f1f2] text-[#424242]/80 transition-all duration-250 hover:bg-[#e5e6e8] hover:text-[#202020] border border-[#424242]/30 hover:border-[#202020]"
     >
       <svg
-        width="14"
-        height="14"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="transition-transform duration-200 ease-out group-hover:-translate-x-0.5"
+        className="transition-transform duration-200 ease-out"
       >
         <path
-          d="M19 12H5M5 12L11 6M5 12L11 18"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M7.53033 3.46967C7.82322 3.76256 7.82322 4.23744 7.53033 4.53033L5.81066 6.25H15C18.1756 6.25 20.75 8.82436 20.75 12C20.75 15.1756 18.1756 17.75 15 17.75H8.00001C7.58579 17.75 7.25001 17.4142 7.25001 17C7.25001 16.5858 7.58579 16.25 8.00001 16.25H15C17.3472 16.25 19.25 14.3472 19.25 12C19.25 9.65279 17.3472 7.75 15 7.75H5.81066L7.53033 9.46967C7.82322 9.76256 7.82322 10.2374 7.53033 10.5303C7.23744 10.8232 6.76256 10.8232 6.46967 10.5303L3.46967 7.53033C3.17678 7.23744 3.17678 6.76256 3.46967 6.46967L6.46967 3.46967C6.76256 3.17678 7.23744 3.17678 7.53033 3.46967Z"
+          fill="currentColor"
         />
       </svg>
-
-      <span>Back</span>
     </Link>
   );
 }

@@ -75,7 +75,7 @@ export default function FAQSection() {
     >
       {/* Section heading */}
       <div className="mb-10 md:mb-12">
-        <h2 className="font-inter text-4xl font-medium tracking-[-0.03em] md:text-5xl">
+        <h2 className="font-inter text-4xl text-[#202020] font-medium tracking-[-0.03em] md:text-5xl">
           Frequently Asked Questions
         </h2>
       </div>
@@ -93,7 +93,7 @@ export default function FAQSection() {
                 className="flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left md:py-6"
                 aria-expanded={isOpen}
               >
-                <span className="font-inter text-base font-medium md:text-lg">
+                <span className="font-inter text-base font-medium md:text-lg text-[#202020]">
                   {faq.question}
                 </span>
 
@@ -103,7 +103,7 @@ export default function FAQSection() {
                     duration: 0.2,
                     ease: "easeOut",
                   }}
-                  className="shrink-0 text-2xl font-light leading-none"
+                  className="shrink-0 text-2xl font-light leading-none text-[#202020]"
                 >
                   +
                 </motion.span>
@@ -126,7 +126,7 @@ export default function FAQSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-[80%] pb-6 font-inter text-sm leading-relaxed text-black/60 md:max-w-[70%] md:text-base">
+                    <p className="max-w-[80%] pb-6 font-inter text-sm leading-relaxed text-[#424242] md:max-w-[70%] md:text-base">
                       {faq.answer}
                     </p>
                   </motion.div>

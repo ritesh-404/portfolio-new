@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 
 import Button from "./Button";
 
@@ -8,6 +8,7 @@ const openCal = () => {
 };
 
 const NAV_LINKS = [
+  // { label: "Writings", href: "#writings" },
   { label: "FAQs", href: "#faqs" },
   // { label: "Pricing", href: "#pricing" },
 ];
@@ -106,15 +107,22 @@ const Navbar = () => {
         {/* Desktop links */}
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 md:flex xl:gap-10">
           {NAV_LINKS.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                onClick={(event) => handleNavClick(event, link.href)}
-                className="text-[14px] font-inter text-gray-700 underline underline-offset-3 transition-colors hover:text-gray-900"
-              >
-                {link.label}
-              </a>
-            </li>
+            // <Link
+            //   key={link.label}
+            //   href={link.href}
+            //   // onClick={(event) => handleNavClick(event, link.href)}
+            //   className="text-[14px] font-inter text-gray-700 underline underline-offset-3 transition-colors hover:text-gray-900"
+            // >
+            //   {link.label}
+            // </Link>
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={(event) => handleNavClick(event, link.href)}
+              className="text-[14px] font-inter text-gray-700 underline underline-offset-3 transition-colors hover:text-gray-900"
+            >
+              {link.label}
+            </a>
           ))}
         </ul>
 
