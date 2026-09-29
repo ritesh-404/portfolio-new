@@ -1,31 +1,35 @@
+// components/Navbar.jsx
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-
-import Button from "./Button";
 
 const openCal = () => {
   window.location.href = "https://cal.com/ritesh-n/15min?overlayCalendar=true";
 };
 
+// type: "scroll" → scrolls to a section id on the homepage (navigates home first if elsewhere)
+// type: "route"  → a real wouter route
 const NAV_LINKS = [
-  // { label: "Writings", href: "#writings" },
-  { label: "FAQs", href: "#faqs" },
-  // { label: "Pricing", href: "#pricing" },
+  { label: "Home", type: "route", href: "/" },
+  // { label: "Services", type: "route", href: "/services" },
+  { label: "About", type: "route", href: "/about" },
+  { label: "FAQs", type: "scroll", href: "faqs" },
+];
+
+const SOCIAL_LINKS = [
+  { label: "Twitter (X)", href: "https://twitter.com", external: true },
+  { label: "LinkedIn", href: "https://linkedin.com", external: true },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
-
   const [location, navigate] = useLocation();
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      // Do nothing on mobile
       if (!mediaQuery.matches) {
         setShowNavbar(true);
         return;
@@ -33,16 +37,11 @@ const Navbar = () => {
 
       const currentScrollY = window.scrollY;
 
-      // Always show at the top
       if (currentScrollY <= 0) {
         setShowNavbar(true);
-      }
-      // Scrolling down
-      else if (currentScrollY > lastScrollY) {
+      } else if (currentScrollY > lastScrollY) {
         setShowNavbar(false);
-      }
-      // Scrolling up
-      else if (currentScrollY < lastScrollY) {
+      } else if (currentScrollY < lastScrollY) {
         setShowNavbar(true);
       }
 
@@ -50,7 +49,6 @@ const Navbar = () => {
     };
 
     const handleViewportChange = () => {
-      // When switching to mobile, make sure navbar is visible
       if (!mediaQuery.matches) {
         setShowNavbar(true);
       }
@@ -65,72 +63,112 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleNavClick = (event, href) => {
+  // Handles "scroll" type links: scrolls directly if already on "/", otherwise
+  // navigates home first and scrolls once the section exists in the DOM.
+  const handleScrollLink = (event, targetId) => {
     event.preventDefault();
-
     setOpen(false);
 
-    const targetId = href.replace("#", "");
+    const isHome = location === "/";
 
-    const isHome = location === "/" || location === "/home";
-
-    // On homepage → smooth scroll directly
     if (isHome) {
       document.getElementById(targetId)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-
       return;
     }
 
-    // On case study → go home first
     navigate(`/?scroll=${targetId}`);
+  };
+
+  // On the homepage, if arriving via /?scroll=faqs, scroll to that section once mounted.
+  useEffect(() => {
+    if (location !== "/") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const scrollTarget = params.get("scroll");
+    if (!scrollTarget) return;
+
+    const el = document.getElementById(scrollTarget);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [location]);
+
+  const renderNavLink = (link, className) => {
+    if (link.type === "route") {
+      return (
+        <Link
+          key={link.label}
+          href={link.href}
+          onClick={() => setOpen(false)}
+          className={className}
+        >
+          {link.label}
+        </Link>
+      );
+    }
+
+    // type === "scroll"
+    return (
+      <a
+        key={link.label}
+        href={`#${link.href}`}
+        onClick={(event) => handleScrollLink(event, link.href)}
+        className={className}
+      >
+        {link.label}
+      </a>
+    );
   };
 
   return (
     <header
-      className={`sticky top-0 left-0 z-50 w-full overflow-x-clip border-b border-gray-200 bg-white font-inter transition-transform duration-300 ease-out ${
-        showNavbar ? "md:translate-y-0" : "md:-translate-y-full"
+      className={`sticky top-0 left-0 z-50 w-full overflow-x-clip border-b border-gray-200 bg-white font-mono text-sm tracking-tight transition-transform duration-300 ease-out ${
+        showNavbar ? "lg:translate-y-0" : "lg:-translate-y-full"
       }`}
     >
-      <nav className="mx-auto box-border flex w-full max-w-[1224px] items-center justify-between px-12 py-2 sm:px-6 md:px-0 py-4">
+      <nav className="mx-auto flex w-full max-w-[1380px] items-center justify-between px-8 md:px-16 py-4">
         {/* Logo */}
-        <a
+        <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="shrink-0 text-lg font-medium text-gray-900"
+          className="shrink-0 text-black lg:hidden"
         >
           Ritesh.
-        </a>
+        </Link>
 
-        {/* Desktop links */}
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 md:flex xl:gap-10">
-          {NAV_LINKS.map((link) => (
-            // <Link
-            //   key={link.label}
-            //   href={link.href}
-            //   // onClick={(event) => handleNavClick(event, link.href)}
-            //   className="text-[14px] font-inter text-gray-700 underline underline-offset-3 transition-colors hover:text-gray-900"
-            // >
-            //   {link.label}
-            // </Link>
+        {/* Desktop: left group */}
+        <div className="group hidden items-center gap-4 lg:flex lg:gap-8">
+          {NAV_LINKS.map((link) =>
+            renderNavLink(
+              link,
+              "text-black transition-colors duration-200 group-hover:text-gray-400 hover:!text-black",
+            ),
+          )}
+          <SwipeFilePill href="/swipe-file" />
+        </div>
+
+        {/* Desktop: right group */}
+        <div className="group hidden items-center gap-4 lg:flex lg:gap-8">
+          <a
+            onClick={openCal}
+            className="cursor-pointer text-black transition-colors duration-200 group-hover:text-gray-400 hover:!text-black"
+          >
+            [ Get in touch ]
+          </a>
+          {SOCIAL_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={(event) => handleNavClick(event, link.href)}
-              className="text-[14px] font-inter text-gray-700 underline underline-offset-3 transition-colors hover:text-gray-900"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+              className="text-black transition-colors duration-200 group-hover:text-gray-400 hover:!text-black"
             >
               {link.label}
             </a>
           ))}
-        </ul>
-
-        {/* Desktop CTA */}
-        <div className="hidden shrink-0 md:block">
-          <Button badge="P" badgePadding="px-3 py-1.5" onClick={openCal}>
-            Start a project
-          </Button>
         </div>
 
         {/* Mobile hamburger */}
@@ -139,22 +177,20 @@ const Navbar = () => {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
-          className="inline-flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 md:hidden"
+          className="inline-flex h-9 w-9 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black lg:hidden"
         >
           <span
-            className={`block h-0.5 w-6 bg-gray-900 transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-black transition-transform duration-200 ${
               open ? "translate-y-2 rotate-45" : ""
             }`}
           />
-
           <span
-            className={`block h-0.5 w-6 bg-gray-900 transition-opacity duration-200 ${
+            className={`block h-0.5 w-6 bg-black transition-opacity duration-200 ${
               open ? "opacity-0" : "opacity-100"
             }`}
           />
-
           <span
-            className={`block h-0.5 w-6 bg-gray-900 transition-transform duration-200 ${
+            className={`block h-0.5 w-6 bg-black transition-transform duration-200 ${
               open ? "-translate-y-2 -rotate-45" : ""
             }`}
           />
@@ -163,37 +199,59 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div
-        className={`overflow-hidden border-t border-gray-200 transition-[max-height] duration-300 ease-in-out md:hidden ${
-          open ? "max-h-80" : "max-h-0"
+        className={`overflow-hidden border-t border-gray-200 transition-[max-height] duration-300 ease-in-out lg:hidden ${
+          open ? "max-h-96" : "max-h-0"
         }`}
       >
-        <ul className="flex flex-col gap-1 px-12 py-4 sm:px-6">
-          {NAV_LINKS.map((link) => (
-            <li key={link.label}>
+        <div className="flex flex-col gap-6 px-8 py-6 sm:px-6">
+          {NAV_LINKS.map((link) => renderNavLink(link, "text-black"))}
+          <SwipeFilePill href="/swipe-file" className="self-start" />
+
+          <div className="mt-10 flex flex-col gap-6">
+            <a onClick={openCal} className="cursor-pointer text-black">
+              [ Get in touch ]
+            </a>
+            {SOCIAL_LINKS.map((link) => (
               <a
+                key={link.label}
                 href={link.href}
-                onClick={(event) => handleNavClick(event, link.href)}
-                className="block py-2 text-[14px] font-medium tracking-wide text-gray-700 hover:text-gray-900"
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="text-black"
               >
                 {link.label}
               </a>
-            </li>
-          ))}
-
-          <li className="pt-2">
-            <Button
-              variant="primary"
-              badge="P"
-              className="w-full"
-              onClick={openCal}
-            >
-              Start a project
-            </Button>
-          </li>
-        </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </header>
   );
 };
+
+const SwipeFilePill = ({ href, className = "" }) => (
+  <Link href={href} className={`group/pill inline-block ${className}`}>
+    <span
+      className="block rounded-full px-2 py-1"
+      style={{
+        border: "1px solid transparent",
+        backgroundImage: "linear-gradient(white, white), var(--gradient-brand)",
+        backgroundOrigin: "border-box",
+        backgroundClip: "padding-box, border-box",
+      }}
+    >
+      <span
+        className="text-black transition-colors duration-200 group-hover/pill:text-transparent"
+        style={{
+          backgroundImage: "var(--gradient-brand)",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+        }}
+      >
+        Swipe file
+      </span>
+    </span>
+  </Link>
+);
 
 export default Navbar;

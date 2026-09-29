@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Container from "../ui/Container";
 import Section from "../ui/Section";
 import Button from "../ui/Button";
-import AvailabilityBadge from "../ui/AvailabilityBadge";
 import SelectedWorks from "../ui/SelectedWorks";
 
 import PricingSection from "./PricingSection";
@@ -49,30 +48,18 @@ export default function HeroSection() {
       <Container>
         <div className="flex flex-col gap-12">
           {/* Hero content */}
-          <div className="mt-8 flex w-full flex-col gap-10 md:mt-24">
-            {/* Availability */}
-            <motion.div
-              variants={itemBlurFade}
-              initial="hidden"
-              animate="visible"
-              custom={0.1}
-            >
-              <AvailabilityBadge />
-            </motion.div>
+          <div className="mt-8 flex w-full flex-col gap-10">
 
             {/* Heading */}
             <motion.h1
-              className="mt-5 w-full font-inter text-2xl font-medium md:mt-0 md:w-[60%] md:text-3xl"
+              className="font-serif text-3xl text-black md:text-4xl md:leading-snug max-w-2xl"
               variants={itemBlurFade}
               initial="hidden"
               animate="visible"
               custom={0}
             >
-              Enterprise-grade Web and App design for B2B and tech companies.{" "}
-              <span className="text-violet-light">
-                Agency-quality design in under 2 weeks — without the agency
-                price tag.
-              </span>
+              Custome, High converting websites and landing pages designed and
+              built for fast moving startup founders.
             </motion.h1>
 
             {/* CTA */}
@@ -85,34 +72,10 @@ export default function HeroSection() {
                 custom={0.15}
               >
                 <Button
-                  badge="P"
-                  padding="pl-4 pr-2 py-3"
-                  badgePadding="px-4 py-1.5"
                   onClick={openCal}
                   className="w-full"
                 >
                   Start a project
-                </Button>
-              </motion.div>
-
-              {/* View recent works */}
-              <motion.div
-                variants={itemBlurFade}
-                initial="hidden"
-                animate="visible"
-                custom={0.2}
-              >
-                <Button
-                  variant="secondary"
-                  className="w-full md:w-fit"
-                  onClick={() => {
-                    document.getElementById("selected-works")?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }}
-                >
-                  View recent works
                 </Button>
               </motion.div>
             </div>

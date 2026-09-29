@@ -5,7 +5,7 @@ const faqs = [
   {
     question: "How much does a project cost?",
     answer:
-      "Pricing depends on the project and what you’re looking to build. Most projects start at $499 for a landing page design, and the price goes up depending on the scope, number of pages or screens, and overall complexity. Once you book a call and share your requirements, I’ll review the project with you and provide a clear, upfront quote tailored to your needs.",
+      "Pricing depends on the project and what you’re looking to build. Most projects start at $999 for a landing page design, and the price goes up depending on the scope, number of pages or screens, and overall complexity. Once you book a call and share your requirements, I’ll review the project with you and provide a clear, upfront quote tailored to your needs.",
   },
   {
     question: "What kind of projects do you work on?",
@@ -63,7 +63,7 @@ export default function FAQSection() {
 
   return (
     <motion.section
-      className="mt-48 w-full"
+      className="mt-40 w-full"
       id="faqs"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function FAQSection() {
     >
       {/* Section heading */}
       <div className="mb-10 md:mb-12">
-        <h2 className="font-inter text-4xl text-[#202020] font-medium tracking-[-0.03em] md:text-5xl">
+        <h2 className="font-serif text-4xl text-[#202020] font-medium tracking-[-0.03em] md:text-5xl">
           Frequently Asked Questions
         </h2>
       </div>
@@ -93,7 +93,7 @@ export default function FAQSection() {
                 className="flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left md:py-6"
                 aria-expanded={isOpen}
               >
-                <span className="font-inter text-base font-medium md:text-lg text-[#202020]">
+                <span className="font-serif text-lg font-medium md:text-lg text-[#202020]">
                   {faq.question}
                 </span>
 
@@ -103,7 +103,7 @@ export default function FAQSection() {
                     duration: 0.2,
                     ease: "easeOut",
                   }}
-                  className="shrink-0 text-2xl font-light leading-none text-[#202020]"
+                  className="shrink-0 text-2xl font-light leading-none text-[#151515]"
                 >
                   +
                 </motion.span>
@@ -126,7 +126,7 @@ export default function FAQSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-[80%] pb-6 font-inter text-sm leading-relaxed text-[#424242] md:max-w-[70%] md:text-base">
+                    <p className="max-w-[80%] pb-6 font-mono text-sm leading-relaxed text-[#575757] md:max-w-[70%] md:text-base">
                       {faq.answer}
                     </p>
                   </motion.div>

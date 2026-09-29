@@ -59,7 +59,7 @@ const caseStudies = [
 
     tags: ["Web design", "Design system", "Strategy & direction"],
 
-    images: [laptopMockup, mobile, userReviews, tolgeeHomepage],
+    images: [tolgeeHomepage, laptopMockup, mobile, userReviews],
 
     // caseStudy: true,
   },
@@ -75,7 +75,7 @@ const caseStudies = [
 
     tags: ["Logo design", "Strategy", "Direction"],
 
-    images: [trackMockup, appMockup, logoVariations, clothMockup, morphOutdoor],
+    images: [clothMockup, trackMockup, appMockup, logoVariations, morphOutdoor],
   },
 
   {

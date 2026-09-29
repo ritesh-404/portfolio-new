@@ -9,20 +9,21 @@ button > * {
   --font-mono: "Geist Mono", monospace;
   --font-dm-sans: "DM Sans Variable", sans-serif;
   --font-solway: "Solway", serif;
-  --font-geist-sans: 'Geist Sans', sans-serif;
-  --font-inter: 'Inter', sans-serif;;
+  --font-geist-sans: "Geist Sans", sans-serif;
+  --font-serif: "IBM Plex Serif", serif;
+  --font-inter: "Inter", sans-serif;
   /* text  */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-muted-light: #6f7688; /*for text */
   --color-muted-dark: #2e3238; /*for text */
   --color-pink: #ff9e9e;
-  --color-violet-light : #67648D;
+  --color-violet-light: #67648d;
 
   /* bg  */
   --color-body: #fafafa;
   --color-surface: #f1f2f4; /* bg for pills tags  */
-  --color-border: #DEDEDE;
+  --color-border: #dedede;
   --color-img-container: #f6f7f8; /* bg for core case studies img container  */
   --color-navbar-bg: #f0f0f0;
 }
@@ -35,6 +36,12 @@ button > * {
   /* user-select: none; */
 
   box-sizing: border-box;
+  --gradient-brand: linear-gradient(
+    90deg,
+    #1d96f9 0%,
+    #64ff6f 53%,
+    #d77bfb 100%
+  );
 }
 
 * {
