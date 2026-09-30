@@ -58,7 +58,7 @@ export default function HeroSection() {
               animate="visible"
               custom={0}
             >
-              Custome, High converting websites and landing pages designed and
+              Custom, High converting websites and landing pages designed and
               built for fast moving startup founders.
             </motion.h1>
 
