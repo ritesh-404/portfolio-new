@@ -6,12 +6,13 @@ import Container from "../ui/Container";
 import Section from "../ui/Section";
 import Button from "../ui/Button";
 import SelectedWorks from "../ui/SelectedWorks";
+import SectionDivider from "../ui/SectionDivider";
 
-import PricingSection from "./PricingSection";
 import FAQSection from "./FAQSection";
+import ImageGridSection from "./ImageGridSection";
 
 /* -------------------------------------------------------------------------- */
-/* Animation                                                                   */
+/* Animation                                                                  */
 /* -------------------------------------------------------------------------- */
 
 const itemBlurFade = {
@@ -35,7 +36,7 @@ const itemBlurFade = {
 };
 
 /* -------------------------------------------------------------------------- */
-/* Hero                                                                        */
+/* Hero                                                                       */
 /* -------------------------------------------------------------------------- */
 
 const openCal = () => {
@@ -45,14 +46,16 @@ const openCal = () => {
 export default function HeroSection() {
   return (
     <Section id="heroSection">
+      {/* ------------------------------------------------------------------ */}
+      {/* Hero                                                               */}
+      {/* ------------------------------------------------------------------ */}
+
       <Container>
         <div className="flex flex-col gap-12">
-          {/* Hero content */}
-          <div className="mt-8 flex w-full flex-col gap-10">
-
+          <div className="mt-8 flex w-full flex-col gap-4">
             {/* Heading */}
             <motion.h1
-              className="font-serif text-3xl text-black md:text-4xl md:leading-snug max-w-2xl"
+              className="max-w-2xl font-serif text-2xl leading-snug text-black md:text-2xl"
               variants={itemBlurFade}
               initial="hidden"
               animate="visible"
@@ -63,78 +66,71 @@ export default function HeroSection() {
             </motion.h1>
 
             {/* CTA */}
-            <div className="flex w-full flex-col gap-4 md:w-fit md:flex-row md:gap-5">
-              {/* Start a project */}
+            <div className="flex w-full md:w-fit">
               <motion.div
                 variants={itemBlurFade}
                 initial="hidden"
                 animate="visible"
                 custom={0.15}
               >
-                <Button
-                  onClick={openCal}
-                  className="w-full"
-                >
+                <Button onClick={openCal} className="w-full">
                   Start a project
                 </Button>
               </motion.div>
             </div>
           </div>
         </div>
-
-        {/* Everything below hero */}
-        <motion.div
-          variants={itemBlurFade}
-          initial="hidden"
-          animate="visible"
-          custom={0.3}
-        >
-          {/* Selected works */}
-          <div id="selected-works" className="scroll-mt-20">
-            <SelectedWorks />
-          </div>
-
-          {/* Pricing */}
-          {/* <PricingSection /> */}
-
-          {/* FAQs */}
-          <FAQSection />
-
-          {/*
-          --------------------------------------------------------------------
-          Redesigns
-          --------------------------------------------------------------------
-
-          <div className="mt-32 flex flex-col">
-            <h3 className="text-center font-inter text-6xl md:text-7xl">
-              Redesigns
-            </h3>
-
-            <div className="mt-8 flex flex-col gap-16">
-              <BeforeAfter
-                beforeImage={beforeImage}
-                afterImage={afterImage}
-              />
-
-              <BeforeAfter
-                beforeImage={beforeImage}
-                afterImage={afterImage}
-              />
-
-              <BeforeAfter
-                beforeImage={beforeImage}
-                afterImage={afterImage}
-              />
-
-              <BeforeAfter
-                beforeImage={beforeImage}
-                afterImage={afterImage}
-              />
-            </div>
-          </div>
-          */}
-        </motion.div>
       </Container>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Divider                                                            */}
+      {/* ------------------------------------------------------------------ */}
+
+      <SectionDivider />
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Selected works                                                     */}
+      {/* ------------------------------------------------------------------ */}
+
+      <motion.div
+        variants={itemBlurFade}
+        initial="hidden"
+        animate="visible"
+        custom={0.3}
+      >
+        <Container>
+          <SelectedWorks />
+        </Container>
+
+        {/* ---------------------------------------------------------------- */}
+        {/* Divider                                                          */}
+        {/* ---------------------------------------------------------------- */}
+
+        <SectionDivider />
+
+        {/* ---------------------------------------------------------------- */}
+        {/* FAQs                                                             */}
+        {/* ---------------------------------------------------------------- */}
+
+        <Container>
+          <ImageGridSection />
+        </Container>
+
+        
+        {/* ---------------------------------------------------------------- */}
+        {/* Divider                                                          */}
+        {/* ---------------------------------------------------------------- */}
+
+        <SectionDivider />
+
+        {/* ---------------------------------------------------------------- */}
+        {/* FAQs                                                             */}
+        {/* ---------------------------------------------------------------- */}
+
+        <Container>
+          <FAQSection />
+        </Container>
+      </motion.div>
     </Section>
   );
 }

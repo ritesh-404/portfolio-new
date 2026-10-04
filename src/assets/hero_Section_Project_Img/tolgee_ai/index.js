@@ -1,6 +1,13 @@
-import laptopMockup from "./laptop-mockup 1.webp";
-import mobile from "./mobile 1.webp";
-import tolgeeHomepage from "./tolgee-homepage 1.webp";
-import userReviews from "./user-reviews.webp";
+import tolgee4 from "./tolgee-4_3.webp";
+import tolgeeDesktop1 from "./tolgee-desktop-1.webp";
+import tolgeeDesktop2 from "./tolgee-desktop-2.webp";
+import tolgeeDesktop3 from "./tolgee-desktop-3.webp";
+import tolgeeDesktop4 from "./tolgee-desktop-4.webp";
 
-export { laptopMockup, mobile, tolgeeHomepage, userReviews };
+export {
+  tolgee4,
+  tolgeeDesktop1,
+  tolgeeDesktop2,
+  tolgeeDesktop3,
+  tolgeeDesktop4,
+};

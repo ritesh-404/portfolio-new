@@ -6,33 +6,65 @@ import {
   img5,
   img6,
   img7,
-  img8,
+  temporalDesktop1,
+  temporalDesktop2,
+  temporalDesktop3,
+  temporalDesktop4,
+  temporalDesktop5,
+  temporalDesktop6,
+  temporalDesktop7,
+  temporalDesktop4_3,
 } from "../assets/hero_Section_Project_Img/temporal_ai";
 
 import {
-  laptopMockup,
-  mobile,
-  tolgeeHomepage,
-  userReviews,
+  typani4,
+  typaniDesktop1,
+  typaniDesktop2,
+  typaniDesktop3,
+  typaniDesktop4,
+  typaniCard1,
+  typaniCard2,
+  typaniCard3,
+  typaniCard4,
+  typaniCard5,
+} from "../assets/hero_Section_Project_Img/typani_ai";
+
+import {
+  tolgee4,
+  tolgeeDesktop1,
+  tolgeeDesktop2,
+  tolgeeDesktop3,
+  tolgeeDesktop4,
 } from "../assets/hero_Section_Project_Img/tolgee_ai";
 
-import {
-  faviconDark,
-  faviconLight,
-  fundRaising,
-  logo,
-  macbookDeck,
-} from "../assets/hero_Section_Project_Img/doctos_ai";
-
-import {
-  morphOutdoor,
-  clothMockup,
-  appMockup,
-  logoVariations,
-  trackMockup,
-} from "../assets/hero_Section_Project_Img/morph";
-
 const caseStudies = [
+  {
+    id: "typani",
+
+    title:
+      "Typani — Landing page redesign to give review automation a clearer product story and stronger visual hierarchy.",
+
+    description:
+      "A self-initiated redesign of Typani’s website, focused on making the product story clearer, improving the hierarchy, and making features like automated review responses, brand voice, and multi-location management easier to understand at a glance.",
+
+    tags: ["Web design", "UX strategy", "Visual direction"],
+
+    images: [
+      typani4,
+      typaniCard1,
+      typaniCard2,
+      typaniCard3,
+      typaniCard4,
+      typaniCard5,
+      typaniDesktop1,
+      typaniDesktop2,
+      typaniDesktop3,
+      typaniDesktop4,
+    ],
+
+    caseStudy: true,
+  },
+
   {
     id: "temporal",
 
@@ -44,7 +76,24 @@ const caseStudies = [
 
     tags: ["Web design", "Design system", "Strategy", "Illustrations"],
 
-    images: [img8,img1, img2, img3, img4, img5, img6, img7],
+    images: [
+      temporalDesktop4_3,
+      img1,
+      img2,
+      img3,
+      img4,
+      img5,
+      img6,
+      img7,
+      temporalDesktop1,
+      temporalDesktop2,
+      temporalDesktop3,
+      temporalDesktop4,
+      temporalDesktop5,
+      temporalDesktop6,
+      temporalDesktop7,
+    ],
+
     caseStudy: true,
   },
 
@@ -59,34 +108,15 @@ const caseStudies = [
 
     tags: ["Web design", "Design system", "Strategy & direction"],
 
-    images: [tolgeeHomepage, laptopMockup, mobile, userReviews],
+    images: [
+      tolgee4,
+      tolgeeDesktop1,
+      tolgeeDesktop2,
+      tolgeeDesktop3,
+      tolgeeDesktop4,
+    ],
 
-    // caseStudy: true,
-  },
-
-  {
-    id: "morph",
-
-    title:
-      "MØRPH — Fitness apparel brand for working professionals who care about quality and comfort",
-
-    description:
-      "A visual identity and digital experience built around transformation, movement and a modern athletic aesthetic. They needed something that was real process like caterpillars morphing into butterflies this was the idea.",
-
-    tags: ["Logo design", "Strategy", "Direction"],
-
-    images: [clothMockup, trackMockup, appMockup, logoVariations, morphOutdoor],
-  },
-
-  {
-    id: "doctus",
-    title:
-      "Doctus: An AI code review platform helping startups and enterprises catch bugs earlier.",
-
-    description:
-      "The final Doctus logo uses a magnifying glass effect within the letter D, representing how Doctus closely examines code to catch even the smallest bugs that can easily be overlooked by humans.",
-    tags: ["Logo Design", "Strategy", "Direction"],
-    images: [logo, fundRaising, macbookDeck, faviconLight, faviconDark],
+    caseStudy: true,
   },
 ];
 

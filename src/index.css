@@ -34,6 +34,7 @@ button > * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* user-select: none; */
+  --page-gutter: clamp(20px, 3.5vw, 54px);
 
   box-sizing: border-box;
   --gradient-brand: linear-gradient(
@@ -59,4 +60,13 @@ button > * {
 .img-fallback.loaded {
   filter: blur(0);
   opacity: 1;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

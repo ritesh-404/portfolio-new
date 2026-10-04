@@ -1,4 +1,3 @@
-// components/Navbar.jsx
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 
@@ -6,7 +5,7 @@ const openCal = () => {
   window.location.href = "https://cal.com/ritesh-n/15min?overlayCalendar=true";
 };
 
-// type: "scroll" → scrolls to a section id on the homepage (navigates home first if elsewhere)
+// type: "scroll" → scrolls to a section id on the homepage
 // type: "route"  → a real wouter route
 const NAV_LINKS = [
   { label: "Home", type: "route", href: "/" },
@@ -16,55 +15,49 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Twitter (X)", href: "https://twitter.com", external: true },
-  { label: "LinkedIn", href: "https://linkedin.com", external: true },
+  {
+    label: "Twitter (X)",
+    href: "https://twitter.com",
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    external: true,
+  },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
   const [location, navigate] = useLocation();
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    let lastScrollY = window.scrollY;
+  // Handle Home click
+  const handleHomeClick = (event) => {
+    event.preventDefault();
+    setOpen(false);
 
-    const handleScroll = () => {
-      if (!mediaQuery.matches) {
-        setShowNavbar(true);
-        return;
-      }
+    // Already on the homepage → smoothly scroll to top
+    if (location === "/" || location === "/home") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      return;
+    }
 
-      const currentScrollY = window.scrollY;
+    // Coming from another route → go home
+    navigate("/");
 
-      if (currentScrollY <= 0) {
-        setShowNavbar(true);
-      } else if (currentScrollY > lastScrollY) {
-        setShowNavbar(false);
-      } else if (currentScrollY < lastScrollY) {
-        setShowNavbar(true);
-      }
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    });
+  };
 
-      lastScrollY = currentScrollY;
-    };
-
-    const handleViewportChange = () => {
-      if (!mediaQuery.matches) {
-        setShowNavbar(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    mediaQuery.addEventListener("change", handleViewportChange);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      mediaQuery.removeEventListener("change", handleViewportChange);
-    };
-  }, []);
-
-  // Handles "scroll" type links: scrolls directly if already on "/", otherwise
-  // navigates home first and scrolls once the section exists in the DOM.
+  // Handles "scroll" type links:
+  // Scrolls directly if already on "/", otherwise navigates home first.
   const handleScrollLink = (event, targetId) => {
     event.preventDefault();
     setOpen(false);
@@ -82,17 +75,24 @@ const Navbar = () => {
     navigate(`/?scroll=${targetId}`);
   };
 
-  // On the homepage, if arriving via /?scroll=faqs, scroll to that section once mounted.
+  // On the homepage, scroll to the requested section after navigation.
   useEffect(() => {
     if (location !== "/") return;
 
     const params = new URLSearchParams(window.location.search);
     const scrollTarget = params.get("scroll");
+
     if (!scrollTarget) return;
 
     const el = document.getElementById(scrollTarget);
+
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      requestAnimationFrame(() => {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
     }
   }, [location]);
 
@@ -102,7 +102,9 @@ const Navbar = () => {
         <Link
           key={link.label}
           href={link.href}
-          onClick={() => setOpen(false)}
+          onClick={
+            link.label === "Home" ? handleHomeClick : () => setOpen(false)
+          }
           className={className}
         >
           {link.label}
@@ -124,16 +126,12 @@ const Navbar = () => {
   };
 
   return (
-    <header
-      className={`sticky top-0 left-0 z-50 w-full overflow-x-clip border-b border-gray-200 bg-white font-mono text-sm tracking-tight transition-transform duration-300 ease-out ${
-        showNavbar ? "lg:translate-y-0" : "lg:-translate-y-full"
-      }`}
-    >
-      <nav className="mx-auto flex w-full max-w-[1380px] items-center justify-between px-8 md:px-16 py-4">
+    <header className="fixed top-0 left-0 z-50 w-full overflow-x-clip border-b border-gray-200 bg-white font-mono text-sm tracking-tight">
+      <nav className="mx-auto flex w-full max-w-[1380px] items-center justify-between px-8 py-4 md:px-16">
         {/* Logo */}
         <Link
           href="/"
-          onClick={() => setOpen(false)}
+          onClick={handleHomeClick}
           className="shrink-0 text-black lg:hidden"
         >
           Ritesh.
@@ -147,6 +145,7 @@ const Navbar = () => {
               "text-black transition-colors duration-200 group-hover:text-gray-400 hover:!text-black",
             ),
           )}
+
           <SwipeFilePill href="/swipe-file" />
         </div>
 
@@ -158,6 +157,7 @@ const Navbar = () => {
           >
             [ Get in touch ]
           </a>
+
           {SOCIAL_LINKS.map((link) => (
             <a
               key={link.label}
@@ -184,11 +184,13 @@ const Navbar = () => {
               open ? "translate-y-2 rotate-45" : ""
             }`}
           />
+
           <span
             className={`block h-0.5 w-6 bg-black transition-opacity duration-200 ${
               open ? "opacity-0" : "opacity-100"
             }`}
           />
+
           <span
             className={`block h-0.5 w-6 bg-black transition-transform duration-200 ${
               open ? "-translate-y-2 -rotate-45" : ""
@@ -205,12 +207,20 @@ const Navbar = () => {
       >
         <div className="flex flex-col gap-6 px-8 py-6 sm:px-6">
           {NAV_LINKS.map((link) => renderNavLink(link, "text-black"))}
+
           <SwipeFilePill href="/swipe-file" className="self-start" />
 
           <div className="mt-10 flex flex-col gap-6">
-            <a onClick={openCal} className="cursor-pointer text-black">
+            <a
+              onClick={() => {
+                setOpen(false);
+                openCal();
+              }}
+              className="cursor-pointer text-black"
+            >
               [ Get in touch ]
             </a>
+
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.label}

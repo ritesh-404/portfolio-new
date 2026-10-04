@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeading } from "../ui/SectionHeading";
 
 const faqs = [
   {
@@ -63,7 +64,7 @@ export default function FAQSection() {
 
   return (
     <motion.section
-      className="mt-40 w-full"
+      className="w-full"
       id="faqs"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -75,9 +76,7 @@ export default function FAQSection() {
     >
       {/* Section heading */}
       <div className="mb-10 md:mb-12">
-        <h2 className="font-serif text-4xl text-[#202020] font-medium tracking-[-0.03em] md:text-5xl">
-          Frequently Asked Questions
-        </h2>
+       <SectionHeading className="mb-0"> ( ^_^ ) Frequently asked questions</SectionHeading>
       </div>
 
       {/* FAQ list */}
@@ -90,10 +89,10 @@ export default function FAQSection() {
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left md:py-6"
+                className="flex w-full cursor-pointer items-center justify-between gap-6 py-4 text-left"
                 aria-expanded={isOpen}
               >
-                <span className="font-serif text-lg font-medium md:text-lg text-[#202020]">
+                <span className="font-dm-sans text-sm text-[#202020]">
                   {faq.question}
                 </span>
 
@@ -126,7 +125,7 @@ export default function FAQSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-[80%] pb-6 font-mono text-sm leading-relaxed text-[#575757] md:max-w-[70%] md:text-base">
+                    <p className="max-w-[80%] pb-6 font-mono text-xs leading-relaxed text-[#575757] md:max-w-[70%]">
                       {faq.answer}
                     </p>
                   </motion.div>
