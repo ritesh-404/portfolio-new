@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import caseStudyData from "../../data/caseStudyCard";
 import { Link } from "wouter";
 import { SectionHeading } from "./SectionHeading";
@@ -9,35 +9,123 @@ import { SectionHeading } from "./SectionHeading";
 
 const ImageGallery = ({ images = [] }) => {
   const galleryRef = useRef(null);
+  const galleryContainerRef = useRef(null);
+  const imageRefs = useRef([]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cursor, setCursor] = useState({
-    x: 0,
-    y: 0,
-    visible: false,
-  });
+  const [imagesReady, setImagesReady] = useState(false);
 
-  const isDraggingRef = useRef(false);
+  /* ---------------------------------------------
+     Preload ALL images for THIS gallery only
+     when the card gets near the viewport
+  --------------------------------------------- */
 
-  const dragState = useRef({
-    startX: 0,
-    startY: 0,
-  });
+  useEffect(() => {
+    if (!galleryContainerRef.current || !images.length) return;
+
+    let cancelled = false;
+
+    const preloadImages = async () => {
+      try {
+        await Promise.all(
+          images.map(
+            (src, index) =>
+              new Promise((resolve) => {
+                const img = new Image();
+
+                img.onload = async () => {
+                  try {
+                    if (img.decode) {
+                      await img.decode();
+                    }
+                  } catch {
+                    // Ignore decode errors.
+                  }
+
+                  if (!cancelled && imageRefs.current[index]) {
+                    imageRefs.current[index].src = src;
+                  }
+
+                  resolve();
+                };
+
+                img.onerror = resolve;
+                img.src = src;
+              }),
+          ),
+        );
+
+        if (!cancelled) {
+          setImagesReady(true);
+        }
+      } catch {
+        if (!cancelled) {
+          setImagesReady(true);
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          preloadImages();
+          observer.disconnect();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "1200px 0px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(galleryContainerRef.current);
+
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [images]);
+
+  /* ---------------------------------------------
+     Navigate
+  --------------------------------------------- */
 
   const goToImage = useCallback(
-    (index) => {
-      if (!galleryRef.current || !images.length) return;
+    async (index) => {
+      if (!galleryRef.current || images.length <= 1) return;
 
       const nextIndex = Math.max(0, Math.min(index, images.length - 1));
+      const slide = galleryRef.current.children[nextIndex];
 
-      const image = galleryRef.current.children[nextIndex];
+      if (!slide) return;
 
-      if (!image) return;
+      const image = imageRefs.current[nextIndex];
 
-      image.scrollIntoView({
+      /*
+       * Make absolutely sure the target image is ready
+       * before starting the transition.
+       */
+      if (image && !image.complete) {
+        await new Promise((resolve) => {
+          const handleLoad = () => {
+            image.removeEventListener("load", handleLoad);
+            image.removeEventListener("error", handleLoad);
+            resolve();
+          };
+
+          image.addEventListener("load", handleLoad);
+          image.addEventListener("error", handleLoad);
+        });
+      }
+
+      if (image?.decode) {
+        await image.decode().catch(() => {});
+      }
+
+      galleryRef.current.scrollTo({
+        left: slide.offsetLeft,
         behavior: "smooth",
-        block: "nearest",
-        inline: "start",
       });
 
       setCurrentIndex(nextIndex);
@@ -45,119 +133,84 @@ const ImageGallery = ({ images = [] }) => {
     [images.length],
   );
 
-  const updateCursor = (event) => {
-    if (event.pointerType === "touch") return;
-
-    const rect = event.currentTarget.getBoundingClientRect();
-
-    setCursor({
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
-      visible: true,
-    });
-  };
-
-  const handlePointerDown = (event) => {
-    if (images.length <= 1) return;
-
-    isDraggingRef.current = true;
-
-    dragState.current = {
-      startX: event.clientX,
-      startY: event.clientY,
-    };
-
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const handlePointerMove = (event) => {
-    updateCursor(event);
-
-    if (!isDraggingRef.current) return;
-  };
-
-  const handlePointerUp = (event) => {
-    if (!isDraggingRef.current) return;
-
-    const distance = event.clientX - dragState.current.startX;
-
-    isDraggingRef.current = false;
-
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-
-    const threshold = 50;
-
-    if (Math.abs(distance) < threshold) return;
-
-    if (distance < 0) {
-      goToImage(currentIndex + 1);
-    } else {
-      goToImage(currentIndex - 1);
-    }
-  };
-
-  const handlePointerCancel = (event) => {
-    isDraggingRef.current = false;
-
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-  };
-
-  const handlePointerEnter = (event) => {
-    updateCursor(event);
-  };
-
-  const handlePointerLeave = () => {
-    if (!isDraggingRef.current) {
-      setCursor((current) => ({
-        ...current,
-        visible: false,
-      }));
-    }
-  };
+  if (!images.length) return null;
 
   return (
-    <div
-      className="group relative w-full cursor-none"
-      onPointerEnter={handlePointerEnter}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-    >
-      {/* Custom cursor */}
-      <div
-        className={`pointer-events-none absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-black/10 bg-white/65 px-3 py-2 font-mono text-[10px] leading-none tracking-[-0.01em] text-black backdrop-blur-md transition-opacity duration-150 ${
-          cursor.visible ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          left: cursor.x,
-          top: cursor.y,
-        }}
-      >
-        Drag
-      </div>
+    <div ref={galleryContainerRef} className="w-full">
+      {/* Navigation buttons */}
+      {images.length > 1 && (
+        <div className="mb-2 flex w-full items-center justify-start gap-2">
+          {/* Left */}
+          <button
+            type="button"
+            aria-label="Previous image"
+            onClick={() => goToImage(currentIndex - 1)}
+            disabled={currentIndex === 0}
+            className="group inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#424242]/30 bg-[#fff] text-[#424242]/80 transition-all duration-250 hover:border-[#202020] hover:text-[#202020] disabled:pointer-events-none disabled:opacity-35 cursor-pointer"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 6L9 12L15 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          {/* Right */}
+          <button
+            type="button"
+            aria-label="Next image"
+            onClick={() => goToImage(currentIndex + 1)}
+            disabled={currentIndex === images.length - 1 || !imagesReady}
+            className="group inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#424242]/30 bg-[#fff] text-[#424242]/80 transition-all duration-250 hover:border-[#202020] hover:text-[#202020] disabled:pointer-events-none disabled:opacity-35 cursor-pointer"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 6L15 12L9 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* Gallery */}
       <div
         ref={galleryRef}
-        className="flex w-full gap-2 overflow-hidden select-none touch-pan-y"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerCancel}
+        className="flex w-full gap-2 overflow-x-auto overflow-y-hidden select-none snap-x snap-mandatory scrollbar-none"
       >
         {images.map((image, index) => (
           <div
             key={`${image}-${index}`}
-            className="h-auto w-full shrink-0 overflow-hidden rounded-sm lg:h-[600px] lg:w-fit"
+            className="w-full min-w-full shrink-0 snap-start overflow-hidden rounded-sm lg:h-[600px] lg:w-fit lg:min-w-0"
           >
             <img
-              src={image}
+              ref={(element) => {
+                imageRefs.current[index] = element;
+              }}
+              src={index === 0 ? image : undefined}
               alt=""
               draggable="false"
-              className="pointer-events-none block h-auto w-full object-contain lg:h-full lg:w-auto"
+              decoding="async"
+              className="block h-auto w-full max-w-full object-contain lg:h-full lg:w-auto"
             />
           </div>
         ))}
@@ -181,7 +234,7 @@ const CaseStudyCard = ({ study }) => {
           {study.tags?.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center whitespace-nowrap rounded-full border border-gray-300 px-3 py-1.5 font-mono text-xs text-gray-700 mt-2"
+              className="mt-2 inline-flex items-center whitespace-nowrap rounded-full border border-gray-300 px-3 py-1.5 font-mono text-xs text-gray-700"
             >
               {tag}
             </span>
@@ -189,7 +242,7 @@ const CaseStudyCard = ({ study }) => {
         </div>
 
         {/* Title */}
-        <h3 className=" mt-2 font-serif text-[20px] md:max-w-[40%] w-full leading-[1.3] tracking-[-0.01em]">
+        <h3 className="mt-2 w-full font-serif text-[20px] leading-[1.3] tracking-[-0.01em] md:max-w-[40%]">
           {study.title}
         </h3>
 
@@ -213,13 +266,7 @@ const SelectedWorks = () => {
   return (
     <section className="w-full">
       <div className="mb-10">
-        <SectionHeading className="mb-0">
-          ( +_+ ) Selected works{" "}
-          <span className="text-black/50">
-            ( <span className="inline md:hidden">swipe</span>
-            <span className="hidden md:inline">drag</span> )
-          </span>
-        </SectionHeading>
+        <SectionHeading className="mb-0">(+_+) Selected works</SectionHeading>
       </div>
 
       <div className="space-y-28">

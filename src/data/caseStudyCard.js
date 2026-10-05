@@ -51,15 +51,15 @@ const caseStudies = [
 
     images: [
       typani4,
+      typaniDesktop1,
+      typaniDesktop2,
+      typaniDesktop3,
+      typaniDesktop4,
       typaniCard1,
       typaniCard2,
       typaniCard3,
       typaniCard4,
       typaniCard5,
-      typaniDesktop1,
-      typaniDesktop2,
-      typaniDesktop3,
-      typaniDesktop4,
     ],
 
     caseStudy: true,
@@ -78,13 +78,6 @@ const caseStudies = [
 
     images: [
       temporalDesktop4_3,
-      img1,
-      img2,
-      img3,
-      img4,
-      img5,
-      img6,
-      img7,
       temporalDesktop1,
       temporalDesktop2,
       temporalDesktop3,
@@ -92,6 +85,11 @@ const caseStudies = [
       temporalDesktop5,
       temporalDesktop6,
       temporalDesktop7,
+      img1,
+      img2,
+      img3,
+      img4,
+      img5,
     ],
 
     caseStudy: true,
