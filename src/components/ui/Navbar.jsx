@@ -10,8 +10,8 @@ const openCal = () => {
 const NAV_LINKS = [
   { label: "Home", type: "route", href: "/" },
   // { label: "Services", type: "route", href: "/services" },
-  { label: "About", type: "route", href: "/about" },
   { label: "FAQs", type: "scroll", href: "faqs" },
+  // { label: "Resume", type: "route", href: "/about" },
 ];
 
 const SOCIAL_LINKS = [
@@ -25,6 +25,11 @@ const SOCIAL_LINKS = [
     href: "https://linkedin.com",
     external: true,
   },
+  // {
+  //   label: "Resume",
+  //   href: "#",
+  //   external: true,
+  // },
 ];
 
 const Navbar = () => {

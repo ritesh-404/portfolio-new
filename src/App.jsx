@@ -7,7 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import SideRails from "./components/ui/SideRails";
 import Writings from "./pages/Writings";
 import FAQs from "./pages/FAQs";
-import About from "./pages/About"
+// import About from "./pages/About"
 import SwipeFile from "./pages/SwipeFile";
 
 function App() {
@@ -21,12 +21,11 @@ function App() {
   };
   return (
     <>
-      <SideRails />
       <Switch>
         <Route path="/" component={HomePage} />
         <Route path="/home" component={HomePage} />
         <Route path="/writings" component={Writings} />
-        <Route path="/about" component={About} />
+        {/* <Route path="/about" component={About} /> */}
         <Route path="/faqs" component={FAQs} />
         <Route path="/swipe-file" component={SwipeFile} />
         <Route path="/work/:id" component={CaseStudyPage} />

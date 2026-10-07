@@ -1,0 +1,185 @@
+
+/* ==================================================
+   REFERENCE EXAMPLES
+   Keep these commented out so you can copy them later.
+   ================================================== */
+
+/*
+  1. TEXT ONLY
+
+  {
+    type: "text",
+
+    text: "Your paragraph here.",
+  },
+*/
+
+/*
+  2. HEADING + ONE DESCRIPTION
+
+  {
+    type: "section",
+
+    heading: "Your heading",
+
+    paragraphs: [
+      "Your paragraph here.",
+    ],
+  },
+*/
+
+/*
+  3. HEADING + MULTIPLE DESCRIPTIONS
+
+  {
+    type: "section",
+
+    heading: "Your heading",
+
+    paragraphs: [
+      "First paragraph.",
+
+      "Second paragraph.",
+
+      "Third paragraph.",
+    ],
+  },
+*/
+
+/*
+  4. ONE IMAGE + LABEL
+
+  {
+    type: "image",
+
+    src: yourImage,
+
+    alt: "Description of what is shown in the image",
+
+    label: "Short explanation of what the image shows.",
+  },
+*/
+
+/*
+  5. ONE VIDEO + LABEL
+
+  {
+    type: "video",
+
+    src: yourVideo,
+
+    label: "Short explanation of what the video demonstrates.",
+  },
+*/
+
+/*
+  6. HEADING + TEXT + IMAGE
+
+  Keep them as separate blocks so you control the order:
+
+  {
+    type: "section",
+
+    heading: "Your heading",
+
+    paragraphs: [
+      "Your description.",
+    ],
+  },
+
+  {
+    type: "image",
+
+    src: yourImage,
+
+    alt: "Description of the image",
+
+    label: "What the image demonstrates.",
+  },
+*/
+
+/*
+  7. HEADING + TEXT + MULTIPLE IMAGES
+
+  Put as many image blocks as you want.
+
+  {
+    type: "section",
+
+    heading: "Your heading",
+
+    paragraphs: [
+      "Your description.",
+    ],
+  },
+
+  {
+    type: "image",
+
+    src: image1,
+
+    alt: "Image 1",
+
+    label: "Description of image 1.",
+  },
+
+  {
+    type: "image",
+
+    src: image2,
+
+    alt: "Image 2",
+
+    label: "Description of image 2.",
+  },
+
+  {
+    type: "image",
+
+    src: image3,
+
+    alt: "Image 3",
+
+    label: "Description of image 3.",
+  },
+*/
+
+/*
+  8. IMAGE + VIDEO + TEXT + IMAGE
+
+  You can mix blocks in any order.
+
+  {
+    type: "image",
+
+    src: image1,
+
+    alt: "Image 1",
+
+    label: "Description of image 1.",
+  },
+
+  {
+    type: "video",
+
+    src: video1,
+
+    label: "Description of the video.",
+  },
+
+  {
+    type: "text",
+
+    text: "Your paragraph here.",
+  },
+
+  {
+    type: "image",
+
+    src: image2,
+
+    alt: "Image 2",
+
+    label: "Description of image 2.",
+  },
+*/

@@ -2,60 +2,86 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "../ui/SectionHeading";
 
+// Use \n\n inside a string for a paragraph break, \n for a single line break.
+// The <p> below has `whitespace-pre-line`, which renders both.
 const faqs = [
   {
     question: "How much does a project cost?",
-    answer:
-      "Pricing depends on the project and what you’re looking to build. Most projects start at $999 for a landing page design, and the price goes up depending on the scope, number of pages or screens, and overall complexity. Once you book a call and share your requirements, I’ll review the project with you and provide a clear, upfront quote tailored to your needs.",
+    answer: `Design starts at $800 and development at $900. Book both together and the full package is $1,500, saving you $200.
+
+Every project is custom-designed around your business and your brand. I don't use templates or pre-made layouts. Each page is built from scratch around your audience, your goals, and the story you want your brand to tell, so your site looks like yours and not like a hundred others. That's what turns visitors into customers and gives you a foundation you can grow on.
+
+Final pricing depends on scope: the number of pages or screens, and the complexity of the features. Book a call, share your requirements, and I'll send you a clear, upfront quote with no hidden costs or surprises.`,
   },
   {
     question: "What kind of projects do you work on?",
-    answer:
-      "I mainly work on websites and product interfaces for B2B, SaaS, AI, and technology companies. This can include landing pages, marketing websites app designs.",
+    answer: `I design and build websites and product interfaces for startups and technology companies, especially in B2B, SaaS, and AI.
+
+That includes landing pages, marketing websites, app screens, and design systems.`,
+  },
+  {
+    question: "Can I book just design or just development?",
+    answer: `Yes. Design ($800) and development ($900) can be booked separately.
+
+Booking both together is $1,500 and gives you one person carrying the project from first sketch to live site, with no handoff gaps.`,
   },
   {
     question: "How long does a project usually take?",
-    answer:
-      "Most focused website projects take around 1–2 weeks. The exact timeline depends on the scope, number of pages, complexity, and how quickly feedback and content are provided.",
+    answer: `Most focused website projects take 1–2 weeks.
+
+The exact timeline depends on scope, number of pages, and how quickly feedback and content come back. You'll get a clear delivery date before we start.`,
   },
   {
     question: "What is your design process?",
-    answer:
-      "I start by understanding the product, users, business goals, and existing experience. From there I work through the structure, visual direction, UI, responsive states, and final polish before preparing everything for handoff or implementation.",
+    answer: `I start by understanding your product, audience, and business goals.
+
+Then I move through structure, visual direction, UI, and responsive layouts across desktop, tablet, and mobile.
+
+I finish with a final polish before handoff or development.`,
+  },
+  {
+    question: "Why not just use a template?",
+    answer: `Templates are cheaper upfront, but they look like everyone else's site and rarely fit your message.
+
+A custom design is built around your brand and your customers, so it earns trust faster and converts better.`,
   },
   {
     question: "Do you work from an existing design or start from scratch?",
-    answer:
-      "Both. I can redesign an existing product or website, work from an existing brand system, or create the interface from scratch when there is no established visual direction.",
+    answer: `Both. I can redesign your current site, build on an existing brand system, or create everything from scratch if you don't have a visual direction yet.`,
   },
   {
     question: "How many revisions are included?",
-    answer:
-      "The goal is to get the direction right early through structured feedback rather than going through endless revision rounds. Revisions are included throughout the project within the agreed scope.",
+    answer: `Revisions are included within the agreed scope.
+
+I focus on getting the direction right early through structured feedback, so you don't end up in endless revision rounds.`,
   },
   {
     question: "What do you need from me before we start?",
-    answer:
-      "Usually I need a clear understanding of the product, goals, target users, existing assets, content, and any references you already have. I will tell you exactly what is needed before the project begins.",
-  },
-  {
-    question: "Can you work with my existing developers?",
-    answer:
-      "Yes. I can work directly with an existing engineering team and provide production-ready Figma files, responsive specifications, interaction details, and implementation guidance.",
+    answer: `Your goals, target audience, any existing brand assets, content, and references you like.
+
+If something is missing, I'll tell you exactly what's needed before the project begins.`,
   },
   {
     question: "Do you also handle development?",
-    answer: "Yes but only for landing pages and micro websites",
+    answer: `Yes, for landing pages and micro websites.
+
+You get a fully working, responsive site, so you don't have to find a separate developer.`,
   },
   {
-    question: "Do you design for mobile and responsive layouts?",
-    answer:
-      "Yes. Responsive behavior is considered as part of the design rather than treated as an afterthought. The interface is designed to work across desktop, tablet, and mobile breakpoints.",
+    question: "Can you work with my existing developers?",
+    answer: `Yes. I provide production-ready Figma files, responsive specs, and implementation notes so your team can build without guessing.`,
+  },
+  {
+    question: "How does payment work?",
+    answer: `50% upfront to start and 50% on delivery.
+
+You'll see the full amount in your quote before anything begins.`,
   },
   {
     question: "What happens after the project is finished?",
-    answer:
-      "You receive the final design files and assets along with everything needed for implementation. For projects that include development, the finished experience can be handed over as a working website or product interface.",
+    answer: `You receive the final design files, assets, and everything needed for implementation.
+
+If development is included, you get the finished website ready to go live. I'm also happy to help with small tweaks after launch.`,
   },
 ];
 
@@ -76,7 +102,10 @@ export default function FAQSection() {
     >
       {/* Section heading */}
       <div className="mb-10 md:mb-12">
-       <SectionHeading className="mb-0"> ( ^_^ ) Frequently asked questions</SectionHeading>
+        <SectionHeading className="mb-0">
+          {" "}
+          ( ^_^ ) Frequently asked questions
+        </SectionHeading>
       </div>
 
       {/* FAQ list */}
@@ -125,7 +154,7 @@ export default function FAQSection() {
                     }}
                     className="overflow-hidden"
                   >
-                    <p className="max-w-[80%] pb-6 font-mono text-xs leading-relaxed text-[#575757] md:max-w-[70%]">
+                    <p className="max-w-[80%] whitespace-pre-line pb-6 font-mono text-xs leading-relaxed text-[#575757] md:max-w-[70%]">
                       {faq.answer}
                     </p>
                   </motion.div>

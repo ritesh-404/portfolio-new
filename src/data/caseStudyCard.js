@@ -62,7 +62,7 @@ const caseStudies = [
       typaniCard5,
     ],
 
-    caseStudy: true,
+    caseStudy: false,
   },
 
   {
@@ -114,7 +114,7 @@ const caseStudies = [
       tolgeeDesktop4,
     ],
 
-    caseStudy: true,
+    caseStudy: false,
   },
 ];
 
