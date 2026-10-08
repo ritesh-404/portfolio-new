@@ -25,11 +25,11 @@ const SOCIAL_LINKS = [
     href: "https://linkedin.com",
     external: true,
   },
-  // {
-  //   label: "Resume",
-  //   href: "#",
-  //   external: true,
-  // },
+  {
+    label: "Github",
+    href: "https://github.com/ritesh-404",
+    external: true,
+  },
 ];
 
 const Navbar = () => {
