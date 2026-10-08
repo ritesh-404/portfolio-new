@@ -69,7 +69,7 @@ const caseStudies = [
     id: "temporal",
 
     title:
-      "Temporal ai — Landing page redesign to brind structure and illustrate the process more clearly.",
+      "Temporal ai — Landing page redesign to bring structure and illustrate the process more clearly.",
 
     description:
       "The current landing page was too messy, no hierarchy that was making it harder to scan the information and also the illustrations were too outdated and held no meaning. The redesign of their landing page makes cleaner and sensible illustrations to explain the product and brought consistency and structure to the design.",
