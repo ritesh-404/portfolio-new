@@ -6,5 +6,5 @@ import { lazy } from "react";
  */
 export const caseStudyPages = {
   temporal: lazy(() => import("./TemporalCaseStudy")),
-  // loop: lazy(() => import("./LoopCaseStudy")),
+  typani: lazy(() => import("./TypaniCaseStudy")),
 };

@@ -1,0 +1,23 @@
+import CaseStudyLayout from "../../components/case-study/CaseStudyLayout";
+import { Section, H3, P, UL, Figure, Video, Pair } from "../../components/case-study/blocks";
+
+import heroImg from "../../assets/case_study_media/loop/hero.png";
+
+export default function LoopCaseStudy() {
+  return (
+    <CaseStudyLayout
+      title="Loop: Super Agent"
+      overview="One-line summary of the project."
+      heroImage={heroImg}
+    >
+      <Section title="About the project">
+        <P>...</P>
+      </Section>
+
+      <Section title="The wrong-door problem">
+        <P>...</P>
+        <Figure src={heroImg} caption="..." />
+      </Section>
+    </CaseStudyLayout>
+  );
+}

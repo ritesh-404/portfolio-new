@@ -17,16 +17,16 @@ import {
 } from "../assets/hero_Section_Project_Img/temporal_ai";
 
 import {
-  typani4,
+  typani_hero_section,
   typaniDesktop1,
   typaniDesktop2,
   typaniDesktop3,
   typaniDesktop4,
-  typaniCard1,
-  typaniCard2,
-  typaniCard3,
-  typaniCard4,
-  typaniCard5,
+  howItWorksCards,
+  sixSeconds_bento,
+  ninePM1Star_bento,
+  howReplyLooksLike_bento,
+  pricing_Cards,
 } from "../assets/hero_Section_Project_Img/typani_ai";
 
 import {
@@ -50,16 +50,16 @@ const caseStudies = [
     tags: ["Web design", "UX strategy", "Visual direction"],
 
     images: [
-      typani4,
+      typani_hero_section,
       typaniDesktop1,
       typaniDesktop2,
       typaniDesktop3,
       typaniDesktop4,
-      typaniCard1,
-      typaniCard2,
-      typaniCard3,
-      typaniCard4,
-      typaniCard5,
+      howItWorksCards,
+      sixSeconds_bento,
+      ninePM1Star_bento,
+      howReplyLooksLike_bento,
+      pricing_Cards,
     ],
 
     caseStudy: false,
@@ -77,19 +77,16 @@ const caseStudies = [
     tags: ["Web design", "Design system", "Strategy", "Illustrations"],
 
     images: [
-      temporalDesktop4_3,
-      temporalDesktop1,
-      temporalDesktop2,
-      temporalDesktop3,
-      temporalDesktop4,
-      temporalDesktop5,
-      temporalDesktop6,
-      temporalDesktop7,
-      img1,
-      img2,
-      img3,
-      img4,
-      img5,
+      typani_hero_section,
+      typaniDesktop1,
+      typaniDesktop2,
+      typaniDesktop3,
+      typaniDesktop4,
+      howItWorksCards,
+      sixSeconds_bento,
+      ninePM1Star_bento,
+      howReplyLooksLike_bento,
+      pricing_Cards,
     ],
 
     caseStudy: true,
