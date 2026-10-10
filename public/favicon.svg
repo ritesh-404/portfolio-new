@@ -1,21 +1,75 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1270_2488)">
-<rect width="16" height="16" fill="#000080"/>
-<path d="M-44.0957 41.1821L13.1589 -16.0723" stroke="white"/>
-<path d="M-37.7559 41.1821L19.4988 -16.0723" stroke="white"/>
-<path d="M-31.4199 41.1821L25.8347 -16.0723" stroke="white"/>
-<path d="M-25.0801 41.1821L32.1745 -16.0723" stroke="white"/>
-<path d="M-18.7441 41.1821L38.5105 -16.0723" stroke="white"/>
-<path d="M-12.4043 41.1821L44.8503 -16.0723" stroke="white"/>
-<path d="M-6.06836 41.1821L51.1863 -16.0723" stroke="white"/>
-<path d="M0.271484 41.1821L57.5261 -16.0723" stroke="white"/>
-<path d="M6.60938 41.1821L63.864 -16.0723" stroke="white"/>
-<path d="M12.9473 41.1821L70.2019 -16.0723" stroke="white"/>
+<svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_55_2865)">
+<rect x="1" y="1" width="32" height="32" fill="white"/>
+<rect width="4" height="4" transform="translate(1 1)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(1 13)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(1 25)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(21 5)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(21 17)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(21 9)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(21 29)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(21 21)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(5 1)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(5 13)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(5 25)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(29 5)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(29 17)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(9 9)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(9 29)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(9 21)" fill="#9C9BF3"/>
+<rect width="4" height="4" transform="translate(9 1)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(9 13)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(9 25)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(17 5)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(17 17)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(13 9)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(13 29)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(13 21)" fill="#A855F7"/>
+<rect width="4" height="4" transform="translate(13 1)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(13 13)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(13 25)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(25 5)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(25 17)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(25 9)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(25 29)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(25 21)" fill="#D946EF"/>
+<rect width="4" height="4" transform="translate(17 1)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(17 13)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(17 25)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(5 5)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(5 17)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(1 9)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(1 29)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(1 21)" fill="#F472B6"/>
+<rect width="4" height="4" transform="translate(21 1)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(21 13)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(21 25)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(9 5)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(9 17)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(17 9)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(17 29)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(17 21)" fill="#22D3EE"/>
+<rect width="4" height="4" transform="translate(25 1)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(25 13)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(25 25)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(1 5)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(1 17)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(29 9)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(29 29)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(29 21)" fill="#67E8F9"/>
+<rect width="4" height="4" transform="translate(29 1)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(29 13)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(29 25)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(13 5)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(13 17)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(5 9)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(5 29)" fill="#7C3AED"/>
+<rect width="4" height="4" transform="translate(5 21)" fill="#7C3AED"/>
 </g>
-<rect x="0.25" y="0.25" width="15.5" height="15.5" stroke="white" stroke-width="0.5"/>
+<rect x="0.5" y="0.5" width="33" height="33" stroke="white"/>
 <defs>
-<clipPath id="clip0_1270_2488">
-<rect width="16" height="16" fill="white"/>
+<clipPath id="clip0_55_2865">
+<rect x="1" y="1" width="32" height="32" fill="white"/>
 </clipPath>
 </defs>
 </svg>

@@ -247,14 +247,14 @@ const CaseStudyCard = ({ study }) => {
         </h3>
 
         {/* View more */}
-        {study.caseStudy && (
+        {/* {study.caseStudy && (
           <Link
             href={`/work/${study.id}`}
             className="mt-4 inline-block font-mono text-[14px] leading-[1.3] tracking-[-0.01em] text-black underline underline-offset-3 transition-opacity duration-200 hover:opacity-50"
           >
             case study →
           </Link>
-        )}
+        )} */}
       </div>
     </article>
   );

@@ -20,6 +20,17 @@ button > * {
   --color-pink: #ff9e9e;
   --color-violet-light: #67648d;
 
+  /* product designer - portfolio  */
+  --color-portfolio-text-primary:#ffffff;
+  --color-portfolio-text-secondary:#dadada;
+  --color-portfolio-text-muted:#6e6e6e;
+  --color-portfolio-body-bg:#101010;
+  --color-portfolio-card-bg:#111111;
+  --color-portfolio-border:#FFFFFF1A;
+  --color-portfolio-white:#ffffff;
+  --color-portfolio-black:#000000;
+
+
   /* bg  */
   --color-body: #fafafa;
   --color-surface: #f1f2f4; /* bg for pills tags  */
@@ -69,4 +80,30 @@ button > * {
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%; /* stops mobile browsers inflating text */
+  }
+
+  body {
+    @apply antialiased;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+    font-optical-sizing: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance; /* even line lengths, no lonely last word */
+  }
+
+  p,
+  li {
+    text-wrap: pretty; /* avoids single-word orphans on the last line */
+  }
 }

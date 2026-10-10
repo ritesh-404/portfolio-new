@@ -183,3 +183,20 @@
     label: "Description of image 2.",
   },
 */
+
+
+
+      {/* top spacer */}
+      {/* <div className={`h-12 border-b md:h-[60px] ${line}`} /> */}
+
+      {/* quote */}
+      {/* <header className={`border-b px-6 py-8 md:py-10 ${line}`}>
+        <h1
+          className={`mx-auto max-w-[680px] text-center font-serif text-xl leading-[1.25] md:text-[36px] md:leading-[1.2] text-muted-light`}
+        >
+          <span className="text-(--text-primary)">I believe &ldquo;</span>
+          We Designers should do a lot of thinking so our users don&apos;t have
+          to!
+          <span className="text-(--text-primary)">&rdquo;</span>
+        </h1>
+      </header> */}

@@ -19,11 +19,14 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#f7f8fa] text-[#202020] antialiased">
+    <div className="relative min-h-screen text-[#fff] bg-[#101010] antialiased">
       <main className="mx-auto w-full max-w-[960px] py-8 px-10 sm:py-10 md:px-8 md:py-12 lg:px-10">
         {/* Back */}
         <div className="mb-14 md:mb-16">
-          <BackLinkBtn />
+          <BackLinkBtn
+            className="bg-portfolio-card-bg text-portfolio-text-muted border-portfolio-border border hover:text-portfolio-text-primary hover:bg-portfolio-card-bg hover:border-portfolio-text-primary"
+            href="/portfolio"
+          />
         </div>
 
         {/* Header */}
@@ -33,7 +36,7 @@ export default function CaseStudyPage() {
           </h1>
 
           {study.overview && (
-            <p className="mt-5 max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
+            <p className="mt-5 md:max-w-[75%] max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-portfolio-text-secondary sm:text-[17px]">
               {study.overview}
             </p>
           )}
@@ -67,7 +70,7 @@ export default function CaseStudyPage() {
               return (
                 <p
                   key={index}
-                  className="max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]"
+                  className="md:max-w-[75%] max-w-[100%] text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-portfolio-text-secondary sm:text-[17px]"
                 >
                   {block.text}
                 </p>
@@ -82,13 +85,13 @@ export default function CaseStudyPage() {
               return (
                 <section key={index}>
                   {block.heading && (
-                    <h2 className="max-w-[100%] text-pretty font-dm-sans text-2xl font-medium leading-[1.12] tracking-[-0.025em] sm:text-3xl">
+                    <h2 className="md:max-w-[75%] max-w-[100%] text-pretty font-dm-sans text-2xl font-medium leading-[1.12] tracking-[-0.025em] sm:text-3xl">
                       {block.heading}
                     </h2>
                   )}
 
                   {block.paragraphs?.length > 0 && (
-                    <div className="mt-4 max-w-[100%] space-y-3 text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-[#424242] sm:text-[17px]">
+                    <div className="mt-4 md:max-w-[75%] max-w-[100%] space-y-3 text-pretty font-inter text-base leading-[1.55] tracking-[-0.01em] text-portfolio-text-secondary sm:text-[17px]">
                       {block.paragraphs.map((paragraph, paragraphIndex) => (
                         <p key={paragraphIndex}>{paragraph}</p>
                       ))}
@@ -116,7 +119,7 @@ export default function CaseStudyPage() {
                   </MediaFrame>
 
                   {block.label && (
-                    <figcaption className="mx-auto mt-3 max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
+                    <figcaption className="mx-auto mt-3 md:max-w-[75%] max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
                       {block.label}
                     </figcaption>
                   )}
@@ -144,7 +147,7 @@ export default function CaseStudyPage() {
                   </MediaFrame>
 
                   {block.label && (
-                    <figcaption className="mx-auto mt-3 max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
+                    <figcaption className="mx-auto mt-3 md:max-w-[75%] max-w-[100%] text-center font-inter text-sm leading-[1.5] tracking-[-0.005em] text-[#737780]">
                       {block.label}
                     </figcaption>
                   )}
@@ -158,7 +161,10 @@ export default function CaseStudyPage() {
 
         {/* Footer */}
         <div className="flex justify-center pt-20 md:pt-28">
-          <BackLinkBtn />
+          <BackLinkBtn
+            className="bg-portfolio-card-bg text-portfolio-text-muted border-portfolio-border border hover:text-portfolio-text-primary hover:bg-portfolio-card-bg hover:border-portfolio-text-primary"
+            href="/portfolio"
+          />
         </div>
       </main>
     </div>
@@ -180,7 +186,7 @@ export default function CaseStudyPage() {
 
 function MediaFrame({ children }) {
   return (
-    <div className="w-full rounded-[14px] border border-[#d9dde3] bg-white p-2 shadow-[0_1px_2px_rgba(0,0,0,0.03)] sm:p-3">
+    <div className="w-full rounded-[14px] border border-portfolio-border bg-portfolio-border p-2 shadow-[0_1px_2px_rgba(0,0,0,0.03)] sm:p-2">
       {children}
     </div>
   );

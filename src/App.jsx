@@ -9,6 +9,7 @@ import Writings from "./pages/Writings";
 import FAQs from "./pages/FAQs";
 // import About from "./pages/About"
 import SwipeFile from "./pages/SwipeFile";
+import NewPotfolio from "./pages/NewPortfolio";
 
 function App() {
   document.onkeydown = (event) => {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/writings" component={Writings} />
         {/* <Route path="/about" component={About} /> */}
         <Route path="/faqs" component={FAQs} />
+        <Route path="/portfolio" component={NewPotfolio} />
         <Route path="/swipe-file" component={SwipeFile} />
         <Route path="/work/:id" component={CaseStudyPage} />
         <Route component={NotFoundPage} />

@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Home", type: "route", href: "/" },
   // { label: "Services", type: "route", href: "/services" },
   { label: "FAQs", type: "scroll", href: "faqs" },
-  // { label: "Resume", type: "route", href: "/about" },
+  { label: "Case studies", type: "route", href: "/portfolio" },
 ];
 
 const SOCIAL_LINKS = [
@@ -151,7 +151,7 @@ const Navbar = () => {
             ),
           )}
 
-          <SwipeFilePill href="/swipe-file" />
+          {/* <SwipeFilePill href="/swipe-file" /> */}
         </div>
 
         {/* Desktop: right group */}
@@ -213,7 +213,7 @@ const Navbar = () => {
         <div className="flex flex-col gap-6 px-8 py-6 sm:px-6">
           {NAV_LINKS.map((link) => renderNavLink(link, "text-black"))}
 
-          <SwipeFilePill href="/swipe-file" className="self-start" />
+          {/* <SwipeFilePill href="/swipe-file" className="self-start" /> */}
 
           <div className="mt-10 flex flex-col gap-6">
             <a
@@ -244,29 +244,29 @@ const Navbar = () => {
   );
 };
 
-const SwipeFilePill = ({ href, className = "" }) => (
-  <Link href={href} className={`group/pill inline-block ${className}`}>
-    <span
-      className="block rounded-full px-2 py-1"
-      style={{
-        border: "1px solid transparent",
-        backgroundImage: "linear-gradient(white, white), var(--gradient-brand)",
-        backgroundOrigin: "border-box",
-        backgroundClip: "padding-box, border-box",
-      }}
-    >
-      <span
-        className="text-black transition-colors duration-200 group-hover/pill:text-transparent"
-        style={{
-          backgroundImage: "var(--gradient-brand)",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-        }}
-      >
-        Swipe file
-      </span>
-    </span>
-  </Link>
-);
+// const SwipeFilePill = ({ href, className = "" }) => (
+//   <Link href={href} className={`group/pill inline-block ${className}`}>
+//     <span
+//       className="block rounded-full px-2 py-1"
+//       style={{
+//         border: "1px solid transparent",
+//         backgroundImage: "linear-gradient(white, white), var(--gradient-brand)",
+//         backgroundOrigin: "border-box",
+//         backgroundClip: "padding-box, border-box",
+//       }}
+//     >
+//       <span
+//         className="text-black transition-colors duration-200 group-hover/pill:text-transparent"
+//         style={{
+//           backgroundImage: "var(--gradient-brand)",
+//           WebkitBackgroundClip: "text",
+//           backgroundClip: "text",
+//         }}
+//       >
+//         Swipe file
+//       </span>
+//     </span>
+//   </Link>
+// );
 
 export default Navbar;

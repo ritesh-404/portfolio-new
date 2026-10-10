@@ -8,18 +8,21 @@ import "@fontsource/geist-mono";
 import "@fontsource/hedvig-letters-serif";
 import "@fontsource/instrument-sans";
 import "@fontsource-variable/dm-sans";
-import '@fontsource/solway';
-import '@fontsource/geist-sans';
-import '@fontsource/ibm-plex-serif';
+import "@fontsource/solway";
+import "@fontsource/geist-sans";
+import "@fontsource/ibm-plex-serif";
 
+// Import regular and specific weights if needed
+import "@fontsource/sora";
+import "@fontsource/sora/400.css"; // Regular
+import "@fontsource/sora/700.css"; // Bold
 
 // Import the base CSS (defaults to weight 400)
-import "@fontsource/inter"; 
+import "@fontsource/inter";
 
 // Optional: Import specific weights or styles if needed
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
-
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

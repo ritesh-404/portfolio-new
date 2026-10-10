@@ -1,11 +1,15 @@
 import { Link } from "wouter";
 
-export default function BackLinkBtn() {
+export default function BackLinkBtn({
+  href = "/",
+  ariaLabel = "Back to home",
+  className = ""
+}) {
   return (
     <Link
-      href="/"
-      aria-label="Back to home"
-      className="group inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#f0f1f2] text-[#424242]/80 transition-all duration-250 hover:bg-[#e5e6e8] hover:text-[#202020] border border-[#424242]/30 hover:border-[#202020]"
+      href={href}
+      aria-label={ariaLabel}
+      className={`${className} group inline-flex md:h-11 md:w-11 h-16 w-16 items-center justify-center rounded-full bg-[#f0f1f2] text-[#424242]/80 transition-all duration-250 hover:bg-[#e5e6e8] hover:text-[#202020] border border-[#424242]/30 hover:border-[#202020]`}
     >
       <svg
         width="24"
