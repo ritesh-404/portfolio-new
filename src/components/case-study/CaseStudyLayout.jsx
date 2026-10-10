@@ -10,6 +10,9 @@ import { MediaFrame } from "./blocks";
  * The sidebar builds itself from any element with a `data-toc`
  * attribute (the <Section> component adds it for you).
  */
+const backBtnClass =
+  "bg-portfolio-card-bg text-portfolio-text-muted border-portfolio-border border hover:text-portfolio-text-primary hover:bg-portfolio-card-bg hover:border-portfolio-text-primary";
+
 export default function CaseStudyLayout({
   title,
   overview,
@@ -52,38 +55,40 @@ export default function CaseStudyLayout({
   return (
     <div className="relative min-h-screen bg-[#101010] text-[#fff] antialiased">
       <div className="mx-auto w-full max-w-[1180px] px-6 py-8 sm:px-10 md:py-12">
-        <div className="mb-14 md:mb-16">
-          <BackLinkBtn
-            className="bg-portfolio-card-bg text-portfolio-text-muted border-portfolio-border border hover:text-portfolio-text-primary hover:bg-portfolio-card-bg hover:border-portfolio-text-primary"
-            href="/portfolio"
-          />
+        {/* Back button: mobile and tablet only, the sidebar has its own on desktop */}
+        <div className="mb-14 md:mb-16 lg:hidden">
+          <BackLinkBtn className={backBtnClass} href="/portfolio" />
         </div>
 
         <div className="lg:grid lg:grid-cols-[200px_minmax(0,820px)] lg:justify-center lg:gap-16">
           {/* Sidebar */}
           <aside className="hidden lg:block">
-            <nav className="sticky top-12">
-              <p className="mb-5 font-inter text-sm text-portfolio-text-secondary">
-                On this page
-              </p>
-              <ul className="flex flex-col">
-                {items.map(({ id, label }) => (
-                  <li key={id}>
-                    <button
-                      type="button"
-                      onClick={() => jumpTo(id)}
-                      className={`block w-full cursor-pointer border-l py-1 pl-4 text-left font-inter text-[12px] transition-colors duration-200 ${
-                        active === id
-                          ? "border-[#4b6bfb] text-white"
-                          : "border-white/10 text-portfolio-text-muted hover:text-white"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className="sticky top-10">
+              <BackLinkBtn className={backBtnClass} href="/portfolio" />
+
+              <nav className="mt-10">
+                <p className="mb-5 font-inter text-sm text-portfolio-text-secondary">
+                  On this page
+                </p>
+                <ul className="flex flex-col">
+                  {items.map(({ id, label }) => (
+                    <li key={id}>
+                      <button
+                        type="button"
+                        onClick={() => jumpTo(id)}
+                        className={`block w-full cursor-pointer border-l py-1 pl-4 text-left font-inter text-[12px] transition-colors duration-200 ${
+                          active === id
+                            ? "border-[#4b6bfb] text-white"
+                            : "border-white/10 text-portfolio-text-muted hover:text-white"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
           </aside>
 
           {/* Content */}
@@ -126,10 +131,7 @@ export default function CaseStudyLayout({
             <div className="flex flex-col gap-16 md:gap-20">{children}</div>
 
             <div className="flex justify-center pt-20 md:pt-28">
-              <BackLinkBtn
-                className="bg-portfolio-card-bg text-portfolio-text-muted border-portfolio-border border hover:text-portfolio-text-primary hover:bg-portfolio-card-bg hover:border-portfolio-text-primary"
-                href="/portfolio"
-              />
+              <BackLinkBtn className={backBtnClass} href="/portfolio" />
             </div>
           </main>
         </div>

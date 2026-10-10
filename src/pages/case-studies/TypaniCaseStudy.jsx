@@ -458,7 +458,7 @@ export default function TypaniCaseStudy() {
       </Section>
 
       {/* ------------------------------------------------------------ */}
-      <Section title="Pointing at the right plan" toc="Pricing">
+      <Section title="Pointing at the right plan" toc="Pricing choice">
         <P>
           On the old pricing, all three cards had about the same weight. The Pro
           card had a green outline and a small "Best value" tag, but the Starter
@@ -503,7 +503,7 @@ export default function TypaniCaseStudy() {
       </Section>
 
       {/* ------------------------------------------------------------ */}
-      <Section title="Closed questions" toc="FAQ">
+      <Section title="Closed questions" toc="Closed FAQ">
         <P>
           The old FAQ had every answer open at once. That's a lot of vertical
           space for questions most people don't have, and it buried the

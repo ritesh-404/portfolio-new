@@ -5,10 +5,10 @@ import typaniBig from "../assets/new_portfolio/typani-newPortfolio_big.png";
 
 import typani from "../assets/new_portfolio/typani_newPortfolio.png";
 import temporal from "../assets/new_portfolio/temporal_newPortfolio.png";
-import byteAsk from "../assets/new_portfolio/byte-ask_newPortfolio.png";
-import hyperProbe from "../assets/new_portfolio/hyperProbe_newPortfolio.png";
-import openSeo from "../assets/new_portfolio/openseo_newPortfolio.png";
-import threadOtter from "../assets/new_portfolio/thread_otter_newPortfolio.png";
+import byteAsk from "../assets/new_portfolio/byte-ask_newPortfolio.webp";
+import hyperProbe from "../assets/new_portfolio/hyperProbe_newPortfolio.webp";
+import openSeo from "../assets/new_portfolio/openseo_newPortfolio.webp";
+import threadOtter from "../assets/new_portfolio/thread_otter_newPortfolio.webp";
 
 /* ---------- edit these ---------- */
 const EMAIL = "workwithriteshhh@gmail.com";
@@ -52,7 +52,7 @@ const works = [
       </>
     ),
     images: [typani, byteAsk, hyperProbe, openSeo, threadOtter, temporal],
-    href: "/work/hero-sections",
+    href: "/work/heroSections",
   },
 ];
 /* -------------------------------- */
