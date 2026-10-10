@@ -14,6 +14,8 @@ import temporalOriginalVisibilityInCode from "./temporal_original-visibility-in-
 import temporalOriginalWatchDemo from "./temporal_original-watch-demo.avif";
 import temporalOriginalWorkflowDemo from "./temporal_original-workflow-demo.avif";
 import originalNav from "./original-nav.avif";
+import moodboard from "./moodboard.webp";
+import competitors from "./competitors-temporal.webp";
 
 
 export {
@@ -32,5 +34,7 @@ export {
   temporalOriginalVisibilityInCode,
   temporalOriginalWatchDemo,
   temporalOriginalWorkflowDemo,
-  originalNav
+  originalNav,
+  moodboard,
+  competitors
 };
