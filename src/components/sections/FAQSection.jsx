@@ -7,7 +7,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 const faqs = [
   {
     question: "How much does a project cost?",
-    answer: `Design starts at $800 and development at $900. Book both together and the full package is $1,500, saving you $200.
+    answer: `Design starts at $600 and development at $700. Book both together and the full package is $1,100, saving you $200.
 
 Every project is custom-designed around your business and your brand. I don't use templates or pre-made layouts. Each page is built from scratch around your audience, your goals, and the story you want your brand to tell, so your site looks like yours and not like a hundred others. That's what turns visitors into customers and gives you a foundation you can grow on.
 

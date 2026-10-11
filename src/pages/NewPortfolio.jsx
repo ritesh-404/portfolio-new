@@ -12,7 +12,7 @@ import threadOtter from "../assets/new_portfolio/thread_otter_newPortfolio.webp"
 
 /* ---------- edit these ---------- */
 const EMAIL = "workwithriteshhh@gmail.com";
-const RESUME = "/resume.pdf"; // put the file in /public
+const RESUME = "/ritesh_resume.pdf"; // put the file in /public
 
 const socials = [
   { label: "twitter", href: "https://x.com/Riteshxdev", icon: "x" },
@@ -767,6 +767,185 @@ function fallbackCopy(text) {
   return ok;
 }
 
+/* ---------- little cat + live India time ---------- */
+function useISTTime() {
+  const get = () =>
+    new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+      .format(new Date())
+      .replace(/\s/g, "")
+      .toLowerCase(); // "10:49am"
+
+  const [time, setTime] = useState(get);
+  useEffect(() => {
+    const id = setInterval(() => setTime(get()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function Cat() {
+  const svgRef = useRef(null);
+  const eyesRef = useRef(null);
+  const [blink, setBlink] = useState(false);
+  const [ear, setEar] = useState(null); // null | "l" | "r"
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timers = new Set();
+    let alive = true;
+    let lastMove = -Infinity; // last time the cursor moved
+    const later = (fn, ms) => {
+      const id = setTimeout(() => {
+        timers.delete(id);
+        if (alive) fn();
+      }, ms);
+      timers.add(id);
+    };
+    const r = (a, b) => a + Math.random() * (b - a);
+
+    // move the eyes directly on the DOM (no re-render on every mouse move)
+    const setGaze = (x, y, fast) => {
+      const el = eyesRef.current;
+      if (!el) return;
+      el.style.transition = fast
+        ? "transform 120ms ease-out"
+        : "transform 380ms cubic-bezier(0.3, 0.7, 0.3, 1)";
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    };
+
+    // follow the cursor (mouse / pen only, same as the pixel trail)
+    const onMove = (e) => {
+      if (e.pointerType === "touch") return;
+      const svg = svgRef.current;
+      if (!svg) return;
+      lastMove = performance.now();
+
+      const box = svg.getBoundingClientRect();
+      const dx = e.clientX - (box.left + box.width / 2);
+      const dy = e.clientY - (box.top + box.height / 2);
+      const dist = Math.hypot(dx, dy) || 1;
+      const strength = Math.min(dist / 60, 1); // full look at just 60px away
+      setGaze((dx / dist) * 4 * strength, (dy / dist) * 3 * strength, true);
+    };
+
+    // when the cursor is idle, eyes look around on their own again
+    const look = () => {
+      if (performance.now() - lastMove > 2500) {
+        if (Math.random() < 0.3) setGaze(0, 0, false);
+        else setGaze(r(-3.5, 3.5), r(-2.5, 2.5), false);
+      }
+      later(look, r(1200, 3200));
+    };
+
+    const doBlink = () => {
+      setBlink(true);
+      later(() => setBlink(false), 130);
+      if (Math.random() < 0.2) {
+        later(() => setBlink(true), 260);
+        later(() => setBlink(false), 390);
+      }
+      later(doBlink, r(2500, 6000));
+    };
+
+    const twitch = () => {
+      setEar(Math.random() < 0.5 ? "l" : "r");
+      later(() => setEar(null), 160);
+      later(twitch, r(4000, 9000));
+    };
+
+    window.addEventListener("pointermove", onMove);
+    later(look, 1000);
+    later(doBlink, 2000);
+    later(twitch, 3000);
+
+    return () => {
+      alive = false;
+      timers.forEach(clearTimeout);
+      window.removeEventListener("pointermove", onMove);
+    };
+  }, []);
+
+  const earStyle = (side, deg) => ({
+    transformBox: "fill-box",
+    transformOrigin: "50% 100%",
+    transform: ear === side ? `rotate(${deg}deg)` : "rotate(0deg)",
+    transition: "transform 140ms ease-out",
+  });
+
+  return (
+    <svg
+      ref={svgRef}
+      width="28"
+      height="32"
+      viewBox="0 0 33 38"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="text-[#6e6e6e]"
+    >
+      {/* cheeks */}
+      <path
+        d="M9.50207 18.082C9.50207 18.082 -0.0115643 23.0655 0.521601 28.3726C1.00213 33.1557 9.50207 36.7917 9.50207 36.7917"
+        stroke="currentColor"
+      />
+      <path
+        d="M23.1386 18.082C23.1386 18.082 32.6522 23.0655 32.119 28.3726C31.6385 33.1557 23.1386 36.7917 23.1386 36.7917"
+        stroke="currentColor"
+      />
+
+      {/* eyes: the group moves to look around, each eye squeezes to blink */}
+      <g ref={eyesRef} className="text-[#dadada]">
+        {[6.28825, 16.8996].map((cx) => (
+          <ellipse
+            key={cx}
+            cx={cx}
+            cy="25.9792"
+            rx="1.28629"
+            ry="1.65308"
+            fill="currentColor"
+            style={{
+              transformBox: "fill-box",
+              transformOrigin: "center",
+              transform: blink ? "scale(1.1, 0.1)" : "scale(1, 1)",
+              transition: "transform 90ms ease-out",
+            }}
+          />
+        ))}
+      </g>
+
+      {/* ears */}
+      <path
+        style={earStyle("r", 8)}
+        d="M22.4844 16.3909C22.4844 16.3909 23.3461 13.7855 23.4687 12.0525C23.7888 7.53143 19.6348 1.09814 19.6348 1.09814C19.6348 1.09814 17.0994 7.70347 17.444 12.0525C17.5802 13.7715 18.2655 16.3909 18.2655 16.3909"
+        stroke="currentColor"
+      />
+      <path
+        style={earStyle("l", -8)}
+        d="M9.75666 17.1704C9.75666 17.1704 8.2771 14.8592 7.72944 13.2105C6.30068 8.90916 8.73371 1.64809 8.73371 1.64809C8.73371 1.64809 12.8246 7.42069 13.5669 11.7197C13.8602 13.419 13.8443 16.1265 13.8443 16.1265"
+        stroke="currentColor"
+      />
+    </svg>
+  );
+}
+
+function LocalTime() {
+  const time = useISTTime();
+  return (
+    <section className={`${col} pb-16 pt-10 ${line}`}>
+      <div className="flex items-baseline justify-center gap-3 text-base text-[#6e6e6e]">
+        <Cat />
+        <span>{time} in Mumbai, India</span>
+      </div>
+    </section>
+  );
+}
+
 export default function NewPortfolio() {
   const [copyState, setCopyState] = useState("idle"); // idle | done | fail
   const navLinksCss =
@@ -827,10 +1006,13 @@ export default function NewPortfolio() {
             Home
           </a>
           <a href="#work" className={`${navLinksCss}`}>
-            Work
+            Case studies
           </a>
           <a href="#contact" className={`${navLinksCss}`}>
             Contact me
+          </a>
+          <a href="#whyme" className={`${navLinksCss}`}>
+            Why me ?
           </a>
           <a href={RESUME} download className={`${navLinksCss}`}>
             Resume
@@ -868,9 +1050,8 @@ export default function NewPortfolio() {
               <p>
                 I care deeply about craft and quality and I like to make people
                 feel something through my work. I'm obsessed with details and I
-                spend an unreasonable amount of time making sure they feel
-                right. I enjoy turning an ambiguous problem into something clear
-                and useful.
+                spend a good amount of time making sure they feel right. I enjoy
+                turning an ambiguous problem into something clear and useful.
               </p>
             </div>
           </section>
@@ -952,6 +1133,97 @@ export default function NewPortfolio() {
               ))}
             </div>
           </section>
+
+          {/* why me ?  */}
+          <section id="whyme" className={`${col} scroll-mt-6 pb-24 pt-4`}>
+            <h3 className="font-geist-sans text-base text-(--text-primary)">
+              <span className="mr-2">(^_^)</span> Why me ?
+            </h3>
+
+            <div className="mt-6 space-y-3 text-base leading-6 md:text-[16px] text-[#dadada]">
+              <p>
+                Professionally I&apos;m a{" "}
+                <span className="text-(--text-primary)">
+                  UI/UX product designer
+                </span>
+                , but I&apos;m not ONLY a designer. I&apos;m more of a{" "}
+                <span className="text-(--text-primary)">design engineer</span>.
+              </p>
+
+              <p>
+                I&apos;ve been learning how to code for the past 4-5 months from{" "}
+                <a
+                  href="https://www.theodinproject.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-(--text-primary) underline underline-offset-4"
+                >
+                  The Odin Project
+                </a>{" "}
+                and CSS stuffs from {" "}
+                <a
+                  href="https://www.joshwcomeau.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-(--text-primary) underline underline-offset-4"
+                >
+                  Josh Comeau
+                </a>{" "}
+                and there are so many great instructors whose writings and blogs
+                help me a lot to understand the coding part of designing and
+                after learning I decided to code for myself so i made this
+                portfolio of mine all by myself and claude helpming me along the
+                way and so i have developed a good understanding of frontend now.
+              </p>
+
+              <p>
+                I&apos;ll keep learning code. I love both design and code and
+                honestly I can&apos;t do only one thing.
+              </p>
+
+              <p>
+                Apart from product design, I can help the company with almost
+                any design work if it helps things move a little faster. Social
+                media posts, billboards, posters, pitch decks, ads, banners,
+                logos(i am not so good with logos though ;), thumbnails,
+                presentations and a lot of other stuff. From my heart I love
+                designing and being creative, so I enjoy all of it.
+              </p>
+
+              <p>So why might I be a good fit ?</p>
+
+              <ul className="list-disc space-y-2 pl-5 marker:text-[#6e6e6e]">
+                <li>
+                  <span className="text-(--text-primary)">
+                    Less back and forth.
+                  </span>{" "}
+                  UI/UX plus code means I can go from idea to a working screen
+                  myself.
+                </li>
+                <li>
+                  <span className="text-(--text-primary)">Better handoff.</span>{" "}
+                  I think about spacing, states and responsiveness like a
+                  developer would.
+                </li>
+                <li>
+                  <span className="text-(--text-primary)">
+                    One person, many problems.
+                  </span>{" "}
+                  Product design today, a launch post tomorrow, a billboard next
+                  week.
+                </li>
+                <li>
+                  <span className="text-(--text-primary)">
+                    I care about details.
+                  </span>{" "}
+                  Design or code, I spend a good amount of time making it feel
+                  right.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <LocalTime />
         </div>
       </main>
       <div className="fixed inset-x-0 bottom-0 z-0">
