@@ -947,6 +947,7 @@ function LocalTime() {
 }
 
 export default function NewPortfolio() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [copyState, setCopyState] = useState("idle"); // idle | done | fail
   const navLinksCss =
     "relative text-base font-dm-sans tracking-wide after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full";
@@ -999,24 +1000,92 @@ export default function NewPortfolio() {
       {/* nav */}
       <nav
         aria-label="Primary"
-        className={`sticky top-0 z-50 border-b bg-(--body-bg)/80 backdrop-blur py-5 ${line}`}
+        className={`sticky top-0 z-50 border-b bg-(--body-bg)/80 py-5 backdrop-blur ${line}`}
       >
-        <div className="flex w-full items-center justify-between px-8 text-[16px] md:justify-center md:gap-8 text-[#6e6e6e] md:px-0">
-          <a href="#" className={`${navLinksCss}`}>
-            Home
-          </a>
-          <a href="#work" className={`${navLinksCss}`}>
-            Case studies
-          </a>
-          <a href="#contact" className={`${navLinksCss}`}>
-            Contact me
-          </a>
-          <a href="#whyme" className={`${navLinksCss}`}>
-            Why me ?
-          </a>
-          <a href={RESUME} download className={`${navLinksCss}`}>
-            Resume
-          </a>
+        <div className="flex w-full items-center justify-between px-8 text-[16px] text-[#6e6e6e] md:justify-center md:gap-8 md:px-0">
+          {/* Keep the existing link row on desktop */}
+          <div className="hidden items-center gap-8 md:flex">
+            <a href="#" className={navLinksCss}>
+              Home
+            </a>
+            <a href="#work" className={navLinksCss}>
+              Case studies
+            </a>
+            <a href="#contact" className={navLinksCss}>
+              Contact me
+            </a>
+            <a href="#whyme" className={navLinksCss}>
+              Why me?
+            </a>
+            <a href={RESUME} download className={navLinksCss}>
+              Resume
+            </a>
+          </div>
+
+          {/* Hamburger appears on mobile */}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="ml-auto flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+          >
+            <span
+              className={`h-0.5 w-6 bg-current transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-current transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
+
+        {/* Collapsible mobile links */}
+        <div
+          className={`overflow-hidden transition-[max-height] duration-300 md:hidden ${
+            menuOpen ? "max-h-64" : "max-h-0"
+          }`}
+        >
+          <div className="flex flex-col gap-5 px-8 py-6 text-[16px] text-[#6e6e6e]">
+            <a
+              href="#"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+            </a>
+            <a
+              href="#work"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Case studies
+            </a>
+            <a
+              href="#contact"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact me
+            </a>
+            <a
+              href="#whyme"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Why me?
+            </a>
+            <a
+              href={RESUME}
+              download
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Resume
+            </a>
+          </div>
         </div>
       </nav>
 
@@ -1160,7 +1229,7 @@ export default function NewPortfolio() {
                 >
                   The Odin Project
                 </a>{" "}
-                and CSS stuffs from {" "}
+                and CSS stuffs from{" "}
                 <a
                   href="https://www.joshwcomeau.com/"
                   target="_blank"
@@ -1173,7 +1242,8 @@ export default function NewPortfolio() {
                 help me a lot to understand the coding part of designing and
                 after learning I decided to code for myself so i made this
                 portfolio of mine all by myself and claude helpming me along the
-                way and so i have developed a good understanding of frontend now.
+                way and so i have developed a good understanding of frontend
+                now.
               </p>
 
               <p>
