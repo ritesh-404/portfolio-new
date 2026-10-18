@@ -1,17 +1,17 @@
 import byteAskNew from "./byte-ask-new.png";
-import byteAskOld from "./byte-ask-old.png";
-import openSEONew from "./openSEO-new.png";
-import openSEOOld from "./openSEO-old.png";
-import temporalNew from "./temporal-new.png";
-import temporalOld from "./temporal-old.png";
-import threadOtterNew from "./thread-otter-new.png";
-import threadOtterOld from "./thread-otter-old.png";
-import tolgeeNew from "./tolgee-new.png";
-import tolgeeOld from "./tolgee-old.png";
-import typaniNew from "./typani-new.png";
-import typaniOld from "./typani-old.png";
-import hyperProbeNew1 from "./hyperprobe-1-new.png";
-import hyperProbeOld1 from "./hyperprobe-1-old.png";
+import byteAskOld from "./byte-ask-old.webp";
+import openSEONew from "./openSEO-new.webp";
+import openSEOOld from "./openSEO-old.webp";
+import temporalNew from "./temporal-new.webp";
+import temporalOld from "./temporal-old.webp";
+import threadOtterNew from "./thread-otter-new.webp";
+import threadOtterOld from "./thread-otter-old.webp";
+import tolgeeNew from "./tolgee-new.webp";
+import tolgeeOld from "./tolgee-old.webp";
+import typaniNew from "./typani-new.webp";
+import typaniOld from "./typani-old.webp";
+import hyperProbeNew1 from "./hyperprobe-1-new.webp";
+import hyperProbeOld1 from "./hyperprobe-1-old.webp";
 
 export {
   byteAskNew,

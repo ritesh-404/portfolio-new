@@ -1157,10 +1157,6 @@ export default function NewPortfolio() {
             id="work"
             className={`${col} scroll-mt-6 pb-24 pt-16 md:pt-20`}
           >
-            <h3 className="font-geist-sans text-base text-(--text-primary)">
-              <span className="mr-2">(+_+)</span> Selected works
-            </h3>
-
             <div className="mt-8 flex flex-col gap-14 md:gap-16">
               {works.map((w) => (
                 <article key={w.title}>
@@ -1190,10 +1186,7 @@ export default function NewPortfolio() {
                   </p>
                   <a
                     href={w.href}
-                    className="relative mt-4 inline-flex w-fit items-center gap-1 whitespace-nowrap text-lg text-(--text-primary) hover:opacity-70
-    after:absolute after:bottom-0 after:left-0 after:h-[1px]
-    after:w-0 after:bg-current after:transition-all
-    after:duration-300 hover:after:w-full"
+                    className={`inline-flex h-8 cursor-pointer items-center gap-2 rounded-[8px] border border-(--border-color) hover:bg-(--card-bg) pl-2 pr-4 py-4 text-base text-(--text-primary) transition-colors bg-(--border-color) mt-4 w-fit whitespace-nowrap`}
                   >
                     Case study
                     {icons.chevron}

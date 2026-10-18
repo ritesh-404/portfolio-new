@@ -268,7 +268,7 @@ const SelectedWorks = () => {
   return (
     <section className="w-full">
       <div className="mb-10">
-        <SectionHeading className="mb-0">(+_+) Selected works</SectionHeading>
+        <SectionHeading className="mb-0">[ Selected works ]</SectionHeading>
       </div>
 
       <div className="space-y-28">

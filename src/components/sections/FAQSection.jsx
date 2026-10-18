@@ -7,7 +7,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 const faqs = [
   {
     question: "How much does a project cost?",
-    answer: `Design starts at $600 and development at $700. Book both together and the full package is $1,100, saving you $200.
+    answer: `Design starts at $800 and  design + development at $1500 for landing pages.
 
 Every project is custom-designed around your business and your brand. I don't use templates or pre-made layouts. Each page is built from scratch around your audience, your goals, and the story you want your brand to tell, so your site looks like yours and not like a hundred others. That's what turns visitors into customers and gives you a foundation you can grow on.
 
@@ -21,7 +21,7 @@ That includes landing pages, marketing websites, app screens, and design systems
   },
   {
     question: "Can I book just design or just development?",
-    answer: `Yes. Design ($800) and development ($900) can be booked separately.
+    answer: `Yes. Design ($800) and development ($800) can be booked separately.
 
 Booking both together is $1,500 and gives you one person carrying the project from first sketch to live site, with no handoff gaps.`,
   },
@@ -104,7 +104,7 @@ export default function FAQSection() {
       <div className="mb-10 md:mb-12">
         <SectionHeading className="mb-0">
           {" "}
-          ( ^_^ ) Frequently asked questions
+          [ Frequently asked questions ]
         </SectionHeading>
       </div>
 
