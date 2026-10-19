@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Shader, FlowingGradient } from "shaders/react";
 
 import temporalBig from "../assets/new_portfolio/temporal-newPortfolio_big.png";
 import typaniBig from "../assets/new_portfolio/typani-newPortfolio_big.png";
@@ -70,13 +71,15 @@ const colors = {
 };
 
 /* ---------- shared styles (change once, applies everywhere) ---------- */
-const col = "mx-auto w-full max-w-[600px] px-6 md:px-0"; // content column
 const line = "border-(--border-color)"; // dividers
+
+// bento card shell (used by WorkCard, the contact card and the time card)
+const card = "rounded-2xl border border-white/10 bg-[#1b1b1d] p-2";
 
 // Compact on mobile and stretches to fill each row (so pills pair up).
 // From `sm` (640px) up it keeps the original look.
 const pill =
-  "inline-flex h-8 cursor-pointer items-center gap-2 rounded-[8px] border border-(--border-color) bg-(--card-bg) pl-2 pr-4 py-4 text-base text-(--text-primary) transition-colors hover:bg-(--border-color)";
+  "inline-flex h-8 w-fit cursor-pointer items-center gap-2 whitespace-nowrap rounded-[8px] border border-white/10 bg-white/10 py-4 pl-2 pr-4 text-base text-(--text-primary) transition-colors hover:bg-white/20";
 
 /* --------------------------------------------------------------------- */
 
@@ -316,13 +319,13 @@ const RAY_TRAVEL = [16, 26]; // how far lines fly (min, max) px
 const RAY_LIFE = [380, 520]; // ms
 
 const PALETTE = [
-  ["#7c3aed", 26],
-  ["#a855f7", 22],
-  ["#d946ef", 16],
-  ["#f472b6", 12],
-  ["#22d3ee", 12],
-  ["#67e8f9", 7],
-  ["#ffffff", 5],
+  ["#ffe8d6", 24], // cream
+  ["#ffb4a2", 18], // light salmon
+  ["#ff6b5e", 18], // coral red
+  ["#f43f5e", 14], // rose crimson
+  ["#fbbf24", 12], // amber gold
+  ["#fb7185", 8], // soft pink
+  ["#ffffff", 6], // white sparkle
 ];
 const TOTAL_WEIGHT = PALETTE.reduce((s, [, w]) => s + w, 0);
 
@@ -602,72 +605,45 @@ function useClickSound() {
   }, []);
 }
 
-/* ---------- hero sections marquee (fast cruise, short slowdowns, motion blur) ---------- */
-const CRUISE_MIN = 900; // px/s, slowest cruising speed
-const CRUISE_MAX = 1400; // px/s, fastest cruising speed
-const SLOW_SPEED = 90; // px/s, speed during the brief slowdown
-const CRUISE_TIME = [3000, 6000]; // ms between slowdowns (min, max)
-const SLOW_TIME = [1200, 2200]; // ms the slowdown lasts (min, max)
-const EASE_UP = 2.2; // how quickly it accelerates (higher = snappier)
-const EASE_DOWN = 4.5; // how quickly it brakes
-const MAX_BLUR = 14; // px of horizontal blur at full speed
-
-const rand = ([a, b]) => a + Math.random() * (b - a);
+/* ---------- slow, linear hero marquee ---------- */
+const MARQUEE_SPEED = 22; // pixels per second; lower = slower
 
 function useVariableMarquee(trackRef, blurRef) {
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let x = 0;
-    let speed = SLOW_SPEED;
-    let target = CRUISE_MIN;
-    let slowing = false;
-    let last = performance.now();
-    let nextPhase = last + rand(CRUISE_TIME);
-    let nextWobble = last;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    let distance = 0;
+    let lastTime = null;
     let raf = 0;
 
+    // Keep the screenshots sharp instead of blurring during movement.
+    if (blurRef.current) {
+      blurRef.current.setAttribute("stdDeviation", "0 0");
+    }
+
     const tick = (now) => {
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
+      if (lastTime !== null) {
+        const elapsed = (now - lastTime) / 1000;
+        const halfWidth = track.scrollWidth / 2;
 
-      // switch between cruising and a short slowdown
-      if (now > nextPhase) {
-        slowing = !slowing;
-        nextPhase = now + rand(slowing ? SLOW_TIME : CRUISE_TIME);
+        if (halfWidth > 0) {
+          distance = (distance + MARQUEE_SPEED * elapsed) % halfWidth;
+
+          track.style.transform = `translate3d(${-distance}px, 0, 0)`;
+        }
       }
 
-      if (slowing) {
-        target = SLOW_SPEED;
-      } else if (now > nextWobble) {
-        // while cruising, vary the speed a little so it feels alive
-        target = CRUISE_MIN + Math.random() * (CRUISE_MAX - CRUISE_MIN);
-        nextWobble = now + 700 + Math.random() * 900;
-      }
-
-      // brake faster than it accelerates
-      const ease = target < speed ? EASE_DOWN : EASE_UP;
-      speed += (target - speed) * (1 - Math.exp(-dt * ease));
-      x -= speed * dt;
-
-      // the track holds the images twice, so wrapping at half width is seamless
-      const half = track.scrollWidth / 2;
-      if (half) x = ((x % half) - half) % half;
-
-      track.style.transform = `translate3d(${x}px,0,0)`;
-
-      // blur strength follows speed (horizontal only)
-      if (blurRef.current) {
-        const blur = Math.min(speed / CRUISE_MAX, 1) * MAX_BLUR;
-        blurRef.current.setAttribute("stdDeviation", `${blur.toFixed(2)} 0`);
-      }
-
+      lastTime = now;
       raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);
+
     return () => cancelAnimationFrame(raf);
   }, [trackRef, blurRef]);
 }
@@ -678,7 +654,7 @@ function HeroMarquee({ images }) {
   useVariableMarquee(trackRef, blurRef);
 
   return (
-    <div className="flex aspect-[4/3] w-full items-center overflow-hidden rounded-lg border border-(--border-color) md:aspect-[16/11]">
+    <div className="flex aspect-[4/3] w-full items-center overflow-hidden rounded-lg border border-white/10 bg-[#252528] md:aspect-[21/8]">
       {/* horizontal-only blur filter */}
       <svg width="0" height="0" className="absolute" aria-hidden="true">
         <filter id="hero-motion-blur" x="-5%" y="0" width="110%" height="100%">
@@ -698,11 +674,44 @@ function HeroMarquee({ images }) {
             alt={i < images.length ? "Hero section redesign" : ""}
             aria-hidden={i >= images.length}
             draggable={false}
-            className="mr-4 h-36 w-auto shrink-0 rounded-md border border-(--border-color) md:h-44"
+            className="mr-4 h-36 w-auto shrink-0 rounded-md border border-(--border-color) md:h-56"
           />
         ))}
       </div>
     </div>
+  );
+}
+
+/* ---------- bento work card ---------- */
+function WorkCard({ w, className = "" }) {
+  return (
+    <article className={`${card} flex flex-col ${className}`}>
+      <a href={w.href} className="block">
+        {w.images ? (
+          <HeroMarquee images={w.images} />
+        ) : (
+          <div className="flex aspect-[4/3] w-full items-start justify-center overflow-hidden rounded-xl border border-white/10 bg-[#252528] px-[9%] pt-[7%]">
+            <img
+              src={w.image}
+              alt={`${w.title} landing page`}
+              loading="lazy"
+              className="h-auto w-full shrink-0 rounded-t-md border border-b-0 border-white/10"
+            />
+          </div>
+        )}
+      </a>
+
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="font-geist-sans text-xl text-white">{w.title}</h3>
+        <p className="mt-2 text-[16px] leading-6 text-[#dadada]">
+          {w.description}
+        </p>
+        <a href={w.href} className={`${pill} mt-4`}>
+          Case study
+          {icons.chevron}
+        </a>
+      </div>
+    </article>
   );
 }
 
@@ -711,7 +720,7 @@ function ContactFooter() {
     <footer
       id="footer"
       className="relative flex min-h-[320px] items-center justify-center
-        border-t border-(--border-color) bg-black px-5 py-16
+        border-t border-(--border-color) bg-(--body-bg) px-5 py-16
         md:min-h-[320px] md:px-8"
     >
       <div className="mx-auto w-full max-w-[700px] text-center">
@@ -937,12 +946,10 @@ function Cat() {
 function LocalTime() {
   const time = useISTTime();
   return (
-    <section className={`${col} pb-16 pt-10 ${line}`}>
-      <div className="flex items-baseline justify-center gap-3 text-base text-[#6e6e6e]">
-        <Cat />
-        <span>{time} in Mumbai, India</span>
-      </div>
-    </section>
+    <div className="flex items-center justify-center gap-3 text-base text-[#6e6e6e]">
+      <Cat />
+      <span>{time} in Mumbai, India</span>
+    </div>
   );
 }
 
@@ -951,6 +958,8 @@ export default function NewPortfolio() {
   const [copyState, setCopyState] = useState("idle"); // idle | done | fail
   const navLinksCss =
     "relative text-base font-dm-sans tracking-wide after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full";
+  const navItem =
+    "rounded-full px-4 py-2 font-dm-sans tracking-wide text-white/90 transition-colors hover:bg-white/15 hover:text-white";
   const trailRef = useRef(null);
   useCursorTrail(trailRef);
   useClickSound();
@@ -988,36 +997,47 @@ export default function NewPortfolio() {
   return (
     <div
       style={colors}
-      className="relative isolate min-h-screen bg-(--body-bg)
-    font-geist-sans text-(--text-primary) select-none"
+      className="relative isolate min-h-screen overflow-x-clip bg-[#101010] font-geist-sans text-(--text-primary) select-none"
     >
+      {/* Fixed full-viewport shader. FlowingGradient takes numeric speed/distortion props. */}
+      <Shader className="pointer-events-none fixed inset-0 z-0">
+        <FlowingGradient
+          colorA="#3A001B"
+          colorB="#E11D48"
+          colorC="#F97346"
+          colorD="#F4A582"
+          colorSpace="oklch"
+          speed={0.32}
+          distortion={0.58}
+          seed={7}
+        />
+      </Shader>
+
+      {/* Decorative pixel trail follows the cursor without React re-renders. */}
       <canvas
         ref={trailRef}
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-50 h-full w-full"
       />
 
-      {/* nav */}
+      {/* nav: direct child of the root (outside the hero's stacking context)
+          so z-[60] really sits above the pixel-trail canvas and the page */}
       <nav
         aria-label="Primary"
-        className={`sticky top-0 z-50 border-b bg-(--body-bg)/80 py-5 backdrop-blur ${line}`}
+        className="fixed bottom-4 left-1/2 z-[60] w-[calc(100%-2rem)] max-w-[560px] -translate-x-1/2 rounded-full border border-white/25 bg-white/[0.12] px-2 py-1.5 shadow-[0_10px_30px_rgba(60,0,20,0.22),inset_0_1px_0_rgba(255,255,255,0.35)] backdrop-blur-2xl backdrop-saturate-150 sm:w-fit"
       >
-        <div className="flex w-full items-center justify-between px-8 text-[16px] text-[#6e6e6e] md:justify-center md:gap-8 md:px-0">
-          {/* Keep the existing link row on desktop */}
-          <div className="hidden items-center gap-8 md:flex">
-            <a href="#" className={navLinksCss}>
-              Home
-            </a>
-            <a href="#work" className={navLinksCss}>
-              Case studies
-            </a>
-            <a href="#contact" className={navLinksCss}>
-              Contact me
-            </a>
-            <a href="#whyme" className={navLinksCss}>
-              Why me?
-            </a>
-            <a href={RESUME} download className={navLinksCss}>
+        <div className="flex w-full items-center justify-between px-2 text-[15px] text-white/90 md:justify-center md:px-0">
+          <div className="hidden items-center gap-1 md:flex">
+            {[
+              ["Home", "#"],
+              ["Case studies", "#work"],
+              ["Contact me", "#contact"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} className={navItem}>
+                {label}
+              </a>
+            ))}
+            <a href={RESUME} download className={navItem}>
               Resume
             </a>
           </div>
@@ -1048,7 +1068,7 @@ export default function NewPortfolio() {
             menuOpen ? "max-h-64" : "max-h-0"
           }`}
         >
-          <div className="flex flex-col gap-5 px-8 py-6 text-[16px] text-[#6e6e6e]">
+          <div className="flex flex-col gap-5 px-4 py-6 text-[15px] text-white/80 sm:px-6">
             <a
               href="#"
               className={navLinksCss}
@@ -1071,13 +1091,6 @@ export default function NewPortfolio() {
               Contact me
             </a>
             <a
-              href="#whyme"
-              className={navLinksCss}
-              onClick={() => setMenuOpen(false)}
-            >
-              Why me?
-            </a>
-            <a
               href={RESUME}
               download
               className={navLinksCss}
@@ -1089,209 +1102,127 @@ export default function NewPortfolio() {
         </div>
       </nav>
 
-      <main className="relative z-10 mb-[320px] bg-(--body-bg)">
-        <div className="mx-auto w-[calc(100%-1.5rem)] max-w-[800px] border-x border-(--border-color) md:px-8">
-          {/* intro */}
-          <section className={`${col} pt-12 md:pt-14`}>
-            <h2 className="font-serif text-2xl text-(--text-primary) md:text-[26px]">
+      {/* Full-bleed, responsive hero: the gradient is visible behind the content. */}
+      <section
+        id="home"
+        className="relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+        style={{ "--pointer-x": "50%", "--pointer-y": "50%" }}
+        onPointerMove={(event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          event.currentTarget.style.setProperty(
+            "--pointer-x",
+            `${event.clientX - rect.left}px`,
+          );
+          event.currentTarget.style.setProperty(
+            "--pointer-y",
+            `${event.clientY - rect.top}px`,
+          );
+        }}
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/25 via-black/5 to-black/20"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[2]"
+          style={{
+            background:
+              "radial-gradient(circle 520px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255,255,255,0.13), transparent 72%)",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 mt-16 px-6 pb-14 sm:px-10 md:px-14 lg:px-20">
+          <section className="w-full max-w-3xl pb-8 sm:pb-12">
+            <div className="mb-5 inline-flex w-fit items-center gap-2.5 rounded-full border border-white/50 bg-[#101010]/15 px-4 py-2 text-[14px] text-white/85 backdrop-blur-xl sm:text-[15px]">
+              <span className="relative flex size-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#4ade80] opacity-60 motion-safe:animate-ping" />
+                <span className="relative inline-flex size-2 rounded-full bg-[#4ade80]" />
+              </span>
+              Available for Product Design roles
+            </div>
+            <h1 className="max-w-4xl text-balance font-geist-sans text-5xl font-bold leading-[0.94] tracking-[-0.065em] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.25)] sm:text-6xl md:text-7xl lg:text-8xl">
               Ritesh Nishad
-            </h2>
-            <p className={`mt-1 font-geist-sans text-base text-[#6e6e6e]`}>
+            </h1>
+            <p className="ml-2 text-lg text-white/85 drop-shadow-sm sm:text-2xl">
               Product designer (UI/UX)
             </p>
 
-            <div
-              className={`mt-6 space-y-3 text-base leading-6 md:text-[16px] text-[#dadada]`}
-            >
+            <div className="mt-7 max-w-2xl space-y-3 text-sm leading-6 text-white/90 drop-shadow-sm sm:text-base sm:leading-7">
               <p>
                 I&apos;m Ritesh, who loves to think a lot. I am a{" "}
-                <span className="text-(--text-primary)">product designer</span>{" "}
+                <span className="font-semibold text-white">
+                  product designer
+                </span>{" "}
                 from{" "}
-                <span className="inline-flex items-baseline gap-1.5 align-middle text-(--text-primary)">
+                <span className="inline-flex items-baseline gap-1.5 align-middle font-semibold text-white">
                   {icons.india}
                   INDIA
                 </span>
               </p>
               <p>
                 I make software interfaces more meaningful, visually appealing,
-                delightful, and interfaces that are obvious and easy to use.
-              </p>
-              <p>
-                I care deeply about craft and quality and I like to make people
-                feel something through my work. I'm obsessed with details and I
-                spend a good amount of time making sure they feel right. I enjoy
-                turning an ambiguous problem into something clear and useful.
+                delightful, obvious and easy to use. I care deeply about craft
+                and quality. I enjoy turning ambiguous problems into clear,
+                useful experiences and making the details feel right.
               </p>
             </div>
           </section>
+        </div>
+      </section>
 
-          {/* contact */}
-          <section id="contact" className={`${col} scroll-mt-6 pt-12`}>
-            <h3 className="font-geist-sans text-base text-(--text-primary)">
-              Contact me :
-            </h3>
-            {/* order is chosen so the pills pair up two per row on phones */}
-            <div className="mt-4 flex w-full flex-wrap gap-3 sm:w-[80%]">
-              <button onClick={copyEmail} className={pill}>
-                {icons.mail}
-                {copyState === "done"
-                  ? "Copied!"
-                  : copyState === "fail"
-                    ? "Copy failed"
-                    : "Copy email"}
-              </button>
+      {/* The rest of the portfolio stays on a dark, readable surface (bento grid). */}
+      <main className="relative z-10 bg-(--body-bg)">
+        <div className="mx-auto w-[90%] pb-24 pt-16 lg:w-[80%]">
+          <h2 id="work" className="scroll-mt-6">
+            . . . Selected works . . .
+          </h2>
 
-              {renderSocial(firstSocial)}
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-6">
+            <WorkCard w={works[0]} className="md:col-span-3" />
+            <WorkCard w={works[1]} className="md:col-span-3" />
+            <WorkCard w={works[2]} className="md:col-span-6" />
 
-              <a href={RESUME} download className={pill}>
-                {icons.file}
-                Download resume
-              </a>
+            {/* contact card */}
+            <section
+              id="contact"
+              className={`${card} scroll-mt-6 p-6 md:col-span-4`}
+            >
+              <h3 className="font-geist-sans text-base text-(--text-primary)">
+                Contact me :
+              </h3>
+              {/* order is chosen so the pills pair up two per row on phones */}
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button onClick={copyEmail} className={pill}>
+                  {icons.mail}
+                  {copyState === "done"
+                    ? "Copied!"
+                    : copyState === "fail"
+                      ? "Copy failed"
+                      : "Copy email"}
+                </button>
 
-              {otherSocials.map(renderSocial)}
+                {renderSocial(firstSocial)}
+
+                <a href={RESUME} download className={pill}>
+                  {icons.file}
+                  Download resume
+                </a>
+
+                {otherSocials.map(renderSocial)}
+              </div>
+            </section>
+
+            {/* local time card */}
+            <div
+              className={`${card} flex items-center justify-center p-6 md:col-span-2`}
+            >
+              <LocalTime />
             </div>
-          </section>
-
-          {/* selected works */}
-          <section
-            id="work"
-            className={`${col} scroll-mt-6 pb-24 pt-16 md:pt-20`}
-          >
-            <div className="mt-8 flex flex-col gap-14 md:gap-16">
-              {works.map((w) => (
-                <article key={w.title}>
-                  <a
-                    href={w.href}
-                    className="block rounded-xl border bg-[#0b0b0b] border-(--border-color) p-1"
-                  >
-                    {w.images ? (
-                      <HeroMarquee images={w.images} />
-                    ) : (
-                      <div className="flex aspect-[4/3] w-full items-start justify-center overflow-hidden rounded-lg border border-(--border-color) px-[9%] pt-[7%] md:aspect-[16/11]">
-                        <img
-                          src={w.image}
-                          alt={`${w.title} landing page`}
-                          loading="lazy"
-                          className="h-auto w-full shrink-0 rounded-t-md border border-b-0 border-(--border-color)"
-                        />
-                      </div>
-                    )}
-                  </a>
-
-                  <h3 className="mt-6 font-geist-sans text-xl text-white">
-                    {w.title}
-                  </h3>
-                  <p className="mt-2 text-[16px] leading-6 text-[#dadada]">
-                    {w.description}
-                  </p>
-                  <a
-                    href={w.href}
-                    className={`inline-flex h-8 cursor-pointer items-center gap-2 rounded-[8px] border border-(--border-color) hover:bg-(--card-bg) pl-2 pr-4 py-4 text-base text-(--text-primary) transition-colors bg-(--border-color) mt-4 w-fit whitespace-nowrap`}
-                  >
-                    Case study
-                    {icons.chevron}
-                  </a>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          {/* why me ?  */}
-          <section id="whyme" className={`${col} scroll-mt-6 pb-24 pt-4`}>
-            <h3 className="font-geist-sans text-base text-(--text-primary)">
-              <span className="mr-2">(^_^)</span> Why me ?
-            </h3>
-
-            <div className="mt-6 space-y-3 text-base leading-6 md:text-[16px] text-[#dadada]">
-              <p>
-                Professionally I&apos;m a{" "}
-                <span className="text-(--text-primary)">
-                  UI/UX product designer
-                </span>
-                , but I&apos;m not ONLY a designer. I&apos;m more of a{" "}
-                <span className="text-(--text-primary)">design engineer</span>.
-              </p>
-
-              <p>
-                I&apos;ve been learning how to code for the past 4-5 months from{" "}
-                <a
-                  href="https://www.theodinproject.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-(--text-primary) underline underline-offset-4"
-                >
-                  The Odin Project
-                </a>{" "}
-                and CSS stuffs from{" "}
-                <a
-                  href="https://www.joshwcomeau.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-(--text-primary) underline underline-offset-4"
-                >
-                  Josh Comeau
-                </a>{" "}
-                and there are so many great instructors whose writings and blogs
-                help me a lot to understand the coding part of designing and
-                after learning I decided to code for myself so i made this
-                portfolio of mine all by myself and claude helpming me along the
-                way and so i have developed a good understanding of frontend
-                now.
-              </p>
-
-              <p>
-                I&apos;ll keep learning code. I love both design and code and
-                honestly I can&apos;t do only one thing.
-              </p>
-
-              <p>
-                Apart from product design, I can help the company with almost
-                any design work if it helps things move a little faster. Social
-                media posts, billboards, posters, pitch decks, ads, banners,
-                logos(i am not so good with logos though ;), thumbnails,
-                presentations and a lot of other stuff. From my heart I love
-                designing and being creative, so I enjoy all of it.
-              </p>
-
-              <p>So why might I be a good fit ?</p>
-
-              <ul className="list-disc space-y-2 pl-5 marker:text-[#6e6e6e]">
-                <li>
-                  <span className="text-(--text-primary)">
-                    Less back and forth.
-                  </span>{" "}
-                  UI/UX plus code means I can go from idea to a working screen
-                  myself.
-                </li>
-                <li>
-                  <span className="text-(--text-primary)">Better handoff.</span>{" "}
-                  I think about spacing, states and responsiveness like a
-                  developer would.
-                </li>
-                <li>
-                  <span className="text-(--text-primary)">
-                    One person, many problems.
-                  </span>{" "}
-                  Product design today, a launch post tomorrow, a billboard next
-                  week.
-                </li>
-                <li>
-                  <span className="text-(--text-primary)">
-                    I care about details.
-                  </span>{" "}
-                  Design or code, I spend a good amount of time making it feel
-                  right.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <LocalTime />
+          </div>
         </div>
       </main>
-      <div className="fixed inset-x-0 bottom-0 z-0">
-        <ContactFooter />
-      </div>
+      <ContactFooter />
     </div>
   );
 }

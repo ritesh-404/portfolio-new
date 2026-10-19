@@ -22,6 +22,7 @@
     "@fontsource/inter": "^5.3.0",
     "@fontsource/solway": "^5.3.0",
     "@fontsource/sora": "^5.3.0",
+    "@paper-design/shaders-react": "^0.0.81",
     "@tailwindcss/vite": "^4.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -31,6 +32,7 @@
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.11.0",
     "resend": "^6.20.0",
+    "shaders": "^4.0.4",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
     "wouter": "^3.10.0"
