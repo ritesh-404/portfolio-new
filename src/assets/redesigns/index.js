@@ -1,17 +1,15 @@
-import byteAskNew from "./byte-ask-new.png";
-import byteAskOld from "./byte-ask-old.webp";
-import openSEONew from "./openSEO-new.webp";
-import openSEOOld from "./openSEO-old.webp";
-import temporalNew from "./temporal-new.webp";
-import temporalOld from "./temporal-old.webp";
-import threadOtterNew from "./thread-otter-new.webp";
-import threadOtterOld from "./thread-otter-old.webp";
-import tolgeeNew from "./tolgee-new.webp";
-import tolgeeOld from "./tolgee-old.webp";
-import typaniNew from "./typani-new.webp";
-import typaniOld from "./typani-old.webp";
-import hyperProbeNew1 from "./hyperprobe-1-new.webp";
-import hyperProbeOld1 from "./hyperprobe-1-old.webp";
+import byteAskNew from "./byteask_new.png";
+import byteAskOld from "./byteask_old.webp";
+import openSEONew from "./openSEO_new.webp";
+import openSEOOld from "./openSEO_old.webp";
+import temporalNew from "./temporal_new.webp";
+import temporalOld from "./temporal_old.webp";
+import threadOtterNew from "./thread_otter_new.webp";
+import threadOtterOld from "./thread_otter_old.webp";
+import typaniOld from "./typani_old.webp";
+import typaniNew from "./typani_new.webp";
+import hyperProbeNew1 from "./hyperprove_new.webp";
+import hyperProbeOld1 from "./hyperprove_old.webp";
 
 export {
   byteAskNew,
@@ -22,10 +20,8 @@ export {
   temporalOld,
   threadOtterNew,
   threadOtterOld,
-  tolgeeNew,
-  tolgeeOld,
-  typaniNew,
   typaniOld,
+  typaniNew,
   hyperProbeNew1,
   hyperProbeOld1,
 };

@@ -1,0 +1,368 @@
+  {/* Fixed full-viewport shader. FlowingGradient takes numeric speed/distortion props. */}
+      {/* <Shader className="pointer-events-none fixed inset-0 z-0">
+        <FlowingGradient
+          colorA="#3A001B"
+          colorB="#E11D48"
+          colorC="#F97346"
+          colorD="#F4A582"
+          colorSpace="oklch"
+          speed={0.32}
+          distortion={0.58}
+          seed={7}
+        />
+      </Shader> */}
+
+      {/* Full-bleed, responsive hero: the gradient is visible behind the content. */}
+      {/* <section
+        id="home"
+        className="relative isolate flex flex-col overflow-hidden"
+        style={{ "--pointer-x": "50%", "--pointer-y": "50%" }}
+        onPointerMove={(event) => {
+          const rect = event.currentTarget.getBoundingClientRect();
+          event.currentTarget.style.setProperty(
+            "--pointer-x",
+            `${event.clientX - rect.left}px`,
+          );
+          event.currentTarget.style.setProperty(
+            "--pointer-y",
+            `${event.clientY - rect.top}px`,
+          );
+        }}
+      >
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 mt-16 px-6 pb-14 sm:px-10 md:px-14 lg:px-20">
+          <section className="w-full max-w-3xl pb-8 sm:pb-12">
+            <h1 className="max-w-4xl text-balance font-geist-sans text-5xl font-bold leading-[0.94] tracking-[-0.065em] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.25)] sm:text-6xl md:text-7xl lg:text-8xl">
+              Ritesh Nishad
+            </h1>
+            <p className="ml-2 text-lg text-white/85 drop-shadow-sm sm:text-2xl">
+              Product designer (UI/UX)
+            </p>
+
+            <div className="mt-7 max-w-2xl space-y-3 text-sm leading-6 text-white/90 drop-shadow-sm sm:text-base sm:leading-7">
+              <p>
+                I&apos;m Ritesh, who loves to think a lot. I am a{" "}
+                <span className="font-semibold text-white">
+                  product designer
+                </span>{" "}
+                from{" "}
+                <span className="inline-flex items-baseline gap-1.5 align-middle font-semibold text-white">
+                  {icons.india}
+                  INDIA
+                </span>
+              </p>
+              <p>
+                I make software interfaces more meaningful, visually appealing,
+                delightful, obvious and easy to use. I care deeply about craft
+                and quality. I enjoy turning ambiguous problems into clear,
+                useful experiences and making the details feel right.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section> */}
+
+  async function copyEmail() {
+    let ok = false;
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(EMAIL);
+        ok = true;
+      } catch {
+        ok = fallbackCopy(EMAIL);
+      }
+    } else {
+      ok = fallbackCopy(EMAIL);
+    }
+    setCopyState(ok ? "done" : "fail");
+    setTimeout(() => setCopyState("idle"), 1500);
+  }
+
+
+ // const [menuOpen, setMenuOpen] = useState(false);
+  // const [copyState, setCopyState] = useState("idle"); 
+  // const navLinksCss =
+  //   "relative text-base font-dm-sans tracking-wide after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full";
+  // const navItem =
+  //   "rounded-full px-4 py-2 font-dm-sans tracking-wide text-white/90 transition-colors hover:bg-white/15 hover:text-white";
+
+
+/* clipboard.writeText only exists on HTTPS / localhost, so fall back to
+   the old textarea + execCommand trick (works on http LAN testing too) */
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px"; // 16px stops iOS zoom
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, text.length);
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {
+    ok = false;
+  }
+  document.body.removeChild(ta);
+  return ok;
+}
+
+
+const icons = {
+  mail: (
+    <svg
+      className="text-[#1fdf72]"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9.94358 3.25H14.0564C15.8942 3.24998 17.3498 3.24997 18.489 3.40314C19.6614 3.56076 20.6104 3.89288 21.3588 4.64124C22.1071 5.38961 22.4392 6.33856 22.5969 7.51098C22.75 8.65019 22.75 10.1058 22.75 11.9436V12.0564C22.75 13.8942 22.75 15.3498 22.5969 16.489C22.4392 17.6614 22.1071 18.6104 21.3588 19.3588C20.6104 20.1071 19.6614 20.4392 18.489 20.5969C17.3498 20.75 15.8942 20.75 14.0564 20.75H9.94359C8.10583 20.75 6.65019 20.75 5.51098 20.5969C4.33856 20.4392 3.38961 20.1071 2.64124 19.3588C1.89288 18.6104 1.56076 17.6614 1.40314 16.489C1.24997 15.3498 1.24998 13.8942 1.25 12.0564V11.9436C1.24998 10.1058 1.24997 8.65019 1.40314 7.51098C1.56076 6.33856 1.89288 5.38961 2.64124 4.64124C3.38961 3.89288 4.33856 3.56076 5.51098 3.40314C6.65019 3.24997 8.10582 3.24998 9.94358 3.25ZM5.71085 4.88976C4.70476 5.02502 4.12511 5.27869 3.7019 5.7019C3.27869 6.12511 3.02502 6.70476 2.88976 7.71085C2.75159 8.73851 2.75 10.0932 2.75 12C2.75 13.9068 2.75159 15.2615 2.88976 16.2892C3.02502 17.2952 3.27869 17.8749 3.7019 18.2981C4.12511 18.7213 4.70476 18.975 5.71085 19.1102C6.73851 19.2484 8.09318 19.25 10 19.25H14C15.9068 19.25 17.2615 19.2484 18.2892 19.1102C19.2952 18.975 19.8749 18.7213 20.2981 18.2981C20.7213 17.8749 20.975 17.2952 21.1102 16.2892C21.2484 15.2615 21.25 13.9068 21.25 12C21.25 10.0932 21.2484 8.73851 21.1102 7.71085C20.975 6.70476 20.7213 6.12511 20.2981 5.7019C19.8749 5.27869 19.2952 5.02502 18.2892 4.88976C17.2615 4.75159 15.9068 4.75 14 4.75H10C8.09318 4.75 6.73851 4.75159 5.71085 4.88976ZM5.42383 7.51986C5.68901 7.20165 6.16193 7.15866 6.48014 7.42383L8.63903 9.22291C9.57199 10.0004 10.2197 10.5384 10.7666 10.8901C11.2959 11.2306 11.6549 11.3449 12 11.3449C12.3451 11.3449 12.7041 11.2306 13.2334 10.8901C13.7803 10.5384 14.428 10.0004 15.361 9.22291L17.5199 7.42383C17.8381 7.15866 18.311 7.20165 18.5762 7.51986C18.8413 7.83807 18.7983 8.31099 18.4801 8.57617L16.2836 10.4066C15.3973 11.1452 14.6789 11.7439 14.0448 12.1517C13.3843 12.5765 12.7411 12.8449 12 12.8449C11.2589 12.8449 10.6157 12.5765 9.95518 12.1517C9.32112 11.7439 8.60272 11.1452 7.71636 10.4066L5.51986 8.57617C5.20165 8.31099 5.15866 7.83807 5.42383 7.51986Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  file: (
+    <svg
+      className="text-[#e6772d]"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.8002 3.99998C4.8002 3.55815 5.15837 3.19998 5.6002 3.19998H14.8688L19.2002 7.53135V20C19.2002 20.4417 18.842 20.8 18.4002 20.8H5.6002C5.15837 20.8 4.8002 20.4417 4.8002 20V3.99998ZM5.6002 1.59998C4.27471 1.59998 3.2002 2.67449 3.2002 3.99998V20C3.2002 21.3254 4.27471 22.4 5.6002 22.4H18.4002C19.7256 22.4 20.8002 21.3254 20.8002 20V7.36566C20.8002 7.0474 20.6738 6.74218 20.4487 6.51713L15.7659 1.8343C15.6159 1.68426 15.4124 1.59998 15.2002 1.59998H5.6002ZM8.4002 11.2C7.95837 11.2 7.6002 11.5582 7.6002 12C7.6002 12.4418 7.95837 12.8 8.4002 12.8H15.6002C16.042 12.8 16.4002 12.4418 16.4002 12C16.4002 11.5582 16.042 11.2 15.6002 11.2H8.4002Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  linkedin: (
+    <svg
+      className="text-[#0A66C2]"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3.19961 1.59998C2.31596 1.59998 1.59961 2.31633 1.59961 3.19998V20.8C1.59961 21.6837 2.31596 22.4 3.19961 22.4H20.7996C21.6833 22.4 22.3996 21.6837 22.3996 20.8V3.19998C22.3996 2.31633 21.6833 1.59998 20.7996 1.59998H3.19961ZM4.87961 9.59998H7.91961V19.2H4.87961V9.59998ZM8.11961 6.40798C8.11961 7.35791 7.34955 8.12798 6.39961 8.12798C5.44969 8.12798 4.67961 7.35791 4.67961 6.40798C4.67961 5.45804 5.44969 4.68798 6.39961 4.68798C7.34955 4.68798 8.11961 5.45804 8.11961 6.40798ZM19.1996 13.3714C19.1996 10.4833 17.333 9.3605 15.4788 9.3605C14.8716 9.33058 14.2671 9.45788 13.7256 9.72969C13.3144 9.93609 12.8838 10.4083 12.5519 11.2296H12.4665V9.60068H9.59961V19.2075H12.6495V14.0979C12.6054 13.5746 12.7728 12.8982 13.1155 12.4958C13.4581 12.0933 13.9482 11.9972 14.3198 11.9484H14.4357C15.4056 11.9484 16.1254 12.5488 16.1254 14.0619V19.2075H19.1751L19.1996 13.3714Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  x: (
+    <svg
+      className="text-[#D1D5DB]"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M20.133 19.8478L14.2643 10.6247L20.0552 4.25438C20.1862 4.10674 20.2537 3.91343 20.2431 3.71636C20.2325 3.51929 20.1446 3.33435 19.9986 3.20161C19.8525 3.06888 19.66 2.99907 19.4628 3.00731C19.2657 3.01555 19.0797 3.10117 18.9452 3.24562L13.4289 9.31312L9.633 3.34781C9.56531 3.24127 9.47183 3.15353 9.36121 3.09274C9.25059 3.03194 9.12642 3.00004 9.00019 3H4.50019C4.36571 2.99993 4.2337 3.03603 4.11796 3.10449C4.00222 3.17296 3.90702 3.27129 3.84232 3.38918C3.77763 3.50707 3.74582 3.64018 3.75023 3.77458C3.75463 3.90898 3.7951 4.03973 3.86738 4.15313L9.73613 13.3753L3.94519 19.7503C3.87756 19.823 3.82503 19.9083 3.79063 20.0014C3.75623 20.0945 3.74065 20.1935 3.74479 20.2927C3.74894 20.3918 3.77272 20.4892 3.81477 20.5791C3.85681 20.669 3.91628 20.7496 3.98973 20.8164C4.06318 20.8831 4.14915 20.9346 4.24265 20.9679C4.33615 21.0012 4.43533 21.0156 4.53443 21.0103C4.63354 21.0049 4.7306 20.98 4.81999 20.9369C4.90938 20.8937 4.98932 20.8333 5.05519 20.7591L10.5714 14.6916L14.3674 20.6569C14.4356 20.7625 14.5293 20.8494 14.6399 20.9093C14.7505 20.9693 14.8744 21.0005 15.0002 21H19.5002C19.6345 21 19.7664 20.9638 19.882 20.8954C19.9976 20.827 20.0927 20.7288 20.1573 20.611C20.222 20.4933 20.2539 20.3604 20.2496 20.2261C20.2453 20.0918 20.205 19.9612 20.133 19.8478ZM15.4118 19.5L5.86613 4.5H8.58488L18.1343 19.5H15.4118Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  github: (
+    <svg
+      className="text-[#F0F6FC]"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g clipPath="url(#clip0_20_6732)">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.0983 -0.0513916C5.19104 -0.0513916 0.400391 4.73864 0.400391 10.6478C0.400391 15.3741 3.46565 19.3845 7.71708 20.7999C8.25238 20.8977 8.44744 20.5674 8.44744 20.2837C8.44744 20.0294 8.43824 19.3569 8.43299 18.4643C5.45705 19.1106 4.82916 17.0299 4.82916 17.0299C4.34247 15.7938 3.64102 15.4648 3.64102 15.4648C2.66963 14.8014 3.71459 14.8146 3.71459 14.8146C4.78844 14.8901 5.35328 15.9174 5.35328 15.9174C6.30761 17.552 7.85764 17.0798 8.46715 16.8059C8.56436 16.115 8.84086 15.6433 9.14627 15.3761C6.77064 15.1054 4.27286 14.1879 4.27286 10.0882C4.27286 8.91979 4.68992 7.96548 5.3743 7.21738C5.26396 6.94678 4.89682 5.85912 5.47938 4.38592C5.47938 4.38592 6.37722 4.09823 8.42117 5.4821C9.27435 5.245 10.1899 5.12678 11.0996 5.12218C12.0086 5.12678 12.9235 5.245 13.778 5.4821C15.8206 4.09823 16.7171 4.38592 16.7171 4.38592C17.301 5.85912 16.9339 6.94678 16.8242 7.21738C17.5099 7.96548 17.9236 8.91979 17.9236 10.0882C17.9236 14.1985 15.4219 15.1029 13.0391 15.3675C13.4227 15.6979 13.7649 16.3508 13.7649 17.3491C13.7649 18.7789 13.7517 19.9329 13.7517 20.2837C13.7517 20.57 13.9448 20.903 14.4873 20.7985C18.7354 19.3805 21.7981 15.3734 21.7981 10.6478C21.7981 4.73864 17.0074 -0.0513916 11.0983 -0.0513916Z"
+          fill="currentColor"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_20_6732">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  india: (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M13.3337 18.3333V9.16663M6.66699 9.16663V18.3333"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.90068 9.16667C3.68684 5.83333 8.62242 4.16667 9.99967 2.5C11.377 4.16667 16.3125 5.83333 13.0987 9.16667H6.90068Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.0791 10C19.2631 7.72728 16.5738 6.69422 15.8222 5.83333C15.5037 6.19825 14.167 6.66667 14.167 7.08333M15.8337 5.83333V5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 2.49996V1.66663"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <path
+        d="M2.92095 10C0.736906 7.72728 3.42617 6.69422 4.17773 5.83333C4.49627 6.19825 5.83301 6.66667 5.83301 7.08333M4.16634 5.83333V5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6.66699 9.16663L3.60572 10.2891C3.14437 10.4583 2.67728 10.5416 2.18343 10.5416C1.8632 10.5416 1.66699 10.7146 1.66699 11.058V18.3333H18.3337V11.058C18.3337 10.7146 18.1375 10.5416 17.8172 10.5416C17.3234 10.5416 16.8563 10.4583 16.3949 10.2891L13.3337 9.16663"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.833 15V14.1666"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10 18.3334V15.8334"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4.16699 15V14.1666"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <path d="M10 13.3333V12.5" stroke="currentColor" strokeLinecap="round" />
+    </svg>
+  ),
+  chevron: (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m9 6 6 6-6 6" />
+    </svg>
+  ),
+};
+
+
+
+
+ <nav
+
+
+        aria-label="Primary"
+        className="fixed bottom-4 left-1/2 z-[60] w-[calc(100%-2rem)] max-w-[560px] -translate-x-1/2 rounded-full border border-white/25 bg-white/[0.12] px-2 py-1.5 shadow-[0_10px_30px_rgba(60,0,20,0.22),inset_0_1px_0_rgba(255,255,255,0.35)] backdrop-blur-2xl backdrop-saturate-150 sm:w-fit"
+      >
+        <div className="flex w-full items-center justify-between px-2 text-[15px] text-white/90 md:justify-center md:px-0">
+          <div className="hidden items-center gap-1 md:flex">
+            {[
+              ["Home", "#"],
+              ["Case studies", "#work"],
+              // ["Contact me", "#contact"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} className={navItem}>
+                {label}
+              </a>
+            ))}
+            <a href={RESUME} download className={navItem}>
+              Resume
+            </a>
+          </div>
+
+          {/* Hamburger appears on mobile */}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="ml-auto flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+          >
+            <span
+              className={`h-0.5 w-6 bg-current transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-current transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
+
+        {/* Collapsible mobile links */}
+        <div
+          className={`overflow-hidden transition-[max-height] duration-300 md:hidden ${
+            menuOpen ? "max-h-64" : "max-h-0"
+          }`}
+        >
+          <div className="flex flex-col gap-5 px-4 py-6 text-[15px] text-white/80 sm:px-6">
+            <a
+              href="#"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+            </a>
+            <a
+              href="#work"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Case studies
+            </a>
+            {/* <a
+              href="#contact"
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact me
+            </a> */}
+            <a
+              href={RESUME}
+              download
+              className={navLinksCss}
+              onClick={() => setMenuOpen(false)}
+            >
+              Resume
+            </a>
+          </div>
+        </div>
+      </nav>
