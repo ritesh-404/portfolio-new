@@ -3,7 +3,7 @@ import { Link } from "wouter";
 export default function BackLinkBtn({
   href = "/",
   ariaLabel = "Back to home",
-  className = ""
+  className = "",
 }) {
   return (
     <Link

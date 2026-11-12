@@ -22,6 +22,10 @@
   --color-portfolio-border: #ffffff1a;
 }
 
+/* ------------------------------------------------------ */
+/* GLOBAL RESET                                           */
+/* ------------------------------------------------------ */
+
 *,
 *::before,
 *::after {
@@ -52,22 +56,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
-::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
   background: #a3a3a3;
   background-clip: content-box;
 }
 
-::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #737373;
   background-clip: content-box;
 }
@@ -84,6 +88,10 @@ li {
   text-wrap: pretty;
 }
 
+/* ------------------------------------------------------ */
+/* BACKGROUND VIDEO                                       */
+/* ------------------------------------------------------ */
+
 .hero-video {
   position: fixed;
   top: -100px;
@@ -93,17 +101,45 @@ li {
   transform: translateX(-50%);
   object-fit: cover;
   object-position: top center;
+
   -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%);
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 12%,
+      #000 82%,
+      transparent 100%
+    );
+
   -webkit-mask-composite: source-in;
+
   mask-image:
-    linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, #000 12%, #000 82%, transparent 100%);
+    linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 12%,
+      #000 82%,
+      transparent 100%
+    );
+
   mask-composite: intersect;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   .hero-video {
     top: 24px;
     width: 120vw;
@@ -123,26 +159,49 @@ li {
   }
 }
 
+/* ------------------------------------------------------ */
+/* HERO TYPOGRAPHY                                        */
+/* ------------------------------------------------------ */
+
 .hero-heading {
   font-size: clamp(4rem, 6.5vw, 6rem);
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .hero-heading { font-size: clamp(3rem, 7vw, 4rem); }
+  .hero-heading {
+    font-size: clamp(3rem, 7vw, 4rem);
+  }
 }
 
 @media (max-width: 767px) {
-  .hero-heading { font-size: clamp(2.25rem, 8vw, 3rem); }
+  .hero-heading {
+    font-size: clamp(2.25rem, 8vw, 3rem);
+  }
 }
+
+/* ------------------------------------------------------ */
+/* HERO REVEAL ANIMATIONS                                 */
+/* ------------------------------------------------------ */
 
 .hero-reveal {
-  animation: hero-reveal-in 760ms cubic-bezier(.2,.7,.2,1) both;
+  animation: hero-reveal-in 760ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-.hero-reveal--heading { animation-delay: 0ms; }
-.hero-reveal--subheading { animation-delay: 150ms; }
-.hero-reveal--badge { animation-delay: 300ms; }
-.hero-reveal--rest { animation-delay: 470ms; }
+.hero-reveal--heading {
+  animation-delay: 0ms;
+}
+
+.hero-reveal--subheading {
+  animation-delay: 150ms;
+}
+
+.hero-reveal--badge {
+  animation-delay: 300ms;
+}
+
+.hero-reveal--rest {
+  animation-delay: 470ms;
+}
 
 @keyframes hero-reveal-in {
   from {
@@ -150,6 +209,7 @@ li {
     filter: blur(10px);
     transform: translate3d(0, 12px, 0);
   }
+
   to {
     opacity: 1;
     filter: blur(0);
@@ -163,6 +223,10 @@ li {
   }
 }
 
+/* ------------------------------------------------------ */
+/* DESIGNING LETTER ANIMATION                             */
+/* ------------------------------------------------------ */
+
 .designing-letter {
   display: inline-block;
   color: var(--letter-accent);
@@ -170,27 +234,80 @@ li {
   will-change: transform, color, opacity;
 }
 
-.designing-letter:nth-child(1) { --letter-order: 0; --letter-accent: #5ca9e8; }
-.designing-letter:nth-child(2) { --letter-order: 1; --letter-accent: #55aa80; }
-.designing-letter:nth-child(3) { --letter-order: 2; --letter-accent: #447fc2; }
-.designing-letter:nth-child(4) { --letter-order: 3; --letter-accent: #7bbad6; }
-.designing-letter:nth-child(5) { --letter-order: 4; --letter-accent: #8478d1; }
-.designing-letter:nth-child(6) { --letter-order: 5; --letter-accent: #7974b8; }
-.designing-letter:nth-child(7) { --letter-order: 6; --letter-accent: #49a9bb; }
-.designing-letter:nth-child(8) { --letter-order: 7; --letter-accent: #4fa58e; }
-.designing-letter:nth-child(9) { --letter-order: 8; --letter-accent: #687fca; }
+.designing-letter:nth-child(1) {
+  --letter-order: 0;
+  --letter-accent: #5ca9e8;
+}
+
+.designing-letter:nth-child(2) {
+  --letter-order: 1;
+  --letter-accent: #55aa80;
+}
+
+.designing-letter:nth-child(3) {
+  --letter-order: 2;
+  --letter-accent: #447fc2;
+}
+
+.designing-letter:nth-child(4) {
+  --letter-order: 3;
+  --letter-accent: #7bbad6;
+}
+
+.designing-letter:nth-child(5) {
+  --letter-order: 4;
+  --letter-accent: #8478d1;
+}
+
+.designing-letter:nth-child(6) {
+  --letter-order: 5;
+  --letter-accent: #7974b8;
+}
+
+.designing-letter:nth-child(7) {
+  --letter-order: 6;
+  --letter-accent: #49a9bb;
+}
+
+.designing-letter:nth-child(8) {
+  --letter-order: 7;
+  --letter-accent: #4fa58e;
+}
+
+.designing-letter:nth-child(9) {
+  --letter-order: 8;
+  --letter-accent: #687fca;
+}
 
 .designing-word:hover .designing-letter,
 .designing-word:focus-visible .designing-letter {
-  animation: designing-hover 920ms cubic-bezier(.2,.8,.2,1) both;
+  animation: designing-hover 920ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   animation-delay: calc(var(--letter-order) * 44ms);
 }
 
 @keyframes designing-hover {
-  0%, 100% { color: var(--letter-accent); transform: translate3d(0,0,0) rotateX(0) rotateZ(0) scale(1); }
-  24% { color: var(--letter-accent); transform: translate3d(0,-.2em,0) rotateX(35deg) rotateZ(-9deg) scale(1.12); }
-  48% { color: var(--letter-accent); transform: translate3d(0,.035em,0) rotateX(-15deg) rotateZ(6deg) scale(.94); }
-  72% { color: var(--letter-accent); transform: translate3d(0,-.07em,0) rotateX(0) rotateZ(-3deg) scale(1.04); }
+  0%,
+  100% {
+    color: var(--letter-accent);
+    transform: translate3d(0, 0, 0) rotateX(0) rotateZ(0) scale(1);
+  }
+
+  24% {
+    color: var(--letter-accent);
+    transform: translate3d(0, -0.2em, 0) rotateX(35deg) rotateZ(-9deg)
+      scale(1.12);
+  }
+
+  48% {
+    color: var(--letter-accent);
+    transform: translate3d(0, 0.035em, 0) rotateX(-15deg) rotateZ(6deg)
+      scale(0.94);
+  }
+
+  72% {
+    color: var(--letter-accent);
+    transform: translate3d(0, -0.07em, 0) rotateX(0) rotateZ(-3deg) scale(1.04);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -204,5 +321,213 @@ li {
   .designing-word:hover .designing-letter,
   .designing-word:focus-visible .designing-letter {
     animation: none;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* SHARED PAGE LAYOUT                                     */
+/* ------------------------------------------------------ */
+
+.site-shell {
+  --page-gutter: clamp(20px, 4vw, 48px);
+  --content-width: 100%;
+
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding-inline: clamp(12px, 2vw, 20px);
+  box-sizing: border-box;
+}
+
+/* Major panels */
+.section-panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: var(--page-gutter);
+}
+
+/* Shared content width */
+.content-column {
+  width: var(--content-width);
+  max-width: 900px;
+  min-width: 0;
+}
+
+/* Only reduce content width on 1024-class desktop screens */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .site-shell {
+    --content-width: 100%;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* HERO PANEL                                             */
+/* ------------------------------------------------------ */
+
+.hero-panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40.96px 30.72px;
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------ */
+/* SELECTED WORKS                                         */
+/* ------------------------------------------------------ */
+
+.selected-works {
+  width: 100%;
+  min-width: 0;
+}
+
+.selected-work-item {
+  width: 100%;
+  min-width: 0;
+}
+
+.selected-work-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------ */
+/* ABOUT PANEL                                            */
+/* ------------------------------------------------------ */
+
+.about-panel {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin-inline: auto;
+}
+
+/* About content uses the same horizontal gutter */
+.about-content {
+  padding-inline: var(--page-gutter);
+  padding-top: 1.5rem;
+  padding-bottom: 1.25rem;
+}
+
+/* Preserve original About vertical spacing */
+@media (min-width: 640px) {
+  .about-content {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .about-content {
+    padding-top: 4rem;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* ABOUT FOOTER                                            */
+/* ------------------------------------------------------ */
+
+.about-footer {
+  width: 100%;
+  padding-inline: var(--page-gutter);
+  box-sizing: border-box;
+  border-top: 1px solid #0a0a0a;
+  padding-bottom: 36px;
+  padding-top: 36px;
+}
+
+/* ------------------------------------------------------ */
+/* TABLET / SMALL DESKTOP                                 */
+/* ------------------------------------------------------ */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Use the same gutter across Hero, About and Footer */
+  .site-shell {
+    --page-gutter: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  .hero-video {
+    top: -12px;
+    width: 110vw;
+  }
+
+  .hero-panel {
+    padding-block: clamp(2.5rem, 4vw, 3rem);
+    width: 80%;
+  }
+
+  .hero-heading {
+    margin-top: 1.75rem;
+    font-size: 72px;
+  }
+
+  /* Width is inherited from content-column */
+  .hero-subheading {
+    width: 100%;
+    margin-top: 0.625rem;
+    margin-bottom: 2.5rem;
+    font-size: 20px;
+  }
+}
+
+/* ------------------------------------------------------ */
+/* MOBILE                                                 */
+/* ------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .site-shell {
+    --content-width: 100%;
+  }
+
+  .content-column {
+    width: 100%;
+  }
+
+  .hero-panel {
+    padding-block: 28px;
+    width: 100%;
+  }
+}
+
+/* -------------------------------------------------- */
+/* Mobile typography and spacing */
+@media (max-width: 767px) {
+  /* Base body text */
+  body {
+    font-size: 14px;
+  }
+
+  /* Hero heading */
+  .hero-heading {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  /* Hero subheading */
+  .hero-subheading {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* About text */
+  .about-copy {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* About toggle */
+  .about-content-row button {
+    font-size: 14px;
+  }
+
+  /* Selected work titles and descriptions */
+  .selected-works h2,
+  .selected-works p {
+    font-size: 14px;
+  }
+
+  /* Footer buttons */
+  .about-footer-actions button {
+    font-size: 14px;
   }
 }

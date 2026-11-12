@@ -6,7 +6,8 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: "border border-black bg-black text-white hover:bg-neutral-800",
-  secondary: "border border-neutral-400 bg-transparent text-neutral-900 hover:bg-neutral-100",
+  secondary:
+    "border border-neutral-400 bg-transparent text-neutral-900 hover:bg-neutral-100",
 };
 
 const Button = ({
