@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SelectedWorks from "../ui/SelectedWorks";
 import gradientVideo from "../../assets/bg-gradient-3.mp4";
+import gradientPoster from "../../assets/bg-gradient-poster.svg";
 import portrait from "../../assets/my-pic.webp";
 import envelopeIcon from "../../assets/Envelope.svg";
 import twitterIcon from "../../assets/twitter.svg";
@@ -159,27 +160,28 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <main className="mx-auto w-full max-w-[1040px]">
+    <main className="mx-auto w-full max-w-[1040px] px-5 sm:px-6 lg:px-0">
       <section
         id="heroSection"
         className="relative isolate pt-12"
       >
         <video
           ref={videoRef}
-          className="hero-video pointer-events-none fixed left-1/2 top-[-100px] z-0 h-[calc(100vh+100px)] w-screen max-w-none -translate-x-1/2 object-cover object-top max-md:top-[-72px] max-md:h-[calc(100vh+72px)]"
+          className="hero-video pointer-events-none z-0 max-w-none"
           src={gradientVideo}
+          poster={gradientPoster}
           autoPlay
           muted
           playsInline
           loop
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
         />
-        <div className="relative z-10 border border-neutral-950 bg-white/80 p-6 backdrop-blur-md sm:p-10 md:p-16 lg:p-20">
-          <div className="hero-reveal hero-reveal--badge inline-flex items-center gap-2 border border-neutral-950 px-3 py-1.5 text-base leading-[1.45]">
+        <div className="relative z-10 border border-neutral-950 bg-white/80 p-4 backdrop-blur-md sm:p-5 md:p-8 lg:p-16 xl:p-20">
+          <div className="hero-reveal hero-reveal--badge inline-flex items-center gap-2 border border-neutral-950 px-3 py-1.5 text-base leading-[1.45] max-md:hidden">
             Available for product design roles
           </div>
-          <h1 className="hero-reveal hero-reveal--heading mt-6 font-heading text-[clamp(4.5rem,6.667vw,6rem)] font-medium leading-[0.9] tracking-[-.055em] text-black max-md:text-[clamp(2rem,8vw,3rem)] md:mt-10 lg:mt-[60px]">
+          <h1 className="hero-heading hero-reveal hero-reveal--heading mt-6 font-heading font-medium leading-[0.9] tracking-[-.055em] text-black md:mt-10 lg:mt-[60px]">
             Thinking in systems.
             <br />
             <span
@@ -199,7 +201,7 @@ export default function HeroSection() {
             </span>{" "}
             in details.
           </h1>
-          <p className="hero-reveal hero-reveal--subheading mb-10 mt-4 max-w-none text-lg leading-[1.45] text-pretty text-black sm:text-xl md:mb-14 md:text-2xl md:text-balance lg:mb-[80px]">
+          <p className="hero-reveal hero-reveal--subheading mb-10 mt-4 max-w-none text-base leading-[1.45] text-pretty text-black sm:text-lg md:mb-14 md:text-xl lg:mb-[80px] lg:text-2xl">
             I design thoughtful digital products and build interfaces that make
             complex things feel simple. From the first sketch to the final
             interaction.

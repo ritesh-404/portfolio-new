@@ -53,17 +53,17 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-9 z-50 mx-auto mt-9 w-full">
-      <nav className="relative mx-auto flex h-12 w-fit items-center gap-2 max-md:w-full max-md:justify-between" aria-label="Main navigation">
-        <button type="button" className="h-12 cursor-pointer border border-neutral-950 bg-white px-4 text-base leading-[1.45] text-black transition-colors duration-200 hover:bg-neutral-100 md:hidden" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation">
+    <header className="sticky top-9 z-50 mx-auto mt-9 w-full max-w-[1040px] px-5 sm:px-6 lg:px-0">
+      <nav className="relative mx-auto flex h-12 w-fit items-center gap-2 max-lg:w-full max-lg:justify-between" aria-label="Main navigation">
+        <button type="button" className="h-12 cursor-pointer border border-neutral-950 bg-white px-4 text-base leading-[1.45] text-black transition-colors duration-200 hover:bg-neutral-100 lg:hidden" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation">
           {open ? "CLOSE" : "MENU"}
         </button>
-        <div className="flex h-12 items-center justify-center gap-[clamp(1rem,3vw,2.5rem)] border border-neutral-950 bg-white px-[clamp(1rem,2.5vw,2rem)] max-md:hidden">
+        <div className="flex h-12 items-center justify-center gap-[clamp(1rem,3vw,2.5rem)] border border-neutral-950 bg-white px-[clamp(1rem,2.5vw,2rem)] max-lg:hidden">
           {links.map(renderLink)}
         </div>
-        <div className="hidden md:block">{getInTouch("h-12 min-h-12 border border-black px-5 py-0 text-xl leading-[1.45]")}</div>
-        <div className="md:hidden">{getInTouch("h-12 min-h-12 border border-black px-4 py-0 text-base leading-[1.45]")}</div>
-        {open && <div id="mobile-navigation" className="absolute left-0 right-0 top-14 flex flex-col gap-4 border border-neutral-300 bg-white p-4 md:hidden">{links.map(renderLink)}</div>}
+        <div className="hidden lg:block">{getInTouch("h-12 min-h-12 border border-black px-5 py-0 text-xl leading-[1.45]")}</div>
+        <div className="lg:hidden">{getInTouch("h-12 min-h-12 border border-black px-4 py-0 text-base leading-[1.45]")}</div>
+        {open && <div id="mobile-navigation" className="absolute left-0 right-0 top-14 flex flex-col gap-4 border border-neutral-300 bg-white p-4 lg:hidden">{links.map(renderLink)}</div>}
       </nav>
     </header>
   );
