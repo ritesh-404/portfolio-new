@@ -115,7 +115,7 @@ li {
 
 @media (max-width: 767px) {
   .hero-video {
-    top: 50px;
+    top: -50px;
     width: 150vw;
     height: auto;
     object-fit: contain;
