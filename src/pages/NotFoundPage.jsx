@@ -1,14 +1,9 @@
 import BackLinkBtn from "../components/ui/BackLinkBtn";
-import Section from "../components/ui/Section";
-
 export default function NotFoundPage() {
   return (
-    <Section
-      id="heroSection"
-      className="bg-[#fcfcfc] text-[#202020] w-full h-screen font-inter flex justify-center items-center flex-col gap-4"
-    >
+    <main className="flex h-screen w-full flex-col items-center justify-center gap-4 bg-neutral-50 font-geist-sans text-neutral-900">
       <h1>Not found</h1>
       <BackLinkBtn />
-    </Section>
+    </main>
   );
 }

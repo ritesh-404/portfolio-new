@@ -1,7 +1,12 @@
 // components/Button.jsx
 const sizeStyles = {
-  sm: "px-4 py-2 text-xs",
-  md: "px-6 py-3 text-sm",
+  sm: "px-3 py-2 text-xs",
+  md: "px-4 py-2.5 text-sm",
+};
+
+const variantStyles = {
+  primary: "border border-black bg-black text-white hover:bg-neutral-800",
+  secondary: "border border-neutral-400 bg-transparent text-neutral-900 hover:bg-neutral-100",
 };
 
 const Button = ({
@@ -11,10 +16,11 @@ const Button = ({
   onClick,
   type = "button",
   size = "md",
+  variant = "primary",
   className = "",
   ...props
 }) => {
-  const classes = `inline-flex items-center justify-center rounded-full bg-black text-white font-mono tracking-tight border border-white/40 ring-1 ring-inset ring-offset-2 ring-offset-black ring-white/70 hover:bg-[#313131] transition-colors duration-200 cursor-pointer ${sizeStyles[size]} ${className}`;
+  const classes = `inline-flex box-border cursor-pointer items-center justify-center gap-2 font-geist-sans font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-50 ${variantStyles[variant] ?? variantStyles.primary} ${sizeStyles[size] ?? sizeStyles.md} ${className}`;
 
   if (href) {
     return (

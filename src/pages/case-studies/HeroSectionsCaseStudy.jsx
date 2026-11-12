@@ -15,7 +15,13 @@ export default function HeroSectionsCaseStudy() {
   return (
     <CaseStudyLayout
       title="Hero sections"
-      overview="A side project I keep coming back to. In my free time I pick new startups from VC databases like Y Combinator, work out what they do and who they sell to, and redesign their hero sections so the product is easier to understand."
+      overview="Four self-initiated startup hero redesigns focused on making each product easier to understand."
+      snapshot={[
+        { label: "Problem", text: "Startup heroes often hid the product’s value behind vague claims or crowded layouts." },
+        { label: "My contribution", text: "I researched four products and redesigned each hero section independently." },
+        { label: "Approach", text: "Clarified the message, simplified hierarchy, and tailored visuals and next steps to each product." },
+        { label: "Outcome", text: "Four clearer hero concepts; performance and conversion effects were not tested." },
+      ]}
     >
       {/* ------------------------------------------------------------ */}
       <Section title="Why I keep doing this" toc="Why I do this">

@@ -1,28 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
-
-// fonts
 import "@fontsource/geist-mono";
-import "@fontsource/hedvig-letters-serif";
-import "@fontsource/instrument-sans";
-import "@fontsource-variable/dm-sans";
-import "@fontsource/solway";
 import "@fontsource/geist-sans";
-import "@fontsource/ibm-plex-serif";
-
-// Import regular and specific weights if needed
-import "@fontsource/sora";
-import "@fontsource/sora/400.css"; // Regular
-import "@fontsource/sora/700.css"; // Bold
-
-// Import the base CSS (defaults to weight 400)
-import "@fontsource/inter";
-
-// Optional: Import specific weights or styles if needed
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/700.css";
+import "@fontsource-variable/dm-sans";
+import "@fontsource-variable/nata-sans/wght.css";
+import "@fontsource-variable/pixelify-sans/wght.css";
+import "@fontsource/niconne/400.css";
+import "@fontsource/new-rocker/400.css";
+import "@fontsource/special-elite/400.css";
+import "@fontsource/nova-cut/400.css";
+import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

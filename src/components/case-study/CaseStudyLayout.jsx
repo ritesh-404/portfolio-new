@@ -16,8 +16,10 @@ const backBtnClass =
 export default function CaseStudyLayout({
   title,
   overview,
+  snapshot = [],
   heroVideo,
   heroImage,
+  gallery,
   children,
 }) {
   const contentRef = useRef(null);
@@ -102,7 +104,23 @@ export default function CaseStudyLayout({
                   {overview}
                 </p>
               )}
+              {snapshot.length > 0 && (
+                <dl className="mt-7 grid grid-cols-1 gap-x-8 gap-y-5 border-y border-white/10 py-5 sm:grid-cols-2">
+                  {snapshot.map(({ label, text }) => (
+                    <div key={label}>
+                      <dt className="mb-1 font-inter text-xs uppercase tracking-[0.08em] text-portfolio-text-muted">
+                        {label}
+                      </dt>
+                      <dd className="font-inter text-sm leading-[1.5] text-portfolio-text-secondary">
+                        {text}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
             </header>
+
+            {gallery}
 
             {(heroVideo || heroImage) && (
               <div className="mb-14 md:mb-20">

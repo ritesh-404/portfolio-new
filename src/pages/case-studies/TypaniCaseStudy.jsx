@@ -40,13 +40,22 @@ import {
   typaniSeeInActionDemoOld,
   typaniSixSecondsBentoOld,
 } from "../../assets/case_study_media/typani/old";
+import CaseStudyGallery from "../../components/case-study/CaseStudyGallery";
+import typaniPreview from "../../assets/typani-img.webp";
 
 export default function TypaniCaseStudy() {
+  // Previous standalone hero image: <img src={typani_hero_section} alt="Typani redesigned landing page" />
   return (
     <CaseStudyLayout
       title="Typani"
-      overview="Typani is an AI-powered software tool designed to help local and multi-location businesses manage and reply to customer reviews effortlessly. Built by Rize Market LLC, it connects directly to a business's Google Business Profile to automate the review-response workflow."
-      heroImage={typani_hero_section}
+      overview="Concept redesign of Typani’s landing page for AI-assisted Google review replies."
+      snapshot={[
+        { label: "Problem", text: "Visitors couldn't tell what the product did, who it served, or what to click." },
+        { label: "My contribution", text: "I owned the page audit, content hierarchy, visual design, and product demo concept." },
+        { label: "Approach", text: "Focused the first screen on one action, reduced copy, and showed the product in use." },
+        { label: "Outcome", text: "A clearer, product-led page concept; untested, so no conversion impact is claimed." },
+      ]}
+      gallery={<CaseStudyGallery label="Typani" images={[typaniPreview, typaniDesktop1, typaniDesktop2, typaniDesktop3, typaniDesktop4]} />}
     >
       {/* ------------------------------------------------------------ */}
       <Section title="What I set out to fix" toc="The brief">

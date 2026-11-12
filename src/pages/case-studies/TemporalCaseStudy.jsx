@@ -50,6 +50,9 @@ import {
 
 import finalVideo from "../../assets/case_study_media/temporal/temporal-comparison.mp4";
 import { UL } from "../../components/case-study/blocks";
+import CaseStudyGallery from "../../components/case-study/CaseStudyGallery";
+import { temporalDesktop1, temporalDesktop2, temporalDesktop3, temporalDesktop4, temporalDesktop5, temporalDesktop6, temporalDesktop7 } from "../../assets/hero_Section_Project_Img/temporal_ai";
+import temporalPreview from "../../assets/temporal-img.webp";
 
 const PROJECT_URL =
   "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies";
@@ -121,11 +124,18 @@ const pageSections = [
 ];
 
 export default function TemporalCaseStudy() {
+  // Previous standalone hero: <video src={`${PROJECT_URL}/temporal/temporal-video.mp4`} />
   return (
     <CaseStudyLayout
       title="Temporal AI"
-      overview="Temporal Technologies Inc. is an American enterprise software company that develops and distributes the world's leading open-source durable execution platform."
-      heroVideo={`${PROJECT_URL}/temporal/temporal-video.mp4`}
+      overview="Self-initiated landing page redesign focused on helping engineers understand Temporal’s durable execution platform."
+      snapshot={[
+        { label: "Problem", text: "Engineers couldn't quickly see how Temporal handles failure; generic visuals obscured durable execution." },
+        { label: "My contribution", text: "I owned the research, information hierarchy, interface design, and technical illustrations." },
+        { label: "Approach", text: "Benchmarked seven competitors and translated workflow mechanics into a clear hero and accurate visuals." },
+        { label: "Outcome", text: "A cohesive, high-fidelity concept redesign; not user-tested, with no performance claims." },
+      ]}
+      gallery={<CaseStudyGallery label="Temporal" images={[temporalPreview, temporalDesktop1, temporalDesktop2, temporalDesktop3, temporalDesktop4, temporalDesktop5, temporalDesktop6, temporalDesktop7]} />}
     >
       <Section title="The problems">
         <P>
