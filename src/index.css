@@ -494,7 +494,7 @@ li {
 @media (max-width: 767px) {
   /* Base body text */
   body {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   /* Hero heading */
@@ -505,29 +505,29 @@ li {
   /* Hero subheading */
   .hero-subheading {
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
   }
 
   /* About text */
   .about-copy {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
   }
 
   /* About toggle */
   .about-content-row button {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   /* Selected work titles and descriptions */
   .selected-works h2,
   .selected-works p {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   /* Footer buttons */
   .about-footer-actions button {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
