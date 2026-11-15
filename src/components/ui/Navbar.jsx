@@ -77,7 +77,7 @@ export default function Navbar() {
 
   return (
     <header className="site-header sticky top-0 z-50 pt-4">
-      <nav className="relative flex w-full flex-col md:flex-row md:flex-wrap items-center justify-between gap-4 border border-neutral-950 bg-white px-2 py-2 md:pl-4 md:pr-2">
+      <nav className="relative flex w-full flex-col md:flex-row md:flex-wrap items-center justify-between md:gap-4 border border-neutral-950 bg-white px-2 py-2 md:pl-4 md:pr-2">
         {/* Desktop navigation — unchanged */}
         <div className="hidden flex-wrap items-center gap-[clamp(16px,3vw,32px)] md:flex">
           {links.map(renderLink)}
@@ -100,7 +100,7 @@ export default function Navbar() {
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-12 w-10 shrink-0 items-center justify-center border border-neutral-950 bg-white text-2xl leading-none text-neutral-950 md:hidden"
+            className="flex h-12 w-10 shrink-0 items-center justify-center border border-neutral-950 bg-white text-2xl leading-none text-neutral-950 transition-all duration-150 active:scale-[0.98] md:hidden"
           >
             ⋮
           </button>
@@ -110,8 +110,8 @@ export default function Navbar() {
         <div
           className={`grid w-full transition-all duration-200 ease-out md:hidden ${
             menuOpen
-              ? "grid-rows-[1fr] opacity-100 pt-2"
-              : "grid-rows-[0fr] opacity-0 pt-0"
+              ? "grid-rows-[1fr] opacity-100 pt-3 pb-1"
+              : "grid-rows-[0fr] opacity-0 pt-0 pb-0"
           }`}
         >
           <div className="overflow-hidden flex flex-col gap-4">
