@@ -52,7 +52,7 @@ import finalVideo from "../../assets/case_study_media/temporal/temporal-comparis
 import { UL } from "../../components/case-study/blocks";
 import CaseStudyGallery from "../../components/case-study/CaseStudyGallery";
 import { temporalDesktop1, temporalDesktop2, temporalDesktop3, temporalDesktop4, temporalDesktop5, temporalDesktop6, temporalDesktop7 } from "../../assets/hero_Section_Project_Img/temporal_ai";
-import temporalPreview from "../../assets/temporal-img.webp";
+import temporalPreview from "../../assets/images/temporal-img.webp";
 
 const PROJECT_URL =
   "https://hvwdoouwqyukyonadjse.supabase.co/storage/v1/object/public/case-studies";

@@ -1,6 +1,6 @@
-import temporalImage from "../assets/temporal-img.webp";
-import typaniImage from "../assets/typani-img.webp";
-import openSeoImage from "../assets/openseo-img.webp";
+import temporalImage from "../assets/images/temporal-img.webp";
+import typaniImage from "../assets/images/typani-img.webp";
+import openSeoImage from "../assets/images/openseo-img.webp";
 
 const caseStudies = [
   {

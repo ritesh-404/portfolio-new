@@ -1,0 +1,72 @@
+{
+  "spacing": {
+    "spacing-none": {
+      "value": "0px",
+      "type": "spacing"
+    },
+    "spacing-xxs": {
+      "value": "2px",
+      "type": "spacing"
+    },
+    "spacing-xs": {
+      "value": "4px",
+      "type": "spacing"
+    },
+    "spacing-sm": {
+      "value": "6px",
+      "type": "spacing"
+    },
+    "spacing-md": {
+      "value": "8px",
+      "type": "spacing"
+    },
+    "spacing-lg": {
+      "value": "12px",
+      "type": "spacing"
+    },
+    "spacing-xl": {
+      "value": "16px",
+      "type": "spacing"
+    },
+    "spacing-2xl": {
+      "value": "20px",
+      "type": "spacing"
+    },
+    "spacing-3xl": {
+      "value": "24px",
+      "type": "spacing"
+    },
+    "spacing-4xl": {
+      "value": "32px",
+      "type": "spacing"
+    },
+    "spacing-5xl": {
+      "value": "40px",
+      "type": "spacing"
+    },
+    "spacing-6xl": {
+      "value": "48px",
+      "type": "spacing"
+    },
+    "spacing-7xl": {
+      "value": "64px",
+      "type": "spacing"
+    },
+    "spacing-8xl": {
+      "value": "80px",
+      "type": "spacing"
+    },
+    "spacing-9xl": {
+      "value": "96px",
+      "type": "spacing"
+    },
+    "spacing-10xl": {
+      "value": "128px",
+      "type": "spacing"
+    },
+    "spacing-11xl": {
+      "value": "160px",
+      "type": "spacing"
+    }
+  }
+}

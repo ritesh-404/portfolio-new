@@ -1,9 +1,3 @@
-// components/Button.jsx
-const sizeStyles = {
-  sm: "px-3 py-2 text-xs",
-  md: "px-4 py-2.5 text-sm",
-};
-
 const variantStyles = {
   primary: "border border-black bg-black text-white hover:bg-neutral-800",
   secondary:
@@ -16,12 +10,20 @@ const Button = ({
   external = false,
   onClick,
   type = "button",
-  size = "md",
   variant = "primary",
   className = "",
   ...props
 }) => {
-  const classes = `inline-flex box-border cursor-pointer items-center justify-center gap-2 font-geist-sans font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:pointer-events-none disabled:opacity-50 ${variantStyles[variant] ?? variantStyles.primary} ${sizeStyles[size] ?? sizeStyles.md} ${className}`;
+  const classes = [
+    "inline-flex min-h-12 box-border items-center justify-center gap-2",
+    "px-5 py-3",
+    "font-geist-sans text-base font-medium leading-6",
+    "transition-all duration-150 active:scale-[0.98]",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
+    "disabled:pointer-events-none disabled:opacity-50",
+    variantStyles[variant] ?? variantStyles.primary,
+    className,
+  ].join(" ");
 
   if (href) {
     return (

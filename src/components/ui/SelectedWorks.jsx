@@ -7,7 +7,7 @@ function WorkItem({ study }) {
       <h2 className="mb-3 text-base font-geist-sans leading-[1.45] sm:text-lg md:text-xl">
         <Link
           href={`/work/${study.id}`}
-          className="cursor-pointer text-black underline underline-offset-2 transition-colors duration-200 hover:text-neutral-500"
+          className="cursor-pointer text-neutral-500 underline underline-offset-2 transition-colors duration-200 hover:text-neutral-950"
         >
           {study.label}
         </Link>
@@ -26,7 +26,7 @@ function WorkItem({ study }) {
         />
       </Link>
 
-      <p className="mt-3 w-full text-base leading-[1.45] text-pretty text-black sm:text-lg md:text-xl">
+      <p className="mt-3 w-full text-base leading-[1.45] text-pretty text-neutral-950 sm:text-lg">
         {study.cardDescription}
       </p>
     </article>

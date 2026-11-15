@@ -1,157 +1,469 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import SelectedWorks from "../ui/SelectedWorks";
-
-import gradientVideo from "../../assets/bg-gradient-3.mp4";
-import gradientPoster from "../../assets/bg-gradient-poster.svg";
-
-import portrait from "../../assets/my-pic.webp";
-import envelopeIcon from "../../assets/Envelope.svg";
-import twitterIcon from "../../assets/twitter.svg";
-import linkedinIcon from "../../assets/linkedin.svg";
-import githubIcon from "../../assets/github.svg";
-
 import Button from "../ui/Button";
 
+import favNew from "../../assets/images/fav-new.jpg";
+import envelopeIcon from "../../assets/icons/Envelope.svg";
+import twitterIcon from "../../assets/icons/twitter.svg";
+import linkedinIcon from "../../assets/icons/linkedin.svg";
+import githubIcon from "../../assets/icons/github.svg";
+
 /* ------------------------------------------------------ */
-/* ABOUT SECTION                                          */
+/* BLUR-IN REVEAL (styles in index.css: .blur-in)         */
 /* ------------------------------------------------------ */
 
-function AboutSection() {
+// Order everything appears in once the quote has finished typing.
+// To reorder the page, just change these numbers.
+const REVEAL_ORDER = {
+  signature: 0,
+  photo: 1,
+  toggle: 2,
+  about: 3,
+  workStyle: 4,
+  journey: 5,
+  goal: 6,
+  works: 7,
+};
+
+const STEP_MS = 220; // gap between one block starting and the next
+
+// Fades a block in from blurred. Styles live in hero.css (.blur-in)
+function BlurIn({ id, show, step = 0, className = "", children }) {
+  return (
+    <div
+      id={id}
+      className={`blur-in ${show ? "is-visible" : ""} ${className}`}
+      style={{ transitionDelay: show ? `${step * STEP_MS}ms` : "0ms" }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------ */
+/* HUMAN-LIKE TYPING                                      */
+/* ------------------------------------------------------ */
+
+const SPEED = 0.6; // 0.7 = faster, 1.5 = slower
+
+const rand = (min, max) => min + Math.random() * (max - min);
+
+const reducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// How long to wait after typing `char` before the next keystroke
+function keystrokeDelay(char) {
+  let ms = rand(35, 85); // normal key rhythm
+  if (char === " ") ms += rand(30, 80); // small beat between words
+  if (",;:".includes(char)) ms += rand(150, 280); // pause at a comma
+  if (".!?".includes(char)) ms += rand(350, 600); // pause at the end of a sentence
+  if (Math.random() < 0.04) ms += rand(150, 350); // the odd hesitation
+  return ms * SPEED;
+}
+
+/**
+ * Types `text` one character at a time with human-like timing.
+ * Returns how many characters are typed so far and whether it has finished.
+ * Runs on every page load / reload (it starts when the component mounts).
+ */
+function useHumanTyping(text, startDelay = 600) {
+  const [count, setCount] = useState(() => (reducedMotion() ? text.length : 0));
+
+  useEffect(() => {
+    if (reducedMotion()) return;
+
+    let typed = 0;
+    let timer;
+
+    const typeNext = () => {
+      typed += 1;
+      setCount(typed);
+      if (typed < text.length) {
+        timer = setTimeout(typeNext, keystrokeDelay(text[typed - 1]));
+      }
+    };
+
+    timer = setTimeout(typeNext, startDelay);
+    return () => clearTimeout(timer);
+  }, [text, startDelay]);
+
+  return { count, done: count >= text.length };
+}
+
+/* ------------------------------------------------------ */
+/* QUOTE                                                  */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* QUOTE TEXT                                             */
+/* ------------------------------------------------------ */
+
+// Split where the layout needs it: a line break after the first
+// sentence, and the closing mark glued to the last word.
+const PART_1 = "Design is not just what it looks like and feels like. ";
+const PART_2 = "Design is how it ";
+const PART_3 = "works.";
+const QUOTE = PART_1 + PART_2 + PART_3;
+
+/* ------------------------------------------------------ */
+/* SMALL PIECES                                           */
+/* ------------------------------------------------------ */
+
+function QuoteMark({ flip = false, className = "" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="4 5 16 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`inline-block h-[0.85em] w-[0.95em] align-[-0.05em] text-neutral-300 ${
+        flip ? "rotate-180" : ""
+      } ${className}`}
+    >
+      <path
+        d="M6 11H10V7C10 6.73478 9.89464 6.48043 9.70711 6.29289C9.51957 6.10536 9.26522 6 9 6H6C5.73478 6 5.48043 6.10536 5.29289 6.29289C5.10536 6.48043 5 6.73478 5 7V10C5 10.2652 5.10536 10.5196 5.29289 10.7071C5.48043 10.8946 5.73478 11 6 11Z"
+        fill="currentColor"
+      />
+      <path
+        d="M10 11H6C5.73478 11 5.48043 10.8946 5.29289 10.7071C5.10536 10.5196 5 10.2652 5 10V7C5 6.73478 5.10536 6.48043 5.29289 6.29289C5.48043 6.10536 5.73478 6 6 6H9C9.26522 6 9.51957 6.10536 9.70711 6.29289C9.89464 6.48043 10 6.73478 10 7V11ZM10 11V13C10 15.667 8.667 17.333 6 18"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 11H19V7C19 6.73478 18.8946 6.48043 18.7071 6.29289C18.5196 6.10536 18.2652 6 18 6H15C14.7348 6 14.4804 6.10536 14.2929 6.29289C14.1054 6.48043 14 6.73478 14 7V10C14 10.2652 14.1054 10.5196 14.2929 10.7071C14.4804 10.8946 14.7348 11 15 11Z"
+        fill="currentColor"
+      />
+      <path
+        d="M19 11H15C14.7348 11 14.4804 10.8946 14.2929 10.7071C14.1054 10.5196 14 10.2652 14 10V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18C18.2652 6 18.5196 6.10536 18.7071 6.29289C18.8946 6.48043 19 6.73478 19 7V11ZM19 11V13C19 15.667 17.667 17.333 15 18"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// Takes no space in the text flow, so words never shift or re-wrap
+function Caret() {
+  return (
+    <span aria-hidden="true" className="relative">
+      <span className="typing-caret absolute left-0 top-[0.1em] h-[1em] w-[2px] bg-neutral-900" />
+    </span>
+  );
+}
+
+// Shows the typed part of `text` and keeps the rest invisible, so the
+// final layout (line breaks included) is fixed from the first frame.
+function TypedText({ text, from, count, caret }) {
+  const shown = Math.min(text.length, Math.max(0, count - from));
+  const hasCaret =
+    caret && count <= from + text.length && (count > from || from === 0);
+
+  return (
+    <>
+      {text.slice(0, shown)}
+      {hasCaret && <Caret />}
+      <span className="invisible">{text.slice(shown)}</span>
+    </>
+  );
+}
+
+/* ------------------------------------------------------ */
+/* HERO QUOTE                                             */
+/* ------------------------------------------------------ */
+
+function HeroQuote({ onTyped }) {
+  const { count, done } = useHumanTyping(QUOTE);
+
+  useEffect(() => {
+    if (done) onTyped();
+  }, [done, onTyped]);
+
+  const typing = !done;
+  const part2Start = PART_1.length;
+  const part3Start = part2Start + PART_2.length;
+
+  return (
+    <figure className="mx-auto pb-12 text-center pt-8">
+      <blockquote>
+        <h1
+          aria-label={QUOTE}
+          className="mx-auto max-w-[680px] text-balance font-geist-sans text-2xl leading-[1.15] tracking-[-0.03em] text-neutral-900 sm:text-3xl"
+        >
+          <QuoteMark flip />{" "}
+          <TypedText text={PART_1} from={0} count={count} caret={typing} />
+          <br className="hidden sm:block" />
+          <TypedText
+            text={PART_2}
+            from={part2Start}
+            count={count}
+            caret={typing}
+          />
+          <span className="whitespace-nowrap">
+            <TypedText
+              text={PART_3}
+              from={part3Start}
+              count={count}
+              caret={typing}
+            />{" "}
+            <QuoteMark
+              className={`transition-opacity duration-500 ${
+                done ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </span>
+        </h1>
+      </blockquote>
+
+      <figcaption className="mt-5">
+        <BlurIn show={done} step={REVEAL_ORDER.signature}>
+          <span className="inline-block font-script text-4xl leading-none text-neutral-900">
+            Steve Jobs
+          </span>
+        </BlurIn>
+      </figcaption>
+    </figure>
+  );
+}
+
+/* ------------------------------------------------------ */
+/* ABOUT INTRO  (Story / TL;DR)                           */
+/* ------------------------------------------------------ */
+
+/* ------------------------------------------------------ */
+/* STORY / TL;DR                                          */
+/* ------------------------------------------------------ */
+/* Story:  all text is black.                             */
+/* TL;DR:  text is light grey, only <Em> phrases are black */
+
+const ModeContext = createContext("tldr");
+
+function Em({ children }) {
+  const mode = useContext(ModeContext);
+  return (
+    <span
+      className={`transition-colors duration-300 ${
+        mode === "tldr" ? "text-neutral-950" : "text-inherit"
+      }`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function ViewToggle({ mode, onChange }) {
+  const options = [
+    ["tldr", "Short"],
+    ["story", "Full story"],
+  ];
+
+  return (
+    <div
+      className="relative inline-grid grid-cols-2 border border-neutral-950"
+      role="group"
+      aria-label="About text length"
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute inset-y-0 left-0 w-1/2 bg-neutral-950 transition-transform duration-300 ease-out ${
+          mode === "story" ? "translate-x-full" : ""
+        }`}
+      />
+      {options.map(([value, label]) => (
+        <button
+          key={value}
+          type="button"
+          aria-pressed={mode === value}
+          onClick={() => onChange(value)}
+          className={`relative cursor-pointer px-5 py-2.5 text-base leading-none transition-colors duration-300 ${
+            mode === value
+              ? "text-white"
+              : "text-neutral-600 hover:text-neutral-950"
+          }`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------ */
+/* ABOUT INTRO                                            */
+/* ------------------------------------------------------ */
+
+function HeroIntro({ show }) {
   const [mode, setMode] = useState("tldr");
+  const bodyColor = mode === "story" ? "text-neutral-950" : "text-neutral-300";
+
+  return (
+    <ModeContext.Provider value={mode}>
+      <div id="aboutSection" className="pb-8">
+        <BlurIn show={show} step={REVEAL_ORDER.photo}>
+          <img className="w-full" src={favNew} alt="Portrait of Ritesh" />
+        </BlurIn>
+
+        <BlurIn show={show} step={REVEAL_ORDER.toggle} className="mt-10">
+          <ViewToggle mode={mode} onChange={setMode} />
+        </BlurIn>
+
+        <div
+          className={`mt-8 space-y-7 text-[18px] leading-[1.6] tracking-[-0.01em] transition-colors duration-300 sm:text-[19px] ${bodyColor}`}
+        >
+          <BlurIn show={show} step={REVEAL_ORDER.about}>
+            <p className="text-pretty">
+              Hey! I'm <Em>Ritesh</Em>, a{" "}
+              <Em>software product designer from Mumbai, India.</Em> I enjoy
+              figuring out how things work, why they look the way they do, and
+              how they can be made better. I tend to bring a{" "}
+              <Em>
+                strong sense of taste and a lot of care into the products I
+                design
+              </Em>{" "}
+              and build.
+            </p>
+          </BlurIn>
+
+          <BlurIn show={show} step={REVEAL_ORDER.workStyle}>
+            <p className="text-pretty">
+              I enjoy working with ambitious founders and{" "}
+              <Em>teams across product and web design.</Em> I'm currently{" "}
+              <Em>open to freelance projects</Em> and{" "}
+              <Em>full-time opportunities.</Em>
+            </p>
+          </BlurIn>
+
+          <BlurIn show={show} step={REVEAL_ORDER.journey}>
+            <p className="text-pretty">
+              My journey started with frontend development, not design ;){" "}
+              <Em>
+                I gradually got into design by paying more attention to the
+                software I use every day and the little interactions that make
+                an experience feel special.
+              </Em>{" "}
+              Something as simple as the hover interactions in the Microsoft
+              Store can catch my attention. They're just so delightful. More
+              recently, I've found myself getting{" "}
+              <Em>interested in icon design</Em>, partly inspired by the Google
+              Gemini app on Android.
+            </p>
+          </BlurIn>
+
+          <BlurIn show={show} step={REVEAL_ORDER.goal}>
+            <p className="text-pretty">
+              I'm still learning, building, and exploring different sides of
+              design. <Em>My goal is to grow into a design engineer</Em> who can
+              think through a problem, design a thoughtful solution, and bring
+              it to life.
+            </p>
+          </BlurIn>
+        </div>
+      </div>
+    </ModeContext.Provider>
+  );
+}
+
+/* ------------------------------------------------------ */
+/* CONTACT                                                */
+/* ------------------------------------------------------ */
+
+const EMAIL = "riteshnishadofficial66@gmail.com";
+const BOOKING_URL = "https://cal.com/ritesh-n/15min?overlayCalendar=true";
+
+const SOCIALS = [
+  {
+    label: "X",
+    href: "https://x.com",
+    icon: twitterIcon,
+    iconClass: "scale-90",
+  },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: linkedinIcon },
+  { label: "GitHub", href: "https://github.com/ritesh-404", icon: githubIcon },
+];
+
+function ArrowRightIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6 shrink-0"
+    >
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  );
+}
+function EnvelopeIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#000000"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+      <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+    </svg>
+  );
+}
+
+function ContactSection() {
   const [emailCopied, setEmailCopied] = useState(false);
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText("riteshnishadofficial66@gmail.com");
-
+      await navigator.clipboard.writeText(EMAIL);
       setEmailCopied(true);
-
-      window.setTimeout(() => {
-        setEmailCopied(false);
-      }, 1800);
+      window.setTimeout(() => setEmailCopied(false), 1800);
     } catch (error) {
       console.error("Unable to copy email:", error);
     }
   };
 
-  const emphasis = (text) => (
-    <span className={mode === "tldr" ? "text-black" : "text-inherit"}>
-      {text}
-    </span>
-  );
-
-  const textColor = mode === "story" ? "text-black" : "text-neutral-300";
-
   return (
-    <section
-      id="aboutSection"
-      className="about-panel hero-reveal hero-reveal--rest border-x border-b border-neutral-950 bg-white/80 backdrop-blur-md"
-    >
-      {/* ABOUT CONTENT */}
-      <div className="about-content">
-        <div className="content-column">
-          {/* PORTRAIT AND VIEW TOGGLE */}
-          <div className="about-content-row flex items-end justify-between gap-4">
-            <img
-              className="w-[clamp(7rem,18vw,14rem)] shrink-0 object-cover"
-              src={portrait}
-              alt="Illustrated portrait of Ritesh"
-              loading="lazy"
-            />
-
-            <div
-              className="flex gap-1 border border-neutral-300 p-1"
-              role="group"
-              aria-label="About text view"
-            >
-              {["story", "tldr"].map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className={`cursor-pointer px-2 py-1.5 text-base leading-[1.45] transition-colors duration-200 md:px-3 md:text-xl ${
-                    mode === option ? "!bg-black !text-white" : "text-black"
-                  }`}
-                  aria-pressed={mode === option}
-                  onClick={() => setMode(option)}
-                >
-                  {option === "story" ? "Story" : "TL;DR"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* ABOUT TEXT */}
-          <div
-            className={`about-copy my-8 text-sm leading-[1.45] sm:my-12 md:text-xl ${textColor}`}
-            aria-live="polite"
-          >
-            <p>
-              Hey! I'm {emphasis("Ritesh")}, a{" "}
-              {emphasis("software product designer from Mumbai, India.")} I
-              enjoy figuring out how things work, why they look the way they do,
-              and how they can be made better. I tend to bring a{" "}
-              {emphasis(
-                "strong sense of taste and a lot of care into the products I design",
-              )}{" "}
-              and build.
-            </p>
-
-            <p className="mt-5">
-              I enjoy working with ambitious founders and{" "}
-              {emphasis("teams across product and web design.")} I'm currently{" "}
-              {emphasis("open to freelance projects")} and{" "}
-              {emphasis("full-time opportunities.")}
-            </p>
-
-            <p className="mt-5">
-              My journey started with frontend development, not design ;){" "}
-              {emphasis(
-                "I gradually got into design by paying more attention to the software I use every day and the little interactions that make an experience feel special.",
-              )}{" "}
-              Something as simple as the hover interactions in the Microsoft
-              Store can catch my attention. They're just so delightful. More
-              recently, I've found myself getting{" "}
-              {emphasis("interested in icon design")}, partly inspired by the
-              Google Gemini app on Android.
-            </p>
-
-            <p className="mt-5">
-              I'm still learning, building, and exploring different sides of
-              design. {emphasis("My goal is to grow into a design engineer")}{" "}
-              who can think through a problem, design a thoughtful solution, and
-              bring it to life.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* FULL-WIDTH FOOTER */}
+    <section className="panel hero-reveal hero-reveal--rest border-x border-b border-neutral-950 bg-white">
       <div id="footerSection" className="about-footer pt-2">
-        {/* Footer contents share the same content width */}
         <div className="content-column">
-          {/* FOOTER ACTIONS */}
+          {/* ACTIONS */}
           <div className="about-footer-actions space-y-3">
             <div>
-              <Button
-                href="https://cal.com/ritesh-n/15min?overlayCalendar=true"
-                external
-                className="h-12 min-h-12 w-full border-black px-4 py-0 text-base leading-[1.45] md:text-xl"
-              >
-                <span>Book a call</span>
-                <span aria-hidden="true">→</span>
+              <Button href={BOOKING_URL} external size="lg" className="w-full">
+                Book a call
+                <ArrowRightIcon />
               </Button>
             </div>
-
             <div>
               <Button
-                type="button"
                 variant="secondary"
+                size="lg"
+                className="w-full"
                 onClick={copyEmail}
-                className="h-12 min-h-12 w-full border-neutral-400 px-4 py-0 text-base leading-[1.45] md:text-xl"
               >
-                <img className="h-6 w-6" src={envelopeIcon} alt="" />
-
+                <EnvelopeIcon />
                 {emailCopied ? "Email copied" : "Copy email"}
               </Button>
             </div>
@@ -159,35 +471,18 @@ function AboutSection() {
 
           {/* SOCIAL LINKS */}
           <div className="about-socials mt-5 flex items-center justify-center gap-[22px]">
-            <a
-              className="cursor-pointer transition-transform duration-200 hover:-translate-y-0.5"
-              href="https://x.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="X"
-            >
-              <img className="h-6 w-6 scale-90" src={twitterIcon} alt="" />
-            </a>
-
-            <a
-              className="cursor-pointer transition-transform duration-200 hover:-translate-y-0.5"
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-            >
-              <img className="h-6 w-6" src={linkedinIcon} alt="" />
-            </a>
-
-            <a
-              className="cursor-pointer transition-transform duration-200 hover:-translate-y-0.5"
-              href="https://github.com/ritesh-404"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
-            >
-              <img className="h-6 w-6" src={githubIcon} alt="" />
-            </a>
+            {SOCIALS.map(({ label, href, icon, iconClass = "" }) => (
+              <a
+                key={label}
+                className="cursor-pointer transition-transform duration-200 hover:-translate-y-0.5"
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+              >
+                <img className={`h-6 w-6 ${iconClass}`} src={icon} alt="" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -199,95 +494,36 @@ function AboutSection() {
 /* HERO SECTION                                           */
 /* ------------------------------------------------------ */
 
+/* Page flow:
+   1. HeroQuote types itself out
+   2. when it finishes, `typed` flips to true
+   3. everything else blurs in, one block after another (order in BlurIn.jsx) */
+
 export default function HeroSection() {
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    if (!video) return;
-
-    video.muted = true;
-    video.defaultMuted = true;
-
-    const playback = video.play();
-
-    playback?.catch(() => {});
-  }, []);
+  const [typed, setTyped] = useState(false);
+  const handleTyped = useCallback(() => setTyped(true), []);
 
   return (
     <main className="site-shell">
-      <section id="heroSection" className="relative isolate pt-12">
-        {/* BACKGROUND VIDEO */}
-        <video
-          ref={videoRef}
-          className="hero-video pointer-events-none z-0 max-w-none"
-          src={gradientVideo}
-          poster={gradientPoster}
-          autoPlay
-          muted
-          playsInline
-          loop
-          preload="metadata"
-          aria-hidden="true"
-        />
-
-        {/* HERO PANEL */}
-        <div className="hero-panel section-panel relative z-10 border border-neutral-950 bg-white/80 backdrop-blur-md">
-          {/* SHARED CONTENT WIDTH */}
-          <div className="content-column">
-            {/* AVAILABILITY BADGE */}
-            <div className="hero-reveal hero-reveal--badge inline-flex items-center gap-2 border border-neutral-950 px-3 py-1.5 text-base leading-[1.45] max-md:hidden">
-              Available for product design roles
-            </div>
-
-            {/* MAIN HEADING */}
-            <h1 className="hero-heading hero-reveal hero-reveal--heading mt-6 font-heading font-medium leading-[0.9] tracking-[-.055em] text-black md:mt-10 xl:mt-[60px]">
-              Thinking in systems.
-              <br />
-              <span
-                className="designing-word whitespace-nowrap"
-                aria-label="Designing"
-                tabIndex={0}
-              >
-                <span className="designing-letter font-niconne">D</span>
-
-                <span className="designing-letter font-nata">e</span>
-
-                <span className="designing-letter font-pixelify">s</span>
-
-                <span className="designing-letter font-rocker">i</span>
-
-                <span className="designing-letter">g</span>
-
-                <span className="designing-letter font-elite">n</span>
-
-                <span className="designing-letter font-rocker">i</span>
-
-                <span className="designing-letter font-nata">n</span>
-
-                <span className="designing-letter font-nova">g</span>
-              </span>{" "}
-              in details.
-            </h1>
-
-            {/* HERO SUBHEADING */}
-            <p className="hero-subheading hero-reveal hero-reveal--subheading mb-10 mt-4 max-w-none text-base leading-[1.45] text-pretty text-black sm:text-lg md:mb-14 md:text-xl lg:mb-[80px] lg:text-2xl">
-              I design thoughtful digital products and build interfaces that
-              make complex things feel simple. From the first sketch to the
-              final interaction.
-            </p>
-
-            {/* SELECTED WORKS */}
-            <div className="hero-reveal hero-reveal--rest">
-              <SelectedWorks />
-            </div>
-          </div>
+      <section id="heroSection" className="relative isolate pt-4">
+        {/* Quote + about */}
+        <div className="panel section-panel relative z-10 border border-neutral-950 bg-white">
+          <HeroQuote onTyped={handleTyped} />
+          <HeroIntro show={typed} />
         </div>
-      </section>
 
-      {/* ABOUT SECTION */}
-      <AboutSection />
+        {/* Selected works */}
+        <BlurIn id="workSection" show={typed} step={REVEAL_ORDER.works}>
+          <div className="panel section-panel border-x border-b border-neutral-950 bg-white">
+            <h2 className="pb-6 pt-2 text-2xl leading-none tracking-[-0.02em] text-neutral-950">
+              Selected works
+            </h2>
+            <SelectedWorks />
+          </div>
+        </BlurIn>
+
+        <ContactSection />
+      </section>
     </main>
   );
 }

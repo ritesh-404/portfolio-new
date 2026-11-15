@@ -41,7 +41,7 @@ import {
   typaniSixSecondsBentoOld,
 } from "../../assets/case_study_media/typani/old";
 import CaseStudyGallery from "../../components/case-study/CaseStudyGallery";
-import typaniPreview from "../../assets/typani-img.webp";
+import typaniPreview from "../../assets/images/typani-img.webp";
 
 export default function TypaniCaseStudy() {
   // Previous standalone hero image: <img src={typani_hero_section} alt="Typani redesigned landing page" />
