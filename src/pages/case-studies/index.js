@@ -8,4 +8,5 @@ export const caseStudyPages = {
   temporal: lazy(() => import("./TemporalCaseStudy")),
   typani: lazy(() => import("./TypaniCaseStudy")),
   heroSections: lazy(() => import("./HeroSectionsCaseStudy")),
+  "batch-selection-prototype": lazy(() => import("./BatchSelectionCaseStudy")),
 };

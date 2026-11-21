@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title description">
+  <title id="title">Batch selection prototype preview</title>
+  <desc id="description">A grouped batch selection interface with a toolbar, selectable options, and count badges.</desc>
+  <rect width="1200" height="760" fill="#f5f5f5"/>
+  <rect x="180" y="58" width="840" height="644" rx="18" fill="#fff" stroke="#e5e5e5"/>
+  <path d="M198 58h804a18 18 0 0 1 18 18v104H180V76a18 18 0 0 1 18-18Z" fill="#fff"/>
+  <path d="M180 180h840" stroke="#e5e5e5"/>
+  <text x="224" y="118" fill="#262626" font-family="Arial, sans-serif" font-size="30" font-weight="700">Batch</text>
+  <text x="921" y="116" fill="#737373" font-family="Arial, sans-serif" font-size="19" text-anchor="end">3 selected</text>
+  <text x="224" y="157" fill="#737373" font-family="Arial, sans-serif" font-size="16">Select all options</text>
+  <rect x="886" y="133" width="111" height="38" rx="7" fill="#fff" stroke="#e5e5e5"/>
+  <text x="941" y="157" fill="#737373" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Clear selection</text>
+  <text x="224" y="223" fill="#737373" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.5">2026</text>
+  <text x="944" y="223" fill="#a3a3a3" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Select batch</text>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#262626">
+    <rect x="207" y="244" width="786" height="67" rx="11" fill="#ebebeb"/><rect x="229" y="267" width="20" height="20" rx="5" fill="#404040"/><path d="m234 277 5 5 9-10" fill="none" stroke="#fff" stroke-width="2.5"/><text x="270" y="285">Fall 2026</text><rect x="930" y="258" width="42" height="38" rx="8" fill="#fafafa" stroke="#e5e5e5"/><text x="951" y="283" fill="#737373" text-anchor="middle" font-size="16">238</text>
+    <rect x="207" y="317" width="786" height="67" rx="11" fill="#ebebeb"/><rect x="229" y="340" width="20" height="20" rx="5" fill="#404040"/><path d="m234 350 5 5 9-10" fill="none" stroke="#fff" stroke-width="2.5"/><text x="270" y="358">Summer 2026</text><rect x="930" y="331" width="42" height="38" rx="8" fill="#fafafa" stroke="#e5e5e5"/><text x="951" y="356" fill="#737373" text-anchor="middle" font-size="16">226</text>
+    <rect x="207" y="390" width="786" height="67" rx="11" fill="#f5f5f5"/><rect x="229" y="413" width="20" height="20" rx="5" fill="#fff" stroke="#d4d4d4"/><text x="270" y="431">Spring 2026</text><rect x="930" y="404" width="42" height="38" rx="8" fill="#fafafa" stroke="#e5e5e5"/><text x="951" y="429" fill="#737373" text-anchor="middle" font-size="16">193</text>
+    <rect x="207" y="463" width="786" height="67" rx="11" fill="#f5f5f5"/><rect x="229" y="486" width="20" height="20" rx="5" fill="#fff" stroke="#d4d4d4"/><text x="270" y="504">Winter 2026</text><rect x="930" y="477" width="42" height="38" rx="8" fill="#fafafa" stroke="#e5e5e5"/><text x="951" y="502" fill="#737373" text-anchor="middle" font-size="16">198</text>
+  </g>
+  <path d="M207 561h786" stroke="#e5e5e5"/>
+  <text x="224" y="602" fill="#737373" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.5">2025 AND EARLIER</text>
+  <text x="944" y="602" fill="#a3a3a3" font-family="Arial, sans-serif" font-size="14" text-anchor="end">23 options</text>
+  <rect x="207" y="621" width="786" height="57" rx="11" fill="#f5f5f5"/>
+  <rect x="229" y="640" width="20" height="20" rx="5" fill="#fff" stroke="#d4d4d4"/>
+  <text x="270" y="659" fill="#262626" font-family="Arial, sans-serif" font-size="18">Fall 2025</text>
+  <rect x="930" y="630" width="42" height="38" rx="8" fill="#fafafa" stroke="#e5e5e5"/>
+  <text x="951" y="655" fill="#737373" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">146</text>
+</svg>

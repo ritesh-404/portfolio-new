@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Batch selection prototype</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --n50: #f3f7f8;
+        --n100: #edf3f4;
+        --n200: #dce7e9;
+        --n300: #bdcdd1;
+        --n400: #82989e;
+        --n500: #5a7178;
+        --n700: #294a51;
+        --n800: #17343b;
+        --white: #fff;
+        --accent: #087e78;
+        --accent-dark: #06625e;
+        --accent-soft: #e2f3f0;
+        --accent-line: #a8d8d1;
+        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 48px 28px 72px;
+        background: var(--n50);
+        color: var(--n800);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      main {
+        width: min(100%, 1240px);
+        margin: 0 auto;
+      }
+      .intro {
+        max-width: 800px;
+        margin: 0 0 34px;
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent-dark);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .page-title {
+        margin: 0;
+        color: var(--n800);
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 650;
+        letter-spacing: -0.045em;
+        line-height: 1.04;
+      }
+      .intro-copy {
+        max-width: 720px;
+        margin: 16px 0 0;
+        color: var(--n500);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        align-items: start;
+        gap: clamp(32px, 5vw, 72px);
+      }
+      .column-title {
+        margin: 0 0 8px;
+        color: var(--n800);
+        font-size: 17px;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+      }
+      .column-copy {
+        margin: 0 0 18px;
+        color: var(--n500);
+        font-size: 20px;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+      .panel {
+        overflow: clip;
+        background: var(--white);
+        border: 1px solid var(--n200);
+        border-radius: 16px;
+        box-shadow:
+          0 2px 4px #17343b0a,
+          0 18px 48px #17343b0d;
+      }
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        padding: 23px 25px 19px;
+        border-bottom: 1px solid var(--n200);
+        background: #ffffffeb;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .top h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 680;
+        letter-spacing: -0.025em;
+      }
+      .count {
+        padding: 7px 11px;
+        border: 1px solid var(--accent-line);
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent-dark);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .count strong {
+        display: inline-block;
+        min-width: 1ch;
+        color: var(--accent-dark);
+        font-weight: 750;
+        font-variant-numeric: tabular-nums;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--n200);
+      }
+      .control-label,
+      .group-control {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--n700);
+        font-size: 12px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .control-label {
+        padding: 0;
+        border: 0;
+        background: transparent;
+      }
+      .clear {
+        padding: 8px 12px;
+        border: 1px solid var(--n200);
+        border-radius: 8px;
+        background: var(--white);
+        color: var(--n500);
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .clear:hover:not(:disabled) {
+        background: var(--n100);
+        color: var(--n800);
+      }
+      .clear:active:not(:disabled) {
+        transform: scale(0.97);
+      }
+      .clear:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      .sections {
+        padding: 7px 18px 15px;
+      }
+      .section {
+        padding: 20px 0 19px;
+      }
+      .section + .section {
+        border-top: 1px solid var(--n200);
+      }
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 0 12px 12px;
+      }
+      .head-left {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        min-width: 0;
+      }
+      .section-title {
+        color: var(--n700);
+        font-size: 12px;
+        font-weight: 750;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .group-meta {
+        color: var(--n400);
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .group-control {
+        color: var(--n500);
+        font-size: 12px;
+        gap: 9px;
+      }
+      .rows {
+        display: grid;
+        gap: 4px;
+      }
+      .item {
+        width: 100%;
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 17px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: var(--n100);
+        color: var(--n800);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      .is-touch-selecting .item {
+        cursor: grabbing;
+      }
+      .item:hover {
+        background: #e5edef;
+      }
+      .item[aria-checked="true"] {
+        border-color: #c4e3df;
+        background: var(--accent-soft);
+      }
+      .item[aria-checked="true"]:hover {
+        background: #d8eeea;
+      }
+      .item.preview:not([aria-checked="true"]) {
+        border-color: var(--accent-line);
+        background: #f0faf8;
+        box-shadow: inset 0 0 0 1px #d9efeb;
+      }
+      .item:active {
+        transform: scale(0.993);
+      }
+      .cb {
+        width: 19px;
+        height: 19px;
+        flex: 0 0 19px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--n300);
+        border-radius: 6px;
+        background: var(--white);
+        color: var(--white);
+      }
+      [aria-checked="true"] .cb {
+        border-color: var(--accent);
+        background: var(--accent);
+      }
+      .cb svg {
+        width: 13px;
+        height: 13px;
+      }
+      .cb path {
+        stroke-dasharray: 12;
+        stroke-dashoffset: 12;
+      }
+      [aria-checked="true"] .cb path {
+        stroke-dashoffset: 0;
+      }
+      .item-name {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      .item-count {
+        margin-left: auto;
+        padding: 4px 9px;
+        border: 1px solid var(--n200);
+        border-radius: 7px;
+        background: #fafafa;
+        color: var(--n500);
+        font-size: 13px;
+        line-height: 1.35;
+        font-variant-numeric: tabular-nums;
+      }
+      input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 19px;
+        height: 19px;
+        flex: 0 0 19px;
+        margin: 0;
+        position: relative;
+        border: 1px solid var(--n300);
+        border-radius: 5px;
+        background: var(--white);
+        cursor: pointer;
+      }
+      input[type="checkbox"]:checked,
+      input[type="checkbox"]:indeterminate {
+        border-color: var(--accent);
+        background: var(--accent);
+      }
+      input[type="checkbox"]:after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 5px;
+        height: 9px;
+        border: solid white;
+        border-width: 0 1.7px 1.7px 0;
+        transform: rotate(45deg) scale(0);
+        opacity: 0;
+      }
+      input[type="checkbox"]:checked:after {
+        transform: rotate(45deg) scale(1);
+        opacity: 1;
+      }
+      input[type="checkbox"]:indeterminate:after {
+        left: 4px;
+        top: 8px;
+        width: 9px;
+        height: 1.5px;
+        border: 0;
+        background: white;
+        transform: scale(1);
+        opacity: 1;
+      }
+      input[type="checkbox"]:focus {
+        outline: none;
+      }
+      input[type="checkbox"]:focus-visible {
+        outline: 2px solid var(--n500);
+        outline-offset: 3px;
+      }
+      .item:focus {
+        outline: none;
+      }
+      .item:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .clear:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .notes-heading {
+        margin: 0;
+        color: var(--n800);
+        font-size: 22px;
+        font-weight: 650;
+        letter-spacing: -0.03em;
+      }
+      .notes-lede {
+        margin: 8px 0 22px;
+        color: var(--n500);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+      .feature-list {
+        border-top: 1px solid var(--n200);
+        margin-top: 50px;
+      }
+      .feature-row {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 14px;
+        padding: 17px 0;
+        border-bottom: 1px solid var(--n200);
+      }
+      .feature-icon {
+        width: 21px;
+        height: 21px;
+        margin-top: 1px;
+        color: var(--accent-dark);
+      }
+      .feature-row h3 {
+        margin: 0 0 5px;
+        color: var(--n700);
+        font-size: 15px;
+        font-weight: 650;
+      }
+      .feature-row p {
+        margin: 0;
+        color: var(--n500);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .keyboard-help {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 14px;
+        padding-top: 22px;
+      }
+      .keyboard-help h3 {
+        margin: 0 0 7px;
+        color: var(--n700);
+        font-size: 15px;
+        font-weight: 650;
+      }
+      .keyboard-help p {
+        margin: 0;
+        color: var(--n500);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+      kbd {
+        display: inline-flex;
+        min-width: 1.7em;
+        min-height: 1.8em;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0.08em;
+        padding: 0 0.4em;
+        border: 1px solid var(--n300);
+        border-bottom: 2px solid var(--n400);
+        border-radius: 3px;
+        background: #fff;
+        color: var(--n700);
+        font-size: 0.82em;
+        font-weight: 600;
+        line-height: 1;
+        vertical-align: baseline;
+        position: relative;
+        top: -0.04em;
+        white-space: nowrap;
+      }
+      .desktop-hint {
+        margin: 20px 0 0;
+        padding-top: 16px;
+        border-top: 1px solid var(--n200);
+        color: var(--n500);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 28px 14px 48px;
+        }
+        .intro {
+          margin-bottom: 26px;
+        }
+        .intro-copy {
+          font-size: 16px;
+        }
+        .top {
+          padding: 18px 17px 15px;
+        }
+        .sections {
+          padding: 4px 10px 10px;
+        }
+        .section {
+          padding: 16px 0 14px;
+        }
+        .item {
+          min-height: 56px;
+          padding: 10px 12px;
+        }
+        .item-name {
+          font-size: 14px;
+        }
+      }
+      @media (max-width: 840px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 42px;
+        }
+        .info-column {
+          max-width: 680px;
+        }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .item {
+          transition:
+            background-color 0.15s var(--ease),
+            box-shadow 0.15s var(--ease),
+            transform 0.12s var(--ease);
+        }
+        .cb,
+        input[type="checkbox"] {
+          transition:
+            background-color 0.15s var(--ease),
+            border-color 0.15s var(--ease);
+        }
+        .cb path {
+          transition: stroke-dashoffset 0.2s var(--ease);
+        }
+        input[type="checkbox"]:after {
+          transition:
+            transform 0.18s var(--ease),
+            opacity 0.12s;
+        }
+        .clear {
+          transition:
+            background-color 0.15s,
+            color 0.15s,
+            opacity 0.15s,
+            transform 0.12s var(--ease);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="content-grid">
+          <section class="panel" aria-labelledby="selection-heading">
+            <header class="top">
+              <div class="topline">
+                <h2 id="selection-heading">Choose batches</h2>
+                <div class="count" aria-live="polite">
+                  <strong id="selected-count">0</strong> selected
+                </div>
+              </div>
+              <div class="toolbar">
+                <label class="control-label"
+                  ><input id="select-all" type="checkbox" /><span
+                    >Select all options</span
+                  ></label
+                >
+                <button class="clear" id="clear" type="button" disabled>
+                  Clear selection
+                </button>
+              </div>
+            </header>
+            <div class="sections" id="list">
+              <section
+                class="section"
+                data-group="2026"
+                role="group"
+                aria-label="2026"
+              >
+                <div class="section-head">
+                  <div class="head-left">
+                    <span class="section-title">2026</span
+                    ><span class="group-meta"></span>
+                  </div>
+                  <label class="group-control"
+                    ><input type="checkbox" class="group-check" /><span
+                      >Select batch</span
+                    ></label
+                  >
+                </div>
+                <div class="rows"></div>
+              </section>
+              <section
+                class="section"
+                data-group="2025"
+                role="group"
+                aria-label="2025 and earlier"
+              >
+                <div class="section-head">
+                  <div class="head-left">
+                    <span class="section-title">2025 and earlier</span
+                    ><span class="group-meta"></span>
+                  </div>
+                  <label class="group-control"
+                    ><input type="checkbox" class="group-check" /><span
+                      >Select batch</span
+                    ></label
+                  >
+                </div>
+                <div class="rows"></div>
+              </section>
+            </div>
+          </section>
+        </section>
+
+        <aside class="info-column" aria-labelledby="notes-heading">
+           <h2 class="column-title" id="demo-title">Try the prototype</h2>
+          <p class="column-copy">
+            Touchscreen: press and hold a row, drag up or down, then release.
+            <br>
+            Desktop: click a row, then Shift-click another.
+          </p>
+          <!-- Icons below are embedded from lucide-static v1.77.0 (ISC). -->
+          <div class="feature-list">
+            <article class="feature-row">
+              <svg
+                class="feature-icon lucide lucide-hand"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+                <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+                <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
+                <path
+                  d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"
+                />
+              </svg>
+              <div>
+                <h3>Hold to start</h3>
+                <p>
+                  Press a row for about a third of a second. A regular tap still
+                  toggles just one item.
+                </p>
+              </div>
+            </article>
+            <article class="feature-row">
+              <svg
+                class="feature-icon lucide lucide-move-vertical"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 2v20" />
+                <path d="m8 18 4 4 4-4" />
+                <path d="m8 6 4-4 4 4" />
+              </svg>
+              <div>
+                <h3>Drag to extend</h3>
+                <p>
+                  Keep your finger down and move over the list. A preview marks
+                  the range; release to add it.
+                </p>
+              </div>
+            </article>
+            <article class="feature-row">
+              <svg
+                class="feature-icon lucide lucide-scroll"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+                <path
+                  d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"
+                />
+              </svg>
+              <div>
+                <h3>Scroll through long lists</h3>
+                <p>
+                  Keep dragging near the top or bottom edge to scroll the page
+                  and extend the range across groups.
+                </p>
+              </div>
+            </article>
+            <article class="feature-row">
+              <svg
+                class="feature-icon lucide lucide-list-checks"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M13 5h8" />
+                <path d="M13 12h8" />
+                <path d="M13 19h8" />
+                <path d="m3 17 2 2 4-4" />
+                <path d="m3 7 2 2 4-4" />
+              </svg>
+              <div>
+                <h3>Track what is selected</h3>
+                <p>
+                  The selected total, group progress, and row counts stay
+                  visible. Select a whole group or the full list when that is
+                  quicker.
+                </p>
+              </div>
+            </article>
+          </div>
+          <section class="keyboard-help" aria-labelledby="keyboard-heading">
+            <svg
+              class="feature-icon lucide lucide-keyboard"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M10 8h.01" />
+              <path d="M12 12h.01" />
+              <path d="M14 8h.01" />
+              <path d="M16 12h.01" />
+              <path d="M18 8h.01" />
+              <path d="M6 8h.01" />
+              <path d="M7 16h10" />
+              <path d="M8 12h.01" />
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+            </svg>
+            <div>
+              <h3 id="keyboard-heading">Keyboard controls</h3>
+              <p>
+                <kbd>↑</kbd> / <kbd>↓</kbd> move; <kbd>Home</kbd> /
+                <kbd>End</kbd> jump. <kbd>Space</kbd> or
+                <kbd>Enter</kbd> toggles; hold <kbd>Shift</kbd> for a range.
+                <kbd>Ctrl</kbd> / <kbd>⌘</kbd> + <kbd>A</kbd> selects all;
+                <kbd>Esc</kbd> clears.
+              </p>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <script>
+      (() => {
+        const data = [
+          {
+            group: "2026",
+            items: [
+              ["Fall 2026", 238],
+              ["Summer 2026", 226],
+              ["Spring 2026", 193],
+              ["Winter 2026", 198],
+            ],
+          },
+          {
+            group: "2025",
+            items: [
+              ["Fall 2025", 146],
+              ["Summer 2025", 166],
+              ["Spring 2025", 143],
+              ["Winter 2025", 164],
+              ["Fall 2024", 94],
+              ["Summer 2024", 248],
+              ["Winter 2024", 248],
+              ["Fall 2023", 187],
+              ["Summer 2023", 172],
+              ["Spring 2023", 159],
+              ["Winter 2023", 203],
+              ["Fall 2022", 121],
+              ["Summer 2022", 148],
+              ["Spring 2022", 136],
+              ["Winter 2022", 177],
+              ["Fall 2021", 109],
+              ["Summer 2021", 131],
+              ["Spring 2021", 118],
+              ["Winter 2021", 152],
+              ["Fall 2020", 87],
+              ["Summer 2020", 102],
+              ["Spring 2020", 96],
+              ["Winter 2020", 124],
+            ],
+          },
+        ];
+        const items = data.flatMap((g) =>
+          g.items.map(([name, count]) => ({ name, count, group: g.group })),
+        );
+        const selected = new Set();
+        let anchor = null,
+          tabIndex = 0,
+          shiftDown = false,
+          hover = null,
+          lastCount = 0;
+        let touchTimer = null,
+          touchCandidate = null,
+          touchAnchor = null,
+          touchPreviousAnchor = null,
+          touchStartX = 0,
+          touchStartY = 0,
+          touchClientX = 0,
+          touchClientY = 0,
+          touchSelecting = false,
+          touchScrollFrame = 0,
+          suppressTouchClickUntil = 0;
+        const list = document.getElementById("list");
+        const buttons = [];
+        const tick =
+          '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.2 6.2 2.4 2.3 5.2-5.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        const reduceMotion = () =>
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        items.forEach((item, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "item";
+          button.setAttribute("role", "checkbox");
+          button.setAttribute("aria-checked", "false");
+          button.dataset.index = String(index);
+          button.tabIndex = index === 0 ? 0 : -1;
+          button.innerHTML = `<span class="cb">${tick}</span><span class="item-name"></span><span class="item-count"></span>`;
+          button.querySelector(".item-name").textContent = item.name;
+          button.querySelector(".item-count").textContent = item.count;
+          list
+            .querySelector(`[data-group="${item.group}"] .rows`)
+            .append(button);
+          buttons.push(button);
+        });
+
+        const selectAll = document.getElementById("select-all");
+        const selectedCount = document.getElementById("selected-count");
+        const clearBtn = document.getElementById("clear");
+
+        function setTab(i) {
+          buttons[tabIndex].tabIndex = -1;
+          tabIndex = i;
+          buttons[i].tabIndex = 0;
+        }
+
+        function paintPreview() {
+          const on = shiftDown && anchor !== null && hover !== null;
+          const from = on ? Math.min(anchor, hover) : 0,
+            to = on ? Math.max(anchor, hover) : -1;
+          buttons.forEach((b, i) =>
+            b.classList.toggle("preview", on && i >= from && i <= to),
+          );
+        }
+
+        function refresh() {
+          buttons.forEach((button, i) =>
+            button.setAttribute("aria-checked", String(selected.has(i))),
+          );
+          selectedCount.textContent = String(selected.size);
+          if (
+            selected.size !== lastCount &&
+            selectedCount.animate &&
+            !reduceMotion()
+          ) {
+            selectedCount.animate(
+              [
+                { opacity: 0.3, transform: "translateY(3px)" },
+                { opacity: 1, transform: "none" },
+              ],
+              { duration: 180, easing: "cubic-bezier(.2,.7,.2,1)" },
+            );
+          }
+          lastCount = selected.size;
+          clearBtn.disabled = selected.size === 0;
+          selectAll.checked = selected.size === items.length;
+          selectAll.indeterminate =
+            selected.size > 0 && selected.size < items.length;
+          list.querySelectorAll(".section").forEach((section) => {
+            const indices = items
+              .map((item, i) => (item.group === section.dataset.group ? i : -1))
+              .filter((i) => i >= 0);
+            const amount = indices.filter((i) => selected.has(i)).length;
+            const checkbox = section.querySelector(".group-check");
+            checkbox.checked = amount === indices.length;
+            checkbox.indeterminate = amount > 0 && amount < indices.length;
+            section.querySelector(".group-meta").textContent =
+              amount > 0
+                ? `${amount} of ${indices.length}`
+                : `${indices.length} options`;
+          });
+          paintPreview();
+        }
+
+        function toggleOne(index) {
+          if (selected.has(index)) selected.delete(index);
+          else selected.add(index);
+          anchor = index;
+          refresh();
+        }
+        function selectRange(destination) {
+          if (anchor === null) anchor = destination;
+          const from = Math.min(anchor, destination),
+            to = Math.max(anchor, destination);
+          for (let i = from; i <= to; i++) selected.add(i);
+          refresh();
+        }
+
+        // Stop the browser from highlighting text when shift+clicking a range
+        list.addEventListener("mousedown", (event) => {
+          if (event.shiftKey && event.target.closest(".item"))
+            event.preventDefault();
+        });
+
+        list.addEventListener("click", (event) => {
+          if (Date.now() < suppressTouchClickUntil) {
+            event.preventDefault();
+            return;
+          }
+          const button = event.target.closest(".item");
+          if (!button) return;
+          event.preventDefault();
+          const index = Number(button.dataset.index);
+          setTab(index);
+          if (event.shiftKey) selectRange(index);
+          else toggleOne(index);
+        });
+
+        list.addEventListener("focusin", (event) => {
+          const button = event.target.closest(".item");
+          if (button) setTab(Number(button.dataset.index));
+        });
+
+        list.addEventListener("keydown", (event) => {
+          const button = event.target.closest(".item");
+          if (!button) return;
+          const index = Number(button.dataset.index);
+          if (event.key === " " || event.key === "Enter") {
+            event.preventDefault();
+            if (event.shiftKey) selectRange(index);
+            else toggleOne(index);
+          } else if (
+            (event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "a"
+          ) {
+            event.preventDefault();
+            items.forEach((_, i) => selected.add(i));
+            refresh();
+          } else if (
+            ["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)
+          ) {
+            event.preventDefault();
+            const next =
+              event.key === "Home"
+                ? 0
+                : event.key === "End"
+                  ? buttons.length - 1
+                  : Math.max(
+                      0,
+                      Math.min(
+                        buttons.length - 1,
+                        index + (event.key === "ArrowDown" ? 1 : -1),
+                      ),
+                    );
+            if (event.shiftKey && anchor === null) anchor = index;
+            buttons[next].focus();
+            if (event.shiftKey) selectRange(next);
+          }
+        });
+
+        // Live range preview while Shift is held
+        list.addEventListener("mouseover", (event) => {
+          const button = event.target.closest(".item");
+          hover = button ? Number(button.dataset.index) : null;
+          paintPreview();
+        });
+        list.addEventListener("mouseleave", () => {
+          hover = null;
+          paintPreview();
+        });
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Shift" && !shiftDown) {
+            shiftDown = true;
+            paintPreview();
+          }
+          if (event.key === "Escape" && selected.size) {
+            selected.clear();
+            anchor = null;
+            refresh();
+          }
+        });
+        window.addEventListener("keyup", (event) => {
+          if (event.key === "Shift") {
+            shiftDown = false;
+            paintPreview();
+          }
+        });
+        window.addEventListener("blur", () => {
+          shiftDown = false;
+          paintPreview();
+        });
+
+        list.querySelectorAll(".section").forEach((section) => {
+          section
+            .querySelector(".group-check")
+            .addEventListener("change", (event) => {
+              items.forEach((item, i) => {
+                if (item.group !== section.dataset.group) return;
+                if (event.target.checked) selected.add(i);
+                else selected.delete(i);
+              });
+              refresh();
+            });
+        });
+
+        selectAll.addEventListener("change", () => {
+          if (selectAll.checked) items.forEach((_, i) => selected.add(i));
+          else selected.clear();
+          refresh();
+        });
+        clearBtn.addEventListener("click", () => {
+          selected.clear();
+          anchor = null;
+          refresh();
+        });
+
+        function stopTouchScroll() {
+          if (touchScrollFrame) cancelAnimationFrame(touchScrollFrame);
+          touchScrollFrame = 0;
+        }
+
+        function updateTouchPreview(x, y) {
+          const underFinger = document.elementFromPoint(x, y);
+          const button = underFinger && underFinger.closest(".item");
+          if (button) hover = Number(button.dataset.index);
+          paintPreview();
+        }
+
+        function autoScrollTouchRange() {
+          if (!touchSelecting) return;
+          const edge = 76;
+          let distance = 0;
+          if (touchClientY < edge) distance = touchClientY - edge;
+          else if (touchClientY > window.innerHeight - edge) {
+            distance = touchClientY - (window.innerHeight - edge);
+          }
+          if (distance) {
+            const amount =
+              Math.sign(distance) *
+              Math.min(18, Math.max(2, Math.ceil(Math.abs(distance) / 5)));
+            window.scrollBy(0, amount);
+            updateTouchPreview(touchClientX, touchClientY);
+          }
+          touchScrollFrame = requestAnimationFrame(autoScrollTouchRange);
+        }
+
+        function beginTouchSelection(index) {
+          touchSelecting = true;
+          touchAnchor = index;
+          anchor = index;
+          hover = index;
+          shiftDown = true;
+          list.classList.add("is-touch-selecting");
+          paintPreview();
+          touchScrollFrame = requestAnimationFrame(autoScrollTouchRange);
+        }
+
+        function finishTouchSelection(commit) {
+          if (touchTimer) clearTimeout(touchTimer);
+          touchTimer = null;
+          if (touchSelecting && commit) {
+            updateTouchPreview(touchClientX, touchClientY);
+            selectRange(hover === null ? touchAnchor : hover);
+            suppressTouchClickUntil = Date.now() + 700;
+          } else if (!commit) {
+            anchor = touchPreviousAnchor;
+          }
+          touchSelecting = false;
+          list.classList.remove("is-touch-selecting");
+          stopTouchScroll();
+          shiftDown = false;
+          hover = null;
+          touchCandidate = null;
+          touchAnchor = null;
+          paintPreview();
+        }
+
+        list.addEventListener(
+          "touchstart",
+          (event) => {
+            if (event.touches.length !== 1) {
+              finishTouchSelection(false);
+              return;
+            }
+            const button = event.target.closest(".item");
+            if (!button) return;
+            if (touchTimer) clearTimeout(touchTimer);
+            const touch = event.touches[0];
+            touchStartX = touchClientX = touch.clientX;
+            touchStartY = touchClientY = touch.clientY;
+            touchCandidate = Number(button.dataset.index);
+            touchPreviousAnchor = anchor;
+            touchTimer = setTimeout(() => {
+              touchTimer = null;
+              beginTouchSelection(touchCandidate);
+            }, 360);
+          },
+          { passive: true },
+        );
+
+        list.addEventListener(
+          "touchmove",
+          (event) => {
+            if (event.touches.length !== 1) return;
+            const touch = event.touches[0];
+            touchClientX = touch.clientX;
+            touchClientY = touch.clientY;
+            if (!touchSelecting) {
+              if (
+                touchTimer &&
+                (Math.abs(touch.clientX - touchStartX) > 12 ||
+                  Math.abs(touch.clientY - touchStartY) > 12)
+              ) {
+                clearTimeout(touchTimer);
+                touchTimer = null;
+                touchCandidate = null;
+              }
+              return;
+            }
+            if (event.cancelable) event.preventDefault();
+            updateTouchPreview(touchClientX, touchClientY);
+          },
+          { passive: false },
+        );
+
+        list.addEventListener(
+          "touchend",
+          (event) => {
+            if (touchTimer) clearTimeout(touchTimer);
+            touchTimer = null;
+            if (!touchSelecting) {
+              touchCandidate = null;
+              return;
+            }
+            const touch = event.changedTouches[0];
+            if (touch) {
+              touchClientX = touch.clientX;
+              touchClientY = touch.clientY;
+            }
+            finishTouchSelection(true);
+          },
+          { passive: true },
+        );
+
+        list.addEventListener(
+          "touchcancel",
+          () => {
+            finishTouchSelection(false);
+          },
+          { passive: true },
+        );
+
+        refresh();
+      })();
+    </script>
+  </body>
+</html>

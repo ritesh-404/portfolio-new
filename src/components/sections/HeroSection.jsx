@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import SelectedWorks from "../ui/SelectedWorks";
 import Button from "../ui/Button";
@@ -19,20 +13,21 @@ import githubIcon from "../../assets/icons/github.svg";
 /* BLUR-IN REVEAL (styles in index.css: .blur-in)         */
 /* ------------------------------------------------------ */
 
-// Order everything appears in once the quote has finished typing.
+// Order everything appears in on load.
 // To reorder the page, just change these numbers.
 const REVEAL_ORDER = {
-  signature: 0,
-  photo: 1,
-  toggle: 2,
-  about: 3,
-  workStyle: 4,
-  journey: 5,
-  goal: 6,
-  works: 7,
+  quote: 0,
+  signature: 1,
+  photo: 2,
+  toggle: 3,
+  about: 4,
+  workStyle: 5,
+  journey: 6,
+  goal: 7,
+  works: 8,
 };
 
-const STEP_MS = 220; // gap between one block starting and the next
+const STEP_MS = 140; // gap between one block starting and the next
 
 // Fades a block in from blurred. Styles live in hero.css (.blur-in)
 function BlurIn({ id, show, step = 0, className = "", children }) {
@@ -46,61 +41,6 @@ function BlurIn({ id, show, step = 0, className = "", children }) {
     </div>
   );
 }
-
-/* ------------------------------------------------------ */
-/* HUMAN-LIKE TYPING                                      */
-/* ------------------------------------------------------ */
-
-const SPEED = 0.6; // 0.7 = faster, 1.5 = slower
-
-const rand = (min, max) => min + Math.random() * (max - min);
-
-const reducedMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// How long to wait after typing `char` before the next keystroke
-function keystrokeDelay(char) {
-  let ms = rand(35, 85); // normal key rhythm
-  if (char === " ") ms += rand(30, 80); // small beat between words
-  if (",;:".includes(char)) ms += rand(150, 280); // pause at a comma
-  if (".!?".includes(char)) ms += rand(350, 600); // pause at the end of a sentence
-  if (Math.random() < 0.04) ms += rand(150, 350); // the odd hesitation
-  return ms * SPEED;
-}
-
-/**
- * Types `text` one character at a time with human-like timing.
- * Returns how many characters are typed so far and whether it has finished.
- * Runs on every page load / reload (it starts when the component mounts).
- */
-function useHumanTyping(text, startDelay = 600) {
-  const [count, setCount] = useState(() => (reducedMotion() ? text.length : 0));
-
-  useEffect(() => {
-    if (reducedMotion()) return;
-
-    let typed = 0;
-    let timer;
-
-    const typeNext = () => {
-      typed += 1;
-      setCount(typed);
-      if (typed < text.length) {
-        timer = setTimeout(typeNext, keystrokeDelay(text[typed - 1]));
-      }
-    };
-
-    timer = setTimeout(typeNext, startDelay);
-    return () => clearTimeout(timer);
-  }, [text, startDelay]);
-
-  return { count, done: count >= text.length };
-}
-
-/* ------------------------------------------------------ */
-/* QUOTE                                                  */
-/* ------------------------------------------------------ */
 
 /* ------------------------------------------------------ */
 /* QUOTE TEXT                                             */
@@ -154,80 +94,31 @@ function QuoteMark({ flip = false, className = "" }) {
   );
 }
 
-// Takes no space in the text flow, so words never shift or re-wrap
-function Caret() {
-  return (
-    <span aria-hidden="true" className="relative">
-      <span className="typing-caret absolute left-0 top-[0.1em] h-[1em] w-[2px] bg-neutral-900" />
-    </span>
-  );
-}
-
-// Shows the typed part of `text` and keeps the rest invisible, so the
-// final layout (line breaks included) is fixed from the first frame.
-function TypedText({ text, from, count, caret }) {
-  const shown = Math.min(text.length, Math.max(0, count - from));
-  const hasCaret =
-    caret && count <= from + text.length && (count > from || from === 0);
-
-  return (
-    <>
-      {text.slice(0, shown)}
-      {hasCaret && <Caret />}
-      <span className="invisible">{text.slice(shown)}</span>
-    </>
-  );
-}
-
 /* ------------------------------------------------------ */
 /* HERO QUOTE                                             */
 /* ------------------------------------------------------ */
 
-function HeroQuote({ onTyped }) {
-  const { count, done } = useHumanTyping(QUOTE);
-
-  useEffect(() => {
-    if (done) onTyped();
-  }, [done, onTyped]);
-
-  const typing = !done;
-  const part2Start = PART_1.length;
-  const part3Start = part2Start + PART_2.length;
-
+function HeroQuote({ show }) {
   return (
     <figure className="mx-auto pb-12 text-center pt-8">
-      <blockquote>
-        <h1
-          aria-label={QUOTE}
-          className="mx-auto max-w-[680px] text-balance font-geist-sans text-2xl leading-[1.15] tracking-[-0.03em] text-neutral-900 sm:text-3xl"
-        >
-          <QuoteMark flip />{" "}
-          <TypedText text={PART_1} from={0} count={count} caret={typing} />
-          <br className="hidden sm:block" />
-          <TypedText
-            text={PART_2}
-            from={part2Start}
-            count={count}
-            caret={typing}
-          />
-          <span className="whitespace-nowrap">
-            <TypedText
-              text={PART_3}
-              from={part3Start}
-              count={count}
-              caret={typing}
-            />{" "}
-            <QuoteMark
-              className={`transition-opacity duration-500 ${
-                done ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          </span>
-        </h1>
-      </blockquote>
+      <BlurIn show={show} step={REVEAL_ORDER.quote}>
+        <blockquote>
+          <h1
+            aria-label={QUOTE}
+            className="mx-auto max-w-[680px] text-balance font-geist-sans text-2xl leading-[1.15] tracking-[-0.03em] text-neutral-900 sm:text-3xl"
+          >
+            <QuoteMark flip /> {PART_1}
+            <br className="hidden sm:block" />
+            {PART_2}
+            <span className="whitespace-nowrap">
+              {PART_3} <QuoteMark />
+            </span>
+          </h1>
+        </blockquote>
+      </BlurIn>
 
       <figcaption className="mt-5">
-        <BlurIn show={done} step={REVEAL_ORDER.signature}>
+        <BlurIn show={show} step={REVEAL_ORDER.signature}>
           <span className="inline-block font-script text-4xl leading-none text-neutral-900">
             Steve Jobs
           </span>
@@ -495,25 +386,25 @@ function ContactSection() {
 /* ------------------------------------------------------ */
 
 /* Page flow:
-   1. HeroQuote types itself out
-   2. when it finishes, `typed` flips to true
-   3. everything else blurs in, one block after another (order in BlurIn.jsx) */
+   1. everything blurs in on load, one block after another
+   2. order: quote, signature, photo, toggle, about, works (see REVEAL_ORDER) */
 
 export default function HeroSection() {
-  const [typed, setTyped] = useState(false);
-  const handleTyped = useCallback(() => setTyped(true), []);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => setRevealed(true), []);
 
   return (
     <main className="site-shell">
       <section id="heroSection" className="relative isolate pt-4">
         {/* Quote + about */}
         <div className="panel section-panel relative z-10 border border-neutral-950 bg-white">
-          <HeroQuote onTyped={handleTyped} />
-          <HeroIntro show={typed} />
+          <HeroQuote show={revealed} />
+          <HeroIntro show={revealed} />
         </div>
 
         {/* Selected works */}
-        <BlurIn id="workSection" show={typed} step={REVEAL_ORDER.works}>
+        <BlurIn id="workSection" show={revealed} step={REVEAL_ORDER.works}>
           <div className="panel section-panel border-x border-b border-neutral-950 bg-white">
             <h2 className="pb-6 pt-2 text-2xl leading-none tracking-[-0.02em] text-neutral-950">
               Selected works

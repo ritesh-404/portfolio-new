@@ -285,16 +285,6 @@ li {
 
 /* --------------------------------------------------------- */
 
-/* ---------- Typing caret ---------- */
-@keyframes caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-.typing-caret {
-  animation: caret-blink 1s steps(1) infinite;
-}
-
 /* ---------- Blur-in reveal (see BlurIn.jsx) ---------- */
 .blur-in {
   visibility: hidden;
@@ -318,9 +308,6 @@ li {
     transition: none;
     filter: none;
     transform: none;
-  }
-  .typing-caret {
-    animation: none;
   }
 }
 
